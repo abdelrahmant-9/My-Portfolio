@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdelrahman Tarek – QA Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --blue:       #2563EB;
+  --blue-h:     #1d4ed8;
+  --blue-100:   #DBEAFE;
+  --blue-200:   #BFDBFE;
+  --bg:         #FFFFFF;
+  --bg-2:       #F8FAFC;
+  --bg-3:       #F1F5F9;
+  --border:     #E2E8F0;
+  --border-2:   #CBD5E1;
+  --t1:         #0F172A;
+  --t2:         #334155;
+  --t3:         #64748B;
+  --t4:         #94A3B8;
+  --sh-sm:      0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --sh-md:      0 4px 16px rgba(0,0,0,.08);
+  --r:          14px;
+  --r-sm:       8px;
+  --r-full:     100px;
+}
+[data-theme="dark"] {
+  --blue:       #3B82F6;
+  --blue-h:     #60A5FA;
+  --blue-100:   rgba(59,130,246,.15);
+  --blue-200:   rgba(59,130,246,.25);
+  --bg:         #0C0F18;
+  --bg-2:       #131720;
+  --bg-3:       #1A1F2E;
+  --border:     #1E2535;
+  --border-2:   #2A3347;
+  --t1:         #F1F5F9;
+  --t2:         #CBD5E1;
+  --t3:         #94A3B8;
+  --t4:         #475569;
+  --sh-sm:      0 1px 3px rgba(0,0,0,.3);
+  --sh-md:      0 4px 16px rgba(0,0,0,.4);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;transition:background .3s,color .3s;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg-2);}
+::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
+  transition:background .3s,border-color .3s;}
+.nav-inner{max-width:1000px;margin:0 auto;padding:0 28px;height:62px;
+  display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:20px;color:var(--t1);}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;gap:4px;align-items:center;}
+.nav-links a{font-size:13.5px;font-weight:500;color:var(--t3);
+  padding:6px 13px;border-radius:var(--r-full);transition:color .2s,background .2s;}
+.nav-links a:hover{color:var(--t1);background:var(--bg-3);}
+.theme-btn{width:36px;height:36px;border-radius:var(--r-full);
+  background:var(--bg-3);border:1px solid var(--border);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;margin-left:6px;color:var(--t3);}
+.theme-btn:hover{color:var(--t1);background:var(--bg-2);}
+.icon-sun,.icon-moon{width:15px;height:15px;stroke:currentColor;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+[data-theme="light"] .icon-moon{display:block;}[data-theme="light"] .icon-sun{display:none;}
+[data-theme="dark"]  .icon-moon{display:none;} [data-theme="dark"]  .icon-sun{display:block;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:62px;
+  background:radial-gradient(ellipse 80% 55% at 50% -5%,
+    color-mix(in srgb,var(--blue) 10%,transparent),transparent 70%);}
+.hero-inner{max-width:1000px;margin:0 auto;padding:100px 28px 80px;
+  display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;
+  background:color-mix(in srgb,var(--blue) 12%,var(--bg));
+  border:1px solid color-mix(in srgb,var(--blue) 28%,transparent);
+  border-radius:var(--r-full);padding:6px 16px;
+  font-size:12.5px;font-weight:500;color:var(--blue);margin-bottom:24px;}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.45)}}
+.hero h1{font-family:'DM Serif Display',serif;
+  font-size:clamp(44px,6vw,70px);line-height:1.05;
+  letter-spacing:-1.5px;margin-bottom:20px;color:var(--t1);}
+.hero h1 em{color:var(--blue);font-style:normal;}
+.hero-sub{font-size:17px;color:var(--t3);max-width:510px;line-height:1.78;
+  margin-bottom:36px;font-weight:300;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;
+  border-radius:var(--r-sm);font-size:14.5px;font-weight:500;
+  transition:all .2s;border:1.5px solid transparent;}
+.btn-p{background:var(--blue);color:#fff;border-color:var(--blue);}
+.btn-p:hover{background:var(--blue-h);border-color:var(--blue-h);transform:translateY(-1px);
+  box-shadow:0 6px 20px color-mix(in srgb,var(--blue) 32%,transparent);}
+.btn-o{background:transparent;color:var(--t2);border-color:var(--border-2);}
+.btn-o:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-100);}
+.btn svg{width:15px;height:15px;stroke:none;fill:currentColor;flex-shrink:0;}
+.btn-o svg{stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* Hero side card */
+.h-card{background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 24px;box-shadow:var(--sh-md);
+  display:flex;flex-direction:column;gap:18px;min-width:200px;}
+.h-stat{text-align:center;}
+.h-num{font-family:'DM Serif Display',serif;font-size:30px;color:var(--t1);line-height:1;}
+.h-lbl{font-size:12px;color:var(--t4);margin-top:3px;}
+.h-div{height:1px;background:var(--border);}
+
+/* SECTIONS */
+section{padding:88px 28px;}
+.wrap{max-width:1000px;margin:0 auto;}
+.s-tag{font-size:11.5px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.s-title{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,40px);color:var(--t1);line-height:1.15;margin-bottom:48px;}
+
+/* ABOUT */
+#about{background:var(--bg-2);}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:start;}
+.about-p{font-size:15.5px;color:var(--t2);line-height:1.85;margin-bottom:18px;}
+.about-p strong{color:var(--t1);font-weight:600;}
+.info-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-sm);}
+.ic-hdr{padding:14px 20px;border-bottom:1px solid var(--border);font-size:11.5px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--t4);}
+.i-row{display:flex;align-items:center;gap:13px;padding:13px 20px;border-bottom:1px solid var(--border);font-size:14px;color:var(--t3);transition:background .15s;}
+.i-row:last-child{border-bottom:none;}
+.i-row:hover{background:var(--bg-3);}
+.i-row a{color:var(--blue);}
+.i-row a:hover{text-decoration:underline;}
+.i-ico{width:32px;height:32px;flex-shrink:0;background:var(--blue-100);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;}
+.i-ico svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* AVAIL BANNER */
+.avail{display:flex;align-items:flex-start;gap:14px;
+  background:color-mix(in srgb,#F59E0B 9%,var(--bg));
+  border:1px solid color-mix(in srgb,#F59E0B 32%,transparent);
+  border-radius:var(--r);padding:18px 22px;margin-bottom:48px;}
+.avail-ico{width:36px;height:36px;flex-shrink:0;border-radius:var(--r-sm);
+  background:color-mix(in srgb,#F59E0B 16%,var(--bg));
+  display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.avail-ico svg{width:16px;height:16px;stroke:#D97706;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.avail-t{font-size:14px;font-weight:600;color:#92400E;margin-bottom:4px;}
+.avail-d{font-size:13.5px;color:#B45309;line-height:1.65;}
+[data-theme="dark"] .avail-t{color:#FCD34D;}
+[data-theme="dark"] .avail-d{color:#FDE68A;}
+
+/* EXPERIENCE */
+#experience{background:var(--bg);}
+.exp-list{display:flex;flex-direction:column;gap:18px;}
+.exp-card{background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--r);padding:26px 26px 26px 34px;
+  position:relative;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.exp-card::before{content:'';position:absolute;left:0;top:18px;bottom:18px;
+  width:3px;border-radius:0 3px 3px 0;background:var(--border-2);transition:background .2s;}
+.exp-card:hover{border-color:color-mix(in srgb,var(--blue) 38%,transparent);
+  box-shadow:var(--sh-md);transform:translateY(-2px);}
+.exp-card:hover::before{background:var(--blue);}
+.exp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px;}
+.exp-role{font-size:16px;font-weight:600;color:var(--t1);}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;
+  padding:4px 12px;border-radius:var(--r-full);white-space:nowrap;flex-shrink:0;}
+.tag-b{background:var(--blue-100);color:var(--blue);border:1px solid var(--blue-200);}
+.tag-g{background:color-mix(in srgb,#22c55e 11%,var(--bg));
+  color:#16a34a;border:1px solid color-mix(in srgb,#22c55e 28%,transparent);}
+[data-theme="dark"] .tag-g{color:#4ade80;}
+.tag-dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+.exp-co{font-size:14px;font-weight:500;color:var(--blue);margin-bottom:2px;}
+.exp-per{font-size:13px;color:var(--t4);margin-bottom:16px;}
+.award{display:inline-flex;align-items:center;gap:7px;
+  background:color-mix(in srgb,#EAB308 9%,var(--bg));
+  border:1px solid color-mix(in srgb,#EAB308 28%,transparent);
+  border-radius:var(--r-sm);padding:7px 14px;
+  font-size:13px;font-weight:500;color:#92400E;margin-bottom:14px;}
+[data-theme="dark"] .award{color:#FCD34D;}
+.exp-ul{padding-left:18px;display:flex;flex-direction:column;gap:5px;}
+.exp-ul li{font-size:14px;color:var(--t3);line-height:1.65;}
+
+/* SKILLS */
+#skills{background:var(--bg-2);}
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
+.sk-group{background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r);padding:22px;transition:border-color .2s,box-shadow .2s;}
+.sk-group:hover{border-color:var(--border-2);box-shadow:var(--sh-sm);}
+.sk-name{font-size:11px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--t4);margin-bottom:14px;}
+.sk-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.sk-tag{background:var(--bg-2);border:1px solid var(--border);color:var(--t2);
+  font-size:13px;font-weight:500;padding:5px 13px;border-radius:var(--r-sm);transition:all .15s;}
+.sk-tag:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-100);}
+
+/* PROJECTS */
+#projects{background:var(--bg);}
+.pj-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.pj-card{background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--r);padding:26px;
+  transition:all .25s;display:flex;flex-direction:column;}
+.pj-card:hover{border-color:color-mix(in srgb,var(--blue) 38%,transparent);
+  box-shadow:var(--sh-md);transform:translateY(-3px);}
+.pj-ico{width:44px;height:44px;background:var(--blue-100);border:1px solid var(--blue-200);
+  border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.pj-ico svg{width:21px;height:21px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.pj-title{font-size:16px;font-weight:600;color:var(--t1);margin-bottom:8px;}
+.pj-desc{font-size:13.5px;color:var(--t3);line-height:1.75;margin-bottom:16px;flex:1;}
+.pj-techs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.pj-tech{background:var(--bg);border:1px solid var(--border);color:var(--t4);font-size:12px;font-weight:500;padding:3px 10px;border-radius:6px;}
+.pj-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--blue);margin-top:auto;}
+.pj-link:hover{text-decoration:underline;}
+.pj-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* EDUCATION */
+#education{background:var(--bg-2);}
+.edu-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);
+  padding:26px;display:flex;gap:20px;align-items:flex-start;box-shadow:var(--sh-sm);}
+.edu-ico{width:46px;height:46px;flex-shrink:0;background:var(--blue-100);
+  border:1px solid var(--blue-200);border-radius:var(--r-sm);
+  display:flex;align-items:center;justify-content:center;}
+.edu-ico svg{width:21px;height:21px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.edu-deg{font-size:16.5px;font-weight:600;color:var(--t1);margin-bottom:4px;}
+.edu-uni{font-size:14.5px;font-weight:500;color:var(--blue);margin-bottom:3px;}
+.edu-per{font-size:13px;color:var(--t4);}
+
+/* CONNECT */
+#connect{background:var(--bg);}
+.co-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.co-h{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,34px);color:var(--t1);margin-bottom:14px;}
+.co-sub{font-size:15px;color:var(--t3);line-height:1.8;margin-bottom:28px;}
+.co-ctas{display:flex;flex-wrap:wrap;gap:10px;}
+.li-wrap{background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--r);padding:32px;
+  display:flex;justify-content:center;align-items:center;min-height:180px;}
+
+/* FOOTER */
+footer{background:var(--bg-2);border-top:1px solid var(--border);
+  text-align:center;padding:26px 24px;font-size:13.5px;color:var(--t4);}
+footer a{color:var(--blue);}
+footer a:hover{text-decoration:underline;}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s;}
+.fi.in{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}
+.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+
+/* RESPONSIVE */
+@media(max-width:780px){
+  .hero-inner,.about-grid,.co-grid,.pj-grid{grid-template-columns:1fr;}
+  .h-card{flex-direction:row;flex-wrap:wrap;justify-content:space-around;min-width:unset;}
+  .h-div{display:none;}
+  .nav-links a:not(:last-of-type){display:none;}
+}
+@media(max-width:460px){
+  section{padding:64px 18px;}
+  .exp-card{padding:20px 20px 20px 28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">AT<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#connect">Contact</a></li>
+      <li>
+        <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun"  viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner wrap">
+    <div class="fi">
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        Full-Time @ Lumofy &nbsp;·&nbsp; Open to Part-Time &amp; Volunteer
+      </div>
+      <h1>Abdelrahman<br/><em>Tarek</em></h1>
+      <p class="hero-sub">Quality Assurance Engineer focused on delivering high-quality software through structured testing, attention to detail, and effective automation.</p>
+      <div class="hero-ctas">
+        <a href="https://eg.linkedin.com/in/abelrahmantarek" target="_blank" class="btn btn-p">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn Profile
+        </a>
+        <a href="mailto:abdelrahman.tarek.dev@gmail.com" class="btn btn-o">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in Touch
+        </a>
+      </div>
+    </div>
+    <div class="h-card fi d2">
+      <div class="h-stat"><div class="h-num">200+</div><div class="h-lbl">Training Hours (DEPI)</div></div>
+      <div class="h-div"></div>
+      <div class="h-stat"><div class="h-num">1500+</div><div class="h-lbl">Test Cases Written</div></div>
+      <div class="h-div"></div>
+      <div class="h-stat"><div class="h-num">300+</div><div class="h-lbl">Bugs Documented (Jira)</div></div>
+      <div class="h-div"></div>
+      <div class="h-stat"><div class="h-num">#1</div><div class="h-lbl">DEPI Graduate Rank</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="s-tag fi">About</div>
+    <div class="s-title fi d1">Who I Am</div>
+    <div class="about-grid">
+      <div class="fi d1">
+        <p class="about-p">I'm a Quality Assurance Engineer currently transitioning to a <strong>full-time role at Lumofy</strong> starting April 2026, passionate about delivering reliable software through both manual and automated testing.</p>
+        <p class="about-p">I graduated as <strong>Top 1</strong> among 100+ participants in the Digital Egypt Pioneers Initiative (DEPI), completing over 200 hours of structured software testing training.</p>
+        <p class="about-p">I'm also pursuing <strong>Mobile Development</strong> at NTI with a focus on Flutter, aiming to bridge QA and mobile automation engineering.</p>
+        <p class="about-p">While committed to my full-time role, I remain open to <strong>volunteer</strong> and <strong>part-time</strong> opportunities that align with my professional growth.</p>
+      </div>
+      <div class="fi d2">
+        <div class="info-card">
+          <div class="ic-hdr">Contact &amp; Links</div>
+          <div class="i-row">
+            <div class="i-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.64a16 16 0 006.27 6.27l1.06-1.06a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <span>01005118087</span>
+          </div>
+          <div class="i-row">
+            <div class="i-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <a href="mailto:abdelrahman.tarek.dev@gmail.com">abdelrahman.tarek.dev@gmail.com</a>
+          </div>
+          <div class="i-row">
+            <div class="i-ico"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <a href="https://eg.linkedin.com/in/abelrahmantarek" target="_blank">linkedin.com/in/abelrahmantarek</a>
+          </div>
+          <div class="i-row">
+            <div class="i-ico"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></div>
+            <a href="https://github.com/abdelrahmant-9" target="_blank">github.com/abdelrahmant-9</a>
+          </div>
+          <div class="i-row">
+            <div class="i-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></div>
+            <a href="https://drive.google.com/file/d/1cDZ1se7hzIHNFXEptqBsntF_NHGThLjf/view?usp=drive_link" target="_blank">Check out my CV ↗</a>
+          </div>
+          <div class="i-row">
+            <div class="i-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <span>Cairo, Egypt</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="s-tag fi">Experience</div>
+    <div class="s-title fi d1">Work History</div>
+
+    <div class="avail fi d1">
+      <div class="avail-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>
+        <div class="avail-t">Availability</div>
+        <div class="avail-d">Transitioning to <strong>full-time at Lumofy</strong> from April 2026. Currently available for <strong>volunteer</strong> or <strong>part-time</strong> opportunities that support my growth in QA &amp; Automation.</div>
+      </div>
+    </div>
+
+    <div class="exp-list">
+      <!-- Lumofy -->
+      <div class="exp-card fi">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Software QA Engineer</div>
+            <div class="exp-co">Lumofy | لوموفاي</div>
+            <div class="exp-per">October 2025 – Present &nbsp;·&nbsp; Intern → Full-Time from April 2026</div>
+          </div>
+          <span class="tag tag-g"><span class="tag-dot"></span>Full-Time</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Manual and automation testing of web and mobile applications</li>
+          <li>Bug reporting and tracking to ensure overall product quality</li>
+          <li>Promoted from intern to full-time QA Engineer starting April 2026</li>
+        </ul>
+      </div>
+
+      <!-- Test IO -->
+      <div class="exp-card fi d1">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">QA Engineer</div>
+            <div class="exp-co">Test IO</div>
+            <div class="exp-per">January 2026 – Present &nbsp;·&nbsp; 3 months</div>
+          </div>
+          <span class="tag tag-b">Freelance</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Conducted manual testing across 10+ testing cycles to ensure product quality and functionality</li>
+          <li>Identified, documented, and tracked 20+ bugs with clear reproduction steps and severity levels</li>
+          <li>Performed API testing using Postman to validate endpoints and business requirements</li>
+          <li>Executed regression testing before releases to ensure system stability after updates</li>
+          <li>Collaborated with developers and QA teams to verify fixes and improve user experience</li>
+        </ul>
+      </div>
+
+      <!-- DEPI -->
+      <div class="exp-card fi d2">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Software Tester &amp; Project Team Leader</div>
+            <div class="exp-co">Digital Egypt Pioneers Initiative (DEPI)</div>
+            <div class="exp-per">June 2025 – December 2025 &nbsp;·&nbsp; 7 months &nbsp;·&nbsp; Egypt</div>
+          </div>
+          <span class="tag tag-b">Training</span>
+        </div>
+        <div class="award">🏆 Top 1 Graduate — ranked among 100+ participants</div>
+        <ul class="exp-ul">
+          <li>Completed 200+ training hours in Software Testing (online, in-person &amp; self-learning)</li>
+          <li>Led a cross-functional team of 5 through a 4-month graduation project lifecycle</li>
+          <li>Distributed and managed 20+ project tasks to ensure timely milestone delivery</li>
+          <li>Designed and reviewed 50+ test cases and test scenarios</li>
+          <li>Reported and documented 15+ bugs using professional bug reporting practices</li>
+          <li>Presented the final project to instructors and evaluation committee</li>
+        </ul>
+      </div>
+
+      <!-- NTI -->
+      <div class="exp-card fi d3">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Mobile Developer Trainee</div>
+            <div class="exp-co">National Telecommunication Institute (NTI)</div>
+            <div class="exp-per">January 2026 – March 2026 &nbsp;·&nbsp; 3 months &nbsp;·&nbsp; Egypt</div>
+          </div>
+          <span class="tag tag-b">Training</span>
+        </div>
+        <ul class="exp-ul">
+          <li>Completed 120 training hours — 90 hrs Flutter &amp; mobile dev, 30 hrs freelancing</li>
+          <li>Built a full mobile application project applying real-world development concepts</li>
+          <li>Explored UI design, state management, and Dart programming</li>
+          <li>Developed cross-platform mobile applications and improved problem-solving skills</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="s-tag fi">Skills</div>
+    <div class="s-title fi d1">Technical Stack</div>
+    <div class="sk-grid">
+      <div class="sk-group fi">
+        <div class="sk-name">Test Automation</div>
+        <div class="sk-tags"><span class="sk-tag">Selenium</span><span class="sk-tag">TestNG</span><span class="sk-tag">Java</span></div>
+      </div>
+      <div class="sk-group fi d1">
+        <div class="sk-name">API Testing</div>
+        <div class="sk-tags"><span class="sk-tag">Postman</span><span class="sk-tag">REST APIs</span></div>
+      </div>
+      <div class="sk-group fi d2">
+        <div class="sk-name">QA Practices</div>
+        <div class="sk-tags">
+          <span class="sk-tag">Manual Testing</span><span class="sk-tag">Test Case Design</span>
+          <span class="sk-tag">Bug Reporting</span><span class="sk-tag">Regression Testing</span>
+          <span class="sk-tag">Mobile Testing</span>
+        </div>
+      </div>
+      <div class="sk-group fi d3">
+        <div class="sk-name">Tools &amp; Platforms</div>
+        <div class="sk-tags"><span class="sk-tag">JIRA</span><span class="sk-tag">Git</span><span class="sk-tag">GitHub</span><span class="sk-tag">SQL</span></div>
+      </div>
+      <div class="sk-group fi">
+        <div class="sk-name">Mobile Development</div>
+        <div class="sk-tags"><span class="sk-tag">Flutter</span><span class="sk-tag">Dart</span><span class="sk-tag">State Management</span><span class="sk-tag">Hive</span></div>
+      </div>
+      <div class="sk-group fi d1">
+        <div class="sk-name">Languages</div>
+        <div class="sk-tags"><span class="sk-tag">Arabic — Native</span><span class="sk-tag">English — Professional</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="s-tag fi">Projects</div>
+    <div class="s-title fi d1">What I've Built</div>
+    <div class="pj-grid">
+
+      <div class="pj-card fi">
+        <div class="pj-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="pj-title">أجر — Islamic App</div>
+        <div class="pj-desc">Flutter mobile app for Islamic dhikr &amp; tasbih counting. Features morning/evening/after-prayer/sleep Azkar, Hive-based progress tracking, streak stats, Hijri date support, RTL Arabic UI, local notifications, and a debug dashboard.</div>
+        <div class="pj-techs"><span class="pj-tech">Flutter</span><span class="pj-tech">Dart</span><span class="pj-tech">Hive</span><span class="pj-tech">RTL UI</span><span class="pj-tech">Notifications</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9/Ajr-App" target="_blank"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>View on GitHub</a>
+      </div>
+
+      <div class="pj-card fi d1">
+        <div class="pj-ico"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div class="pj-title">DEPI Graduation Project</div>
+        <div class="pj-desc">Led a 5-member QA team on a real-world web application testing project. Designed 50+ test cases, documented 15+ bugs, managed 20+ tasks over 4 months, and presented to an evaluation committee.</div>
+        <div class="pj-techs"><span class="pj-tech">Manual Testing</span><span class="pj-tech">JIRA</span><span class="pj-tech">Test Cases</span><span class="pj-tech">Team Lead</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9/SoftwareTesting-FinalProject" target="_blank"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>View on GitHub</a>
+      </div>
+
+      <div class="pj-card fi d2">
+        <div class="pj-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="pj-title">Test IO Testing Cycles</div>
+        <div class="pj-desc">Participated in 10+ professional testing cycles on live products. Identified and documented 20+ high-quality bugs with detailed reproduction steps, screenshots, and severity classification.</div>
+        <div class="pj-techs"><span class="pj-tech">Exploratory</span><span class="pj-tech">Postman</span><span class="pj-tech">Regression</span><span class="pj-tech">Bug Reports</span></div>
+      </div>
+
+      <div class="pj-card fi d3">
+        <div class="pj-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <div class="pj-title">To Do App</div>
+        <div class="pj-desc">Production-ready To-Do app built with Flutter using Clean Architecture + MVVM, Firebase Authentication, Cloud Firestore, Provider, GetIt, localization (AR/EN) and unit testing.</div>
+        <div class="pj-techs"><span class="pj-tech">Flutter</span><span class="pj-tech">Dart</span><span class="pj-tech">Hive</span><span class="pj-tech">Clean Architecture + MVVM</span><span class="pj-tech">Firebase Authentication</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9/To-Do-App" target="_blank"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>View on GitHub</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="s-tag fi">Education</div>
+    <div class="s-title fi d1">Academic Background</div>
+    <div class="edu-card fi d1">
+      <div class="edu-ico"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+      <div>
+        <div class="edu-deg">Bachelor's Degree — Law</div>
+        <div class="edu-uni">Minufiya University</div>
+        <div class="edu-per">September 2023 – September 2027</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="wrap">
+    <div class="s-tag fi">Connect</div>
+    <div class="s-title fi d1">Let's Work Together</div>
+    <div class="co-grid">
+      <div class="fi d1">
+        <div class="co-h">Open to Part-Time &amp;<br/>Volunteer Opportunities</div>
+        <p class="co-sub">I'm committed full-time to Lumofy from April 2026, but I'm always open to volunteer projects or part-time roles in QA &amp; Automation. Want to collaborate, need a QA eye on your project, or just connect? Reach out.</p>
+        <div class="co-ctas">
+          <a href="mailto:abdelrahman.tarek.dev@gmail.com" class="btn btn-p">Send an Email</a>
+          <a href="https://eg.linkedin.com/in/abelrahmantarek" target="_blank" class="btn btn-o">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="fi d2">
+        <div class="li-wrap">
+          <div class="badge-base LI-profile-badge"
+               data-locale="en_US"
+               data-size="large"
+               data-theme="dark"
+               data-type="VERTICAL"
+               data-vanity="abelrahmantarek"
+               data-version="v1">
+            <a class="badge-base__link LI-simple-link"
+               href="https://eg.linkedin.com/in/abelrahmantarek?trk=profile-badge"
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Abdelrahman Tarek &nbsp;·&nbsp; Cairo, Egypt &nbsp;·&nbsp;
+    <a href="https://eg.linkedin.com/in/abelrahmantarek" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+    <a href="https://github.com/abdelrahmant-9" target="_blank">GitHub</a> &nbsp;·&nbsp;
+    <a href="https://drive.google.com/file/d/1cDZ1se7hzIHNFXEptqBsntF_NHGThLjf/view?usp=sharing" target="_blank">CV</a>
+  </p>
+</footer>
+
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+<script>
+function toggleTheme(){
+  const h=document.documentElement;
+  const n=h.dataset.theme==='light'?'dark':'light';
+  h.dataset.theme=n;localStorage.setItem('theme',n);
+}
+(function(){
+  const s=localStorage.getItem('theme');
+  const sys=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  document.documentElement.dataset.theme=s||sys;
+})();
+const io=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');});
+},{threshold:0.07});
+document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
