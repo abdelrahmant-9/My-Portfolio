@@ -603,12 +603,20 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 .slab{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;
   transform:translateZ(var(--z));transition:transform .45s cubic-bezier(.2,.8,.3,1),filter .3s;}
 .slab .face{
-  position:absolute;left:50%;top:50%;border:1px solid var(--line-2);
-  background:color-mix(in srgb,var(--c) 24%, var(--panel-2));
+  position:absolute;left:50%;top:50%;
+  border:1px solid color-mix(in srgb,var(--c) 38%, var(--line-2));
+  background:color-mix(in srgb,var(--c) 26%, var(--panel-2));
   box-shadow:inset 0 0 34px color-mix(in srgb,var(--c) 16%, transparent);
 }
+[data-theme="light"] .slab .face{
+  border-color:color-mix(in srgb,var(--c) 55%, #ffffff);
+  background:color-mix(in srgb,var(--c) 32%, #ffffff);
+  box-shadow:inset 0 0 30px color-mix(in srgb,var(--c) 18%, transparent);
+}
 .f-front{width:var(--w);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d)/2));
-  background:color-mix(in srgb,var(--c) 38%, var(--panel));}
+  background:color-mix(in srgb,var(--c) 40%, var(--panel));}
+[data-theme="light"] .f-front{background:color-mix(in srgb,var(--c) 52%, #ffffff);}
+[data-theme="light"] .f-back{background:color-mix(in srgb,var(--c) 20%, #ffffff);}
 .f-back {width:var(--w);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d)/-2)) rotateY(180deg);}
 .f-right{width:var(--d);height:var(--h);transform:translate(-50%,-50%) translateX(calc(var(--w)/2)) rotateY(90deg);}
 .f-left {width:var(--d);height:var(--h);transform:translate(-50%,-50%) translateX(calc(var(--w)/-2)) rotateY(-90deg);}
@@ -619,19 +627,33 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 .badge{
   position:absolute;left:50%;top:50%;transform-style:preserve-3d;white-space:nowrap;
   transform:
-    translate3d(calc(var(--w)/-2 - 14px), calc(var(--h)/-2 - 10px), calc(var(--d)/2 + 2px))
+    translate3d(calc(var(--w)/-2 + 10px), calc(var(--h)/-2 - 2px), calc(var(--d)/2 + 44px))
     rotateZ(calc(-1 * var(--rz, -28deg))) rotateX(calc(-1 * var(--rx, 60deg)))
     translate(-50%,-50%);
   font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--c);text-shadow:0 1px 10px var(--bg);pointer-events:none;
+  color:var(--c);pointer-events:none;
   display:flex;align-items:center;gap:7px;
+  padding:4px 10px;border-radius:var(--r-full);
+  background:color-mix(in srgb,var(--panel) 88%, transparent);
+  border:1px solid color-mix(in srgb,var(--c) 34%, var(--line));
+  box-shadow:0 4px 14px color-mix(in srgb,var(--bg) 70%, transparent);
 }
 .badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--c);
   box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%, transparent);}
 .badge b{font-weight:500;font-size:10.4px;letter-spacing:.06em;color:var(--t3);}
 .slab.hl .badge{color:var(--t1);}
-.slab.hl{transform:translateZ(calc(var(--z) + 26px));filter:brightness(1.28);}
-.slab.hl .face{border-color:var(--c);}
+.slab.hl{transform:translateZ(calc(var(--z) + 10px));}
+.slab.hl .face{
+  border-color:var(--c);
+  background:color-mix(in srgb,var(--c) 44%, var(--panel-2));
+  box-shadow:inset 0 0 40px color-mix(in srgb,var(--c) 32%, transparent);
+}
+.slab.hl .f-front{background:color-mix(in srgb,var(--c) 62%, var(--panel));}
+[data-theme="light"] .slab.hl .face{
+  border-color:color-mix(in srgb,var(--c) 80%, #ffffff);
+  background:color-mix(in srgb,var(--c) 48%, #ffffff);
+}
+[data-theme="light"] .slab.hl .f-front{background:color-mix(in srgb,var(--c) 68%, #ffffff);}
 [data-motion="off"] .pyr{animation:none !important;}
 
 .pyr-legend{display:flex;flex-direction:column;gap:10px;}
@@ -1065,21 +1087,21 @@ nav,.hero,section,footer{position:relative;z-index:1;}
         <div class="pyr" id="pyr">
           <div class="slab" data-layer="unit" style="--w:326px;--h:134px;--d:44px;--z:0px;--c:var(--pass)">
             <div class="face f-front"></div>
+            <div class="face f-back"></div><div class="face f-right"></div>
+            <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
             <span class="badge">Unit <b>60%</b></span>
+          </div>
+          <div class="slab" data-layer="api" style="--w:228px;--h:96px;--d:44px;--z:56px;--c:var(--info)">
+            <div class="face f-front"></div>
             <div class="face f-back"></div><div class="face f-right"></div>
             <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
-          </div>
-          <div class="slab" data-layer="api" style="--w:228px;--h:96px;--d:44px;--z:50px;--c:var(--info)">
-            <div class="face f-front"></div>
             <span class="badge">API <b>30%</b></span>
-            <div class="face f-back"></div><div class="face f-right"></div>
-            <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
           </div>
-          <div class="slab" data-layer="e2e" style="--w:134px;--h:58px;--d:44px;--z:100px;--c:var(--warn)">
+          <div class="slab" data-layer="e2e" style="--w:134px;--h:58px;--d:44px;--z:112px;--c:var(--warn)">
             <div class="face f-front"></div>
-            <span class="badge">E2E <b>10%</b></span>
             <div class="face f-back"></div><div class="face f-right"></div>
             <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
+            <span class="badge">E2E <b>10%</b></span>
           </div>
         </div>
         <span class="pyr-hint">drag to rotate · hover a layer</span>
