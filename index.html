@@ -6,10 +6,14 @@
 <title>Abdelrahman Tarek — QA Engineer</title>
 <meta name="description" content="Abdelrahman Tarek — Software QA Engineer at Lumofy. Manual &amp; automation testing, Selenium, Postman, Jira. Play Spot the Bug and test your QA eye."/>
 <meta name="color-scheme" content="dark light"/>
+<script>
+  document.documentElement.classList.add('js');
+  try { document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark'; } catch (_) {}
+</script>
 <meta property="og:title" content="Abdelrahman Tarek — QA Engineer"/>
 <meta property="og:description" content="Software QA Engineer. Manual &amp; automation testing, Selenium, Postman, Jira. Includes a Spot the Bug mini-game."/>
 <meta property="og:type" content="website"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230d1117'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' stroke='%233fb950' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0b09'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' stroke='%235e9fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
 <style>
 /* ============================================================
    TOKENS — test-runner console
@@ -687,24 +691,23 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 /* burst overlay lives on the shared canvas — nothing extra needed here */
 @media print{nav,#game,.hero-ctas,.co-ctas{display:none;}body{background:#fff;color:#000;}}
 </style>
+<link rel="stylesheet" href="redesign.css"/>
 </head>
 <body>
 <a class="skip" href="#about">Skip to content</a>
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <!-- ══ NAV ══ -->
-<nav>
+<nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a class="nav-logo" href="#top"><span class="dot"></span>abdelrahman<span class="ext">.spec.js</span></a>
+    <a class="nav-logo" href="#top"><span class="brand-mark">at<span>✳</span></span><span class="brand-name">Abdelrahman Tarek<span class="ext">QA ENGINEER / BUILDER</span></span></a>
     <div class="nav-right">
       <ul class="nav-links" id="navLinks">
-        <li><a href="#about">about</a></li>
-        <li><a href="#experience">experience</a></li>
-        <li><a href="#skills">skills</a></li>
-        <li><a href="#pyramid">strategy</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#game">play</a></li>
-        <li><a href="#connect">contact</a></li>
+        <li><a href="#projects">Selected work</a></li>
+        <li><a href="#about">About me</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#game">The playground <span class="nav-spark">↗</span></a></li>
+        <li><a href="#connect" class="nav-contact">Let's talk <span>↗</span></a></li>
         <li>
           <button class="motion-btn" onclick="toggleMotion()" aria-label="Toggle background motion" title="Toggle motion">
             <svg class="m-on" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>
@@ -736,39 +739,59 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 <!-- ══ HERO ══ -->
 <header class="hero" id="top">
   <div class="hero-inner">
-    <div class="fi in">
-      <div class="hero-badge"><span class="pulse"></span>build: passing &nbsp;·&nbsp; Software QA Engineer @ Lumofy</div>
-      <h1>Abdelrahman<br/><span class="gr">Tarek</span></h1>
-      <p class="hero-role">
-        <span>QA Engineer</span><span class="sep">/</span><span>Manual &amp; Automation</span><span class="sep">/</span><span>Cairo, EG</span>
-      </p>
-      <p class="hero-sub">I break software on purpose so users never have to. Structured test design, sharp bug reports, and automation that actually holds up in regression.</p>
+    <div class="hero-copy fi in">
+      <div class="hero-badge"><span class="pulse"></span>PLAYER 01 <span class="badge-divider">/</span> QA ENGINEER &amp; BUILDER</div>
+      <h1>Abdelrahman<br/><span class="gr">Tarek<span class="hero-period">.</span></span></h1>
+      <p class="hero-manifesto">Curiosity is the superpower.<br/><span>Quality is the mission.</span></p>
+      <p class="hero-sub">I click twice. I try the weird input.<br class="desktop-break"/> I ask “what if?” — and then I test it.<br class="desktop-break"/> QA Engineer at <strong>Lumofy.</strong> Builder on the side.</p>
       <div class="hero-ctas">
-        <a href="#game" class="btn btn-g">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Play: Spot the Bug
-        </a>
-        <a href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener" class="btn btn-o">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="mailto:abdelrahman.tarek.dev@gmail.com" class="btn btn-o">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Email
-        </a>
+        <a href="#projects" class="btn btn-p">See what I build <span class="button-arrow">↗</span></a>
+        <a href="#connect" class="hero-contact">Let’s talk <span>↗</span></a>
       </div>
+      <div class="hero-principles" aria-label="My approach"><span><i>01</i> Stay curious</span><span><i>02</i> Think in edge cases</span><span><i>03</i> Make it better</span></div>
     </div>
-
-    <div class="term tilt fi in d2" data-tilt="9" aria-hidden="true">
-      <div class="term-bar">
-        <span class="tl tl-r"></span><span class="tl tl-y"></span><span class="tl tl-g"></span>
-        <span class="term-name">~/career — npm test</span>
+    <div class="hero-art fi in" id="heroArt">
+      <div class="portrait-orbit" aria-hidden="true"></div>
+      <span class="portrait-coordinate" aria-hidden="true">SUBJECT_01 / THE HUMAN BEHIND THE TESTS</span>
+      <div class="portrait-scene" id="portraitScene">
+        <div class="portrait-backplate" aria-hidden="true"></div>
+        <figure class="portrait-card" id="portraitCard">
+          <div class="portrait-toolbar" aria-hidden="true"><span class="portrait-lights"><i></i><i></i><i></i></span><span>identity.spec.ts</span><span class="portrait-live">● LIVE</span></div>
+          <div class="portrait-image-wrap" id="portraitImageWrap">
+            <img src="assets/abdelrahman-tarek.jpeg" width="400" height="400" fetchpriority="high" decoding="async" alt="Abdelrahman Tarek, Software QA Engineer"/>
+            <div class="portrait-inspect" aria-hidden="true"><span class="inspect-corner top-left"></span><span class="inspect-corner top-right"></span><span class="inspect-corner bottom-left"></span><span class="inspect-corner bottom-right"></span><span class="inspect-label">&lt;engineer /&gt;</span><span class="portrait-scan"></span></div>
+            <div class="inspect-facts" id="inspectFacts" hidden aria-hidden="true"><span>ROLE: SOFTWARE QA ENGINEER</span><span>BASE: CAIRO, EGYPT</span><span>CURIOSITY: ALWAYS ON</span></div>
+            <button class="inspect-profile" id="inspectProfile" aria-pressed="false" aria-controls="inspectFacts">⌕ Inspect me</button>
+            <span class="portrait-crosshair" aria-hidden="true">+</span>
+          </div>
+          <figcaption class="portrait-caption"><span><strong>Curious by default.</strong><small>SOFTWARE QA / AUTOMATION / BUILDER</small></span><span class="portrait-caption-mark" aria-hidden="true">↗</span></figcaption>
+        </figure>
       </div>
-      <div class="term-body" id="termBody"></div>
+      <div class="portrait-note note-detail" aria-hidden="true"><span class="note-symbol">⌕</span><div><small>IT’S IN THE DETAILS</small><strong>Look a little closer.</strong></div></div>
+      <div class="portrait-note note-code" aria-hidden="true"><div class="note-code-title"><span class="code-dot"></span> mindset.spec.ts</div><code><span>it</span>(<em>'notices the little things'</em>,<br/>&nbsp;&nbsp;() =&gt; <span>keepExploring</span>());</code></div>
+      <div class="portrait-meta"><span>BASED IN CAIRO ↗</span><span id="inspectCoordinates" aria-hidden="true">X: 200 &nbsp; Y: 200</span></div>
     </div>
   </div>
+  <div class="hero-bottom"><a href="#about" class="scroll-cue"><span>↓</span> SCROLL TO INSPECT</a><a href="#game" class="hero-game-link"><span>INTERACTIVE QA CHALLENGE</span> Think you can spot the bug? <b>↗</b></a><span class="hero-index">PERSONAL PORTFOLIO <span>2026</span></span></div>
 </header>
 
+<nav class="journey" id="journey" aria-label="Portfolio inspection trail">
+  <div class="journey-heading">INSPECTION<br/>TRAIL</div>
+  <div class="journey-track"><div class="journey-fill" id="journeyFill"></div><div class="journey-probe" id="journeyProbe" aria-hidden="true"><div class="probe-cube"><span class="probe-face probe-front"><span class="probe-eyes"><i></i><i></i></span></span><span class="probe-face probe-side">+</span><span class="probe-face probe-top">·</span></div></div>
+    <a class="journey-stop" style="--stop:0" href="#top" aria-label="Introduction"></a>
+    <a class="journey-stop" style="--stop:1" href="#about" aria-label="About me"></a>
+    <a class="journey-stop" style="--stop:2" href="#projects" aria-label="Selected work"></a>
+    <a class="journey-stop" style="--stop:3" href="#experience" aria-label="Experience"></a>
+    <a class="journey-stop" style="--stop:4" href="#skills" aria-label="Skills"></a>
+    <a class="journey-stop" style="--stop:5" href="#pyramid" aria-label="Testing approach"></a>
+    <a class="journey-stop" style="--stop:6" href="#game" aria-label="Bug-finding game"></a>
+    <a class="journey-stop" style="--stop:7" href="#education" aria-label="Education"></a>
+    <a class="journey-stop" style="--stop:8" href="#connect" aria-label="Contact"></a>
+  </div>
+  <a class="journey-current" id="journeyCurrent" href="#top"><span id="journeyNumber">00 / 08</span><strong id="journeyLabel">INTRODUCTION</strong><span id="journeyPercent">0%</span></a>
+</nav>
+
+<main id="main-content">
 <!-- ══ STATS ══ -->
 <div class="wrap">
   <div class="stats fi">
@@ -783,8 +806,8 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 <section id="about">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">about.spec.js</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'Who I Am'</span><span class="pn">)</span></h2>
+      <span class="sec-file">01 / THE PERSON</span>
+      <h2 class="sec-h">Curiosity is my default.</h2>
     </div>
     <div class="about-grid">
       <div class="fi d1">
@@ -795,7 +818,7 @@ nav,.hero,section,footer{position:relative;z-index:1;}
       </div>
       <div class="fi d2">
         <div class="panel env">
-          <div class="env-hdr"><span>test.config.json</span><span class="chip chip-pass">ready</span></div>
+          <div class="env-hdr"><span>AT A GLANCE</span><span class="chip chip-pass">ready</span></div>
           <div class="env-row"><span class="env-k">role</span><span class="env-v">QA Engineer @ Lumofy</span></div>
           <div class="env-row"><span class="env-k">location</span><span class="env-v">Cairo, Egypt</span></div>
           <div class="env-row"><span class="env-k">email</span><span class="env-v"><a href="mailto:abdelrahman.tarek.dev@gmail.com">abdelrahman.tarek.dev@gmail.com</a></span></div>
@@ -810,13 +833,117 @@ nav,.hero,section,footer{position:relative;z-index:1;}
   </div>
 </section>
 
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head fi">
+      <span class="sec-file">02 / SELECTED WORK</span>
+      <h2 class="sec-h">A few things I’ve built.</h2>
+    </div>
+    <div class="pj-grid">
+
+      <article class="pj tilt fi" data-tilt="6"><div class="project-visual visual-spectara" aria-hidden="true"><span class="visual-caption">01 / AUTOMATION, REIMAGINED</span><div class="spec-window"><div class="spec-window-bar"><i></i><i></i><i></i><span>SPECTARA</span></div><div class="spec-target"><span>↖</span><div><b>One click.<br/>The right locator.</b><small>LESS GUESSWORK. MORE SHIPPING.</small></div></div><div class="spec-locator"><span>CSS</span><code>[data-testid="quality"]</code><b>98 ↗</b></div></div><span class="visual-watermark">S</span></div><div class="project-content">
+        <div class="pj-top">
+          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v14H3z"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+          <span class="chip chip-pass">flagship</span>
+        </div>
+        <h3 class="pj-title">Spectara</h3>
+        <div class="pj-repo">abdelrahmant-9/Spectara · Chrome MV3</div>
+        <p class="pj-desc">A Chrome extension that kills the most thankless part of automation. Click any element on any page and get the most stable locator — ranked, not guessed — plus a ready-to-paste Selenium Java snippet and a generated Page Object Model class in about three seconds.</p>
+        <div class="pj-techs"><span class="tag">JavaScript ES6</span><span class="tag">Manifest V3</span><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">POM</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9/Spectara" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          View source ↗
+        </a>
+      </div></article>
+
+      <article class="pj tilt fi d1" data-tilt="6"><div class="project-visual visual-depi" aria-hidden="true"><span class="visual-caption">02 / A TEAM EFFORT</span><div class="depi-stack"><div>PLAN <span>01</span></div><div>TEST <span>02</span></div><div>SHIP <span>✓</span></div></div><span class="visual-corner">5 PEOPLE. ONE SHARED STANDARD.</span></div><div class="project-content">
+        <div class="pj-top">
+          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+          <span class="chip chip-warn">team lead</span>
+        </div>
+        <h3 class="pj-title">DEPI Graduation Project</h3>
+        <div class="pj-repo">abdelrahmant-9/SoftwareTesting-FinalProject · Java</div>
+        <p class="pj-desc">Led a five-person QA team through a full web application testing lifecycle. 50+ test cases designed and reviewed, 15+ defects documented, 20+ tasks distributed across four months, closed out with a committee presentation. Repo holds the manual suite, automated cases, and bug documentation.</p>
+        <div class="pj-techs"><span class="tag">Manual Testing</span><span class="tag">Selenium</span><span class="tag">Jira</span><span class="tag">Test Docs</span><span class="tag">Team Lead</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9/SoftwareTesting-FinalProject" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
+          View source ↗
+        </a>
+      </div></article>
+
+      <article class="pj tilt fi d2" data-tilt="6"><div class="project-visual visual-io" aria-hidden="true"><span class="visual-caption">03 / IN THE REAL WORLD</span><div class="io-radar"><i></i><i></i><i></i><span class="radar-dot"></span><span class="radar-dot second"></span><b>20<span>+</span></b></div><span class="visual-corner">ACCEPTED BUGS. BETTER EXPERIENCES.</span></div><div class="project-content">
+        <div class="pj-top">
+          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="chip chip-info">freelance</span>
+        </div>
+        <h3 class="pj-title">Test IO Cycles</h3>
+        <div class="pj-repo">crowdtesting · live production apps</div>
+        <p class="pj-desc">10+ professional testing cycles against real shipping products. 20+ accepted bug reports with detailed reproduction steps, screenshots, and severity classification — plus API validation in Postman and pre-release regression passes.</p>
+        <div class="pj-techs"><span class="tag">Exploratory</span><span class="tag">Postman</span><span class="tag">Regression</span><span class="tag">Bug Reports</span></div>
+        <span class="pj-none">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+          NDA — reports not public
+        </span>
+      </div></article>
+
+      <article class="pj tilt fi" data-tilt="6"><div class="project-visual visual-todo" aria-hidden="true"><span class="visual-caption">04 / EVERYDAY UTILITY</span><div class="todo-preview"><span>Make room for focus.</span><div><i>✓</i> Start with a plan</div><div><i>✓</i> Build something useful</div><div><i>○</i> Make it a little better</div></div></div><div class="project-content">
+        <div class="pj-top">
+          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span class="chip chip-pass">tested</span>
+        </div>
+        <h3 class="pj-title">To-Do App</h3>
+        <div class="pj-repo">abdelrahmant-9/To-Do-App · Dart</div>
+        <p class="pj-desc">Production-shaped Flutter app: Clean Architecture with MVVM, Firebase Auth, Cloud Firestore, Provider and GetIt for DI, AR/EN localization — and unit tests over the domain layer, because I refuse to ship my own code untested.</p>
+        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Clean Architecture</span><span class="tag">Firebase</span><span class="tag">GetIt</span><span class="tag">Unit Tests</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9/To-Do-App" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
+          View source ↗
+        </a>
+      </div></article>
+
+      <article class="pj tilt fi d1" data-tilt="6"><div class="project-visual visual-ajr" aria-hidden="true"><span class="visual-caption">05 / BUILT WITH PURPOSE</span><span class="ajr-orb"></span><div class="ajr-type" lang="ar">أجر<small>SPACE FOR WHAT MATTERS.</small></div></div><div class="project-content">
+        <div class="pj-top">
+          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
+          <span class="chip chip-mute">private</span>
+        </div>
+        <h3 class="pj-title">أجر — Islamic Companion App</h3>
+        <div class="pj-repo">Flutter · Arabic-first, RTL</div>
+        <p class="pj-desc">Dhikr and tasbih companion built in Flutter: morning, evening, after-prayer and sleep Azkar, Hive-backed progress and streak tracking, Hijri dates, full RTL Arabic UI, local notifications, and an internal debug dashboard for state inspection.</p>
+        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Hive</span><span class="tag">RTL UI</span><span class="tag">Notifications</span><span class="tag">Localization</span></div>
+        <span class="pj-none">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+          Private repository
+        </span>
+      </div></article>
+
+      <article class="pj tilt fi d2" data-tilt="6"><div class="project-visual visual-flutter" aria-hidden="true"><span class="visual-caption">06 / LEARNING BY BUILDING</span><div class="flutter-symbol"><i></i><i></i><i></i></div><span class="visual-corner">SMALL APPS. BIG LESSONS.</span></div><div class="project-content">
+        <div class="pj-top">
+          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="10" y1="18" x2="14" y2="18"/></svg></span>
+          <span class="chip chip-mute">practice set</span>
+        </div>
+        <h3 class="pj-title">Flutter Practice Apps</h3>
+        <div class="pj-repo">SmartCalc · Listify · CountUp · QuickText · BMI-App</div>
+        <p class="pj-desc">A run of small, focused builds — each one isolating a single idea. SmartCalc covers layered architecture, precise expression parsing, descriptive error feedback and unit-tested math. The rest drill state management, responsive layout, and local persistence.</p>
+        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Provider</span><span class="tag">Responsive UI</span><span class="tag">Unit Tests</span></div>
+        <a class="pj-link" href="https://github.com/abdelrahmant-9?tab=repositories" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
+          Browse all repos ↗
+        </a>
+      </div></article>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- ══ EXPERIENCE ══ -->
 <section id="experience">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">experience.spec.js</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'Work History'</span><span class="pn">)</span></h2>
-      <p class="sec-sub">Four suites, all green. Each assertion below is something I actually shipped.</p>
+      <span class="sec-file">03 / THE JOURNEY</span>
+      <h2 class="sec-h">Real work. Real impact.</h2>
+      <p class="sec-sub">From testing live products to building the tools that make testing better.</p>
     </div>
 
     <div class="notice fi d1">
@@ -912,8 +1039,8 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 <section id="skills">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">coverage-report.txt</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'Technical Coverage'</span><span class="pn">)</span></h2>
+      <span class="sec-file">04 / THE TOOLKIT</span>
+      <h2 class="sec-h">Built for the details.</h2>
       <p class="sec-sub">Honest levels, not inflated percentages. Core = daily driver, Solid = confident on real work, Growing = actively building.</p>
     </div>
     <div class="cov fi d1">
@@ -970,115 +1097,12 @@ nav,.hero,section,footer{position:relative;z-index:1;}
   </div>
 </section>
 
-<!-- ══ PROJECTS ══ -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head fi">
-      <span class="sec-file">projects.spec.js</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'What I Have Built'</span><span class="pn">)</span></h2>
-    </div>
-    <div class="pj-grid">
-
-      <article class="pj tilt fi" data-tilt="6">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v14H3z"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="12" cy="10" r="2.4"/></svg></span>
-          <span class="chip chip-pass">flagship</span>
-        </div>
-        <h3 class="pj-title">Spectara</h3>
-        <div class="pj-repo">abdelrahmant-9/Spectara · Chrome MV3</div>
-        <p class="pj-desc">A Chrome extension that kills the most thankless part of automation. Click any element on any page and get the most stable locator — ranked, not guessed — plus a ready-to-paste Selenium Java snippet and a generated Page Object Model class in about three seconds.</p>
-        <div class="pj-techs"><span class="tag">JavaScript ES6</span><span class="tag">Manifest V3</span><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">POM</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9/Spectara" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-          View source ↗
-        </a>
-      </article>
-
-      <article class="pj tilt fi d1" data-tilt="6">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
-          <span class="chip chip-warn">team lead</span>
-        </div>
-        <h3 class="pj-title">DEPI Graduation Project</h3>
-        <div class="pj-repo">abdelrahmant-9/SoftwareTesting-FinalProject · Java</div>
-        <p class="pj-desc">Led a five-person QA team through a full web application testing lifecycle. 50+ test cases designed and reviewed, 15+ defects documented, 20+ tasks distributed across four months, closed out with a committee presentation. Repo holds the manual suite, automated cases, and bug documentation.</p>
-        <div class="pj-techs"><span class="tag">Manual Testing</span><span class="tag">Selenium</span><span class="tag">Jira</span><span class="tag">Test Docs</span><span class="tag">Team Lead</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9/SoftwareTesting-FinalProject" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
-          View source ↗
-        </a>
-      </article>
-
-      <article class="pj tilt fi d2" data-tilt="6">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          <span class="chip chip-info">freelance</span>
-        </div>
-        <h3 class="pj-title">Test IO Cycles</h3>
-        <div class="pj-repo">crowdtesting · live production apps</div>
-        <p class="pj-desc">10+ professional testing cycles against real shipping products. 20+ accepted bug reports with detailed reproduction steps, screenshots, and severity classification — plus API validation in Postman and pre-release regression passes.</p>
-        <div class="pj-techs"><span class="tag">Exploratory</span><span class="tag">Postman</span><span class="tag">Regression</span><span class="tag">Bug Reports</span></div>
-        <span class="pj-none">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-          NDA — reports not public
-        </span>
-      </article>
-
-      <article class="pj tilt fi" data-tilt="6">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <span class="chip chip-pass">tested</span>
-        </div>
-        <h3 class="pj-title">To-Do App</h3>
-        <div class="pj-repo">abdelrahmant-9/To-Do-App · Dart</div>
-        <p class="pj-desc">Production-shaped Flutter app: Clean Architecture with MVVM, Firebase Auth, Cloud Firestore, Provider and GetIt for DI, AR/EN localization — and unit tests over the domain layer, because I refuse to ship my own code untested.</p>
-        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Clean Architecture</span><span class="tag">Firebase</span><span class="tag">GetIt</span><span class="tag">Unit Tests</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9/To-Do-App" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
-          View source ↗
-        </a>
-      </article>
-
-      <article class="pj tilt fi d1" data-tilt="6">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
-          <span class="chip chip-mute">private</span>
-        </div>
-        <h3 class="pj-title">أجر — Islamic Companion App</h3>
-        <div class="pj-repo">Flutter · Arabic-first, RTL</div>
-        <p class="pj-desc">Dhikr and tasbih companion built in Flutter: morning, evening, after-prayer and sleep Azkar, Hive-backed progress and streak tracking, Hijri dates, full RTL Arabic UI, local notifications, and an internal debug dashboard for state inspection.</p>
-        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Hive</span><span class="tag">RTL UI</span><span class="tag">Notifications</span><span class="tag">Localization</span></div>
-        <span class="pj-none">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-          Private repository
-        </span>
-      </article>
-
-      <article class="pj tilt fi d2" data-tilt="6">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="10" y1="18" x2="14" y2="18"/></svg></span>
-          <span class="chip chip-mute">practice set</span>
-        </div>
-        <h3 class="pj-title">Flutter Practice Apps</h3>
-        <div class="pj-repo">SmartCalc · Listify · CountUp · QuickText · BMI-App</div>
-        <p class="pj-desc">A run of small, focused builds — each one isolating a single idea. SmartCalc covers layered architecture, precise expression parsing, descriptive error feedback and unit-tested math. The rest drill state management, responsive layout, and local persistence.</p>
-        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Provider</span><span class="tag">Responsive UI</span><span class="tag">Unit Tests</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9?tab=repositories" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
-          Browse all repos ↗
-        </a>
-      </article>
-
-    </div>
-  </div>
-</section>
-
 <!-- ══ TEST PYRAMID ══ -->
 <section id="pyramid">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">strategy.spec.js</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'How I Structure Testing'</span><span class="pn">)</span></h2>
+      <span class="sec-file">05 / THE APPROACH</span>
+      <h2 class="sec-h">Quality, from the ground up.</h2>
       <p class="sec-sub">Coverage is not a number you chase — it is a shape. Drag the pyramid, or hover a layer to see where I put the effort and why.</p>
     </div>
 
@@ -1149,9 +1173,9 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 <section id="game">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">spot-the-bug.spec.js</span>
-      <h2 class="sec-h"><span class="kw">it</span><span class="pn">(</span><span class="str">'should let you find the defect'</span><span class="pn">)</span></h2>
-      <p class="sec-sub">Six screens. One planted defect in each. Read the requirement, click the thing that violates it — before the timer runs out. This is the actual job, compressed into ninety seconds.</p>
+      <span class="sec-file">06 / THE PLAYGROUND</span>
+      <h2 class="sec-h">Think you can spot it?</h2>
+      <p class="sec-sub">Six screens. One planted defect in each. Read the requirement, click the thing that violates it — before the timer runs out. A small taste of the job. Up to three minutes to prove your QA instincts.</p>
     </div>
 
     <div class="game-shell tilt fi d1" data-tilt="3">
@@ -1221,8 +1245,8 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 <section id="education">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">education.spec.js</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'Academic Background'</span><span class="pn">)</span></h2>
+      <span class="sec-file">07 / THE FOUNDATION</span>
+      <h2 class="sec-h">Always a student.</h2>
     </div>
     <div class="panel edu fi d1">
       <span class="edu-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
@@ -1240,12 +1264,12 @@ nav,.hero,section,footer{position:relative;z-index:1;}
 <section id="connect">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">contact.spec.js</span>
-      <h2 class="sec-h"><span class="kw">describe</span><span class="pn">(</span><span class="str">'Let us Work Together'</span><span class="pn">)</span></h2>
+      <span class="sec-file">08 / YOUR NEXT RELEASE</span>
+      <h2 class="sec-h">Let’s make it better.</h2>
     </div>
     <div class="co-grid">
       <div class="fi d1">
-        <h3 class="co-h">Need a second pair of eyes<br/>before you ship?</h3>
+        <h3 class="co-h">Great software starts<br/>with a conversation.</h3>
         <p class="co-sub">I'm full-time at Lumofy and running freelance cycles on Test IO — but I still take on part-time and volunteer QA work when it's interesting. Send me a build, a staging link, or a problem you can't reproduce.</p>
         <div class="co-ctas">
           <a href="mailto:abdelrahman.tarek.dev@gmail.com" class="btn btn-p">
@@ -1264,7 +1288,7 @@ nav,.hero,section,footer{position:relative;z-index:1;}
       </div>
       <div class="fi d2">
         <div class="panel help">
-          <h3>// how I can help</h3>
+          <h3>What I bring to the table</h3>
           <div class="help-item">
             <strong>Manual &amp; regression testing</strong>
             <span>Structured scenarios, exploratory passes, reproduction of the bug your team can't pin down, and a release checklist that actually gets run.</span>
@@ -1287,10 +1311,12 @@ nav,.hero,section,footer{position:relative;z-index:1;}
   </div>
 </section>
 
+</main>
+
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="foot">
-    <div class="foot-run"><span style="color:var(--pass)">✓</span><span id="footRun">test run finished — 0 failing</span></div>
+    <div class="foot-run"><span style="color:var(--pass)">✓</span><span id="footRun">Made with curiosity. Tested with care.</span></div>
     <div>
       <a href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener">LinkedIn</a> ·
       <a href="https://github.com/abdelrahmant-9" target="_blank" rel="noopener">GitHub</a> ·
@@ -1314,13 +1340,12 @@ function toggleTheme(){
 (function(){
   let saved=null;
   try{saved=localStorage.getItem('theme');}catch(e){}
-  const sys=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
-  document.documentElement.dataset.theme=saved||sys;
+  document.documentElement.dataset.theme=saved||'dark';
 
   let m=null;
   try{m=localStorage.getItem('motion');}catch(e){}
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.documentElement.dataset.motion = m || (reduce?'off':'on');
+  document.documentElement.dataset.motion = reduce ? 'off' : (m || 'on');
 })();
 function toggleMotion(){
   const h=document.documentElement;
@@ -1340,6 +1365,7 @@ function toggleMotion(){
   function syncMobile(){
     const small=matchMedia('(max-width:760px)').matches;
     themeMobile.style.display=small?'grid':'none';
+    document.getElementById('motionMobile').style.display=small?'grid':'none';
     if(!small){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
   }
   toggle.addEventListener('click',()=>{
@@ -1347,7 +1373,7 @@ function toggleMotion(){
     toggle.setAttribute('aria-expanded',String(open));
   });
   links.addEventListener('click',e=>{
-    if(e.target.tagName==='A'){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
+    if(e.target.closest('a')){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
   });
   matchMedia('(max-width:760px)').addEventListener('change',syncMobile);
   syncMobile();
@@ -1380,52 +1406,6 @@ function toggleMotion(){
     });
   },{threshold:0.08});
   document.querySelectorAll('.fi:not(.in)').forEach(el=>io.observe(el));
-})();
-
-/* ============================================================
-   HERO TERMINAL
-   ============================================================ */
-(function(){
-  const body=document.getElementById('termBody');
-  if(!body) return;
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const lines=[
-    {t:'cmd', html:'<span class="pr">$</span> npm run test:career'},
-    {t:'gap'},
-    {t:'head',html:'<span class="dim">RUN</span> <span class="tx">abdelrahman.spec.js</span>'},
-    {t:'ok',  html:'lumofy &gt; ships tested releases <span class="dim">(9 mo)</span>'},
-    {t:'ok',  html:'test-io &gt; files accepted bug reports <span class="dim">(20+)</span>'},
-    {t:'ok',  html:'depi &gt; graduates ranked #1 of 100+ <span class="dim">(200h)</span>'},
-    {t:'ok',  html:'nti &gt; builds flutter apps <span class="dim">(120h)</span>'},
-    {t:'ok',  html:'spectara &gt; generates stable selenium locators'},
-    {t:'w',   html:'coffee &gt; supply running low <span class="dim">(non-blocking)</span>'},
-    {t:'sum'}
-  ];
-  let i=0;
-  function push(){
-    if(i>=lines.length) return;
-    const l=lines[i++];
-    const d=document.createElement('div');
-    if(l.t==='gap'){d.style.height='8px';}
-    else if(l.t==='sum'){
-      d.className='term-sum';
-      d.innerHTML='<span style="color:var(--pass)"><b>5 passing</b></span>'+
-                  '<span style="color:var(--warn)"><b>1 pending</b></span>'+
-                  '<span style="color:var(--fail)"><b>0 failing</b></span>'+
-                  '<span class="dim" style="color:var(--t4)">done in 1.42s</span>';
-    } else {
-      d.className='tline';
-      const mk = l.t==='ok'?'<span class="mk mk-ok">✓</span>'
-              : l.t==='w' ?'<span class="mk mk-w">!</span>'
-              : l.t==='head'?'<span class="mk mk-i">›</span>'
-              : '<span class="mk"></span>';
-      d.innerHTML = l.t==='cmd' ? '<span class="mk"></span><span class="term-cmd">'+l.html+'</span>'
-                                : mk+'<span class="tx">'+l.html+'</span>';
-    }
-    body.appendChild(d);
-    if(i<lines.length) setTimeout(push, reduce?0:(l.t==='cmd'?420:170));
-  }
-  push();
 })();
 
 /* ============================================================
@@ -1861,163 +1841,30 @@ function toggleMotion(){
 })();
 
 /* ============================================================
-   DEFECT FIELD — canvas background + click bursts
-   ============================================================ */
-(function(){
-  const cv=document.getElementById('fx');
-  if(!cv||!cv.getContext) return;
-  const ctx=cv.getContext('2d');
-  const root=document.documentElement;
-  let W=0,H=0,dpr=1,nodes=[],bursts=[],raf=null,running=false;
-  let mx=0,my=0,tx=0,ty=0;
-  const C={info:'#58a6ff',pass:'#3fb950',fail:'#f85149',line:'#1d2733'};
-
-  function readColors(){
-    const cs=getComputedStyle(root);
-    C.info=cs.getPropertyValue('--info').trim()||C.info;
-    C.pass=cs.getPropertyValue('--pass').trim()||C.pass;
-    C.fail=cs.getPropertyValue('--fail').trim()||C.fail;
-  }
-  function hexToRgb(h){
-    h=h.replace('#','');
-    if(h.length===3) h=h.split('').map(c=>c+c).join('');
-    const n=parseInt(h,16);
-    return [(n>>16)&255,(n>>8)&255,n&255];
-  }
-  function rgba(hex,a){const c=hexToRgb(hex);return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
-
-  function size(){
-    dpr=Math.min(window.devicePixelRatio||1,2);
-    W=window.innerWidth;H=window.innerHeight;
-    cv.width=Math.floor(W*dpr);cv.height=Math.floor(H*dpr);
-    cv.style.width=W+'px';cv.style.height=H+'px';
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  function seed(){
-    const small=W<620;
-    const count=small?22:Math.min(64,Math.floor((W*H)/24000));
-    nodes=[];
-    for(let i=0;i<count;i++){
-      nodes.push({
-        x:Math.random()*W, y:Math.random()*H,
-        vx:(Math.random()-0.5)*0.16, vy:(Math.random()-0.5)*0.16,
-        r:Math.random()*1.5+1, depth:Math.random()*0.9+0.25,
-        fail:0, next:2000+Math.random()*12000
-      });
-    }
-  }
-
-  /* public: particle burst at viewport coords */
-  window.__burst=function(x,y,kind){
-    if(root.dataset.motion==='off') return;
-    const col=kind==='fail'?C.fail:C.pass;
-    for(let i=0;i<26;i++){
-      const a=(Math.PI*2*i)/26 + Math.random()*0.4;
-      const sp=1.7+Math.random()*3.4;
-      bursts.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1,life:1,col:col,r:1.4+Math.random()*2});
-    }
-    if(!running) start();
-  };
-
-  function frame(){
-    if(!running) return;
-    ctx.clearRect(0,0,W,H);
-    tx+=(mx-tx)*0.045; ty+=(my-ty)*0.045;
-
-    /* links first */
-    for(let i=0;i<nodes.length;i++){
-      const a=nodes[i], ax=a.x+tx*a.depth*16, ay=a.y+ty*a.depth*16;
-      for(let j=i+1;j<nodes.length;j++){
-        const b=nodes[j], bx=b.x+tx*b.depth*16, by=b.y+ty*b.depth*16;
-        const dx=ax-bx, dy=ay-by, d2=dx*dx+dy*dy;
-        if(d2<20000){
-          const al=(1-d2/20000)*0.16;
-          ctx.strokeStyle=rgba((a.fail>0||b.fail>0)?C.fail:C.info, al);
-          ctx.lineWidth=1;
-          ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();
-        }
-      }
-    }
-    /* nodes */
-    for(const n of nodes){
-      n.x+=n.vx;n.y+=n.vy;
-      if(n.x<-40)n.x=W+40; if(n.x>W+40)n.x=-40;
-      if(n.y<-40)n.y=H+40; if(n.y>H+40)n.y=-40;
-      n.next-=16;
-      if(n.next<=0){ n.fail=1600; n.next=9000+Math.random()*16000; }
-      if(n.fail>0) n.fail-=16;
-
-      const x=n.x+tx*n.depth*16, y=n.y+ty*n.depth*16;
-      const failing=n.fail>0;
-      const col=failing?C.fail:C.info;
-      ctx.fillStyle=rgba(col, failing?0.85:0.4*n.depth);
-      ctx.beginPath();ctx.arc(x,y,n.r*(failing?1.6:1),0,Math.PI*2);ctx.fill();
-      if(failing){
-        const k=1-(n.fail/1600);
-        ctx.strokeStyle=rgba(C.fail,0.5*(1-k));
-        ctx.lineWidth=1.2;
-        ctx.beginPath();ctx.arc(x,y,n.r+2+k*16,0,Math.PI*2);ctx.stroke();
-      } else if(n.fail>-260){
-        const k=(n.fail+260)/260;
-        ctx.strokeStyle=rgba(C.pass,0.55*k);
-        ctx.lineWidth=1.4;
-        ctx.beginPath();ctx.arc(x,y,n.r+2+(1-k)*13,0,Math.PI*2);ctx.stroke();
-      }
-    }
-    /* bursts */
-    for(let i=bursts.length-1;i>=0;i--){
-      const b=bursts[i];
-      b.x+=b.vx;b.y+=b.vy;b.vy+=0.09;b.vx*=0.99;b.life-=0.022;
-      if(b.life<=0){bursts.splice(i,1);continue;}
-      ctx.fillStyle=rgba(b.col,Math.max(0,b.life));
-      ctx.beginPath();ctx.arc(b.x,b.y,b.r*b.life,0,Math.PI*2);ctx.fill();
-    }
-    raf=requestAnimationFrame(frame);
-  }
-
-  function start(){
-    if(running||root.dataset.motion==='off'||document.hidden) return;
-    running=true;raf=requestAnimationFrame(frame);
-  }
-  function stop(){running=false;cancelAnimationFrame(raf);ctx.clearRect(0,0,W,H);}
-
-  window.addEventListener('pointermove',e=>{
-    mx=(e.clientX/W-0.5)*2; my=(e.clientY/H-0.5)*2;
-  },{passive:true});
-  window.addEventListener('resize',()=>{size();seed();},{passive:true});
-  document.addEventListener('visibilitychange',()=>{document.hidden?stop():start();});
-  window.addEventListener('motionchange',e=>{e.detail==='off'?stop():start();});
-  new MutationObserver(readColors).observe(root,{attributes:true,attributeFilter:['data-theme']});
-
-  readColors();size();seed();start();
-})();
-
-/* ============================================================
-   POINTER-PARALLAX TILT
+   POINTER-PARALLAX TILT — bounded to pointer interaction
    ============================================================ */
 (function(){
   const root=document.documentElement;
-  const coarse=matchMedia('(hover: none)').matches;
-  if(coarse) return;
+  if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
   document.querySelectorAll('[data-tilt]').forEach(card=>{
     const max=parseFloat(card.dataset.tilt)||6;
-    const glare=document.createElement('span');
-    glare.className='glare';
-    card.appendChild(glare);
-    card.addEventListener('pointermove',e=>{
-      if(root.dataset.motion==='off') return;
-      const r=card.getBoundingClientRect();
-      const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-      card.classList.add('live');
-      card.style.transform=
-        'perspective(1200px) rotateX('+((0.5-py)*max*2).toFixed(2)+'deg) rotateY('+((px-0.5)*max*2).toFixed(2)+'deg) translateZ(6px)';
-      glare.style.setProperty('--gx',(px*100).toFixed(1)+'%');
-      glare.style.setProperty('--gy',(py*100).toFixed(1)+'%');
+    const glare=document.createElement('span');glare.className='glare';card.appendChild(glare);
+    let bounds=null,frame=0,px=.5,py=.5;
+    const reset=()=>{cancelAnimationFrame(frame);frame=0;bounds=null;card.classList.remove('live');card.style.transform='';};
+    card.addEventListener('pointerenter',()=>{bounds=card.getBoundingClientRect();});
+    card.addEventListener('pointermove',event=>{
+      if(root.dataset.motion==='off')return;
+      const r=bounds || (bounds=card.getBoundingClientRect());
+      px=(event.clientX-r.left)/r.width;py=(event.clientY-r.top)/r.height;
+      if(!frame)frame=requestAnimationFrame(()=>{
+        frame=0;if(root.dataset.motion==='off')return;
+        card.classList.add('live');
+        card.style.transform='perspective(1200px) rotateX('+((.5-py)*max*2).toFixed(2)+'deg) rotateY('+((px-.5)*max*2).toFixed(2)+'deg) translateZ(6px)';
+        glare.style.setProperty('--gx',(px*100).toFixed(1)+'%');glare.style.setProperty('--gy',(py*100).toFixed(1)+'%');
+      });
     },{passive:true});
-    card.addEventListener('pointerleave',()=>{
-      card.classList.remove('live');
-      card.style.transform='';
-    });
+    card.addEventListener('pointerleave',reset);
+    window.addEventListener('motionchange',event=>{if(event.detail==='off')reset();});
   });
 })();
 
@@ -2059,11 +1906,20 @@ function toggleMotion(){
   const apply=()=>{pyr.style.setProperty('--rx',rx.toFixed(1)+'deg');pyr.style.setProperty('--rz',rz.toFixed(1)+'deg');};
   apply();
 
-  const loop=()=>{
-    if(spinning && !dragging && root.dataset.motion!=='off' && !document.hidden){ rz+=0.16; apply(); }
-    raf=requestAnimationFrame(loop);
+  let inView=false, lastTime=0;
+  const loop=time=>{
+    raf=null;
+    if(!inView || root.dataset.motion==='off' || document.hidden){lastTime=0;return;}
+    if(spinning && !dragging){rz+=(lastTime?Math.min((time-lastTime)/1000,.05):0)*9.6;apply();}
+    lastTime=time;raf=requestAnimationFrame(loop);
   };
-  raf=requestAnimationFrame(loop);
+  const syncSpin=()=>{
+    if(!inView || root.dataset.motion==='off' || document.hidden){cancelAnimationFrame(raf);raf=null;lastTime=0;}
+    else if(raf===null) raf=requestAnimationFrame(loop);
+  };
+  new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;syncSpin();},{rootMargin:'100px'}).observe(stage);
+  window.addEventListener('motionchange',syncSpin);
+  document.addEventListener('visibilitychange',syncSpin);
 
   stage.addEventListener('pointerenter',()=>{spinning=false;});
   stage.addEventListener('pointerleave',()=>{spinning=true;});
@@ -2115,5 +1971,6 @@ function toggleMotion(){
   });
 })();
 </script>
+<script src="scene.js"></script>
 </body>
 </html>
