@@ -1,1184 +1,492 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Abdelrahman Tarek — QA Engineer</title>
-<meta name="description" content="Abdelrahman Tarek — Software QA Engineer at Lumofy. Manual &amp; automation testing, Selenium, Postman, Jira. Play Spot the Bug and test your QA eye."/>
-<meta name="color-scheme" content="dark light"/>
-<script>
-  document.documentElement.classList.add('js');
-  try { document.documentElement.dataset.theme = localStorage.getItem('theme') || 'dark'; } catch (_) {}
-</script>
-<meta property="og:title" content="Abdelrahman Tarek — QA Engineer"/>
-<meta property="og:description" content="Software QA Engineer. Manual &amp; automation testing, Selenium, Postman, Jira. Includes a Spot the Bug mini-game."/>
+<meta name="description" content="Abdelrahman Tarek — Software QA Engineer at Lumofy. Manual and automation testing, mobile testing and data testing. Play Spot the Bug and test your QA eye."/>
+<meta name="color-scheme" content="dark"/>
+<meta name="theme-color" content="#090d17"/>
 <meta property="og:type" content="website"/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0b09'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' stroke='%235e9fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
-<style>
-/* ============================================================
-   TOKENS — test-runner console
-   ============================================================ */
-:root{
-  --bg:#0a0e14;
-  --bg-2:#0d1117;
-  --panel:#101720;
-  --panel-2:#131c27;
-  --line:#1d2733;
-  --line-2:#2b3949;
-  --t1:#e6edf3;
-  --t2:#a9b6c5;
-  --t3:#7a8899;
-  --t4:#556373;
-  --pass:#3fb950;
-  --pass-bg:rgba(63,185,80,.12);
-  --fail:#f85149;
-  --fail-bg:rgba(248,81,73,.12);
-  --warn:#d29922;
-  --warn-bg:rgba(210,153,34,.12);
-  --info:#58a6ff;
-  --info-bg:rgba(88,166,255,.12);
-  --violet:#bc8cff;
-  --shadow:0 1px 0 rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.35);
-  --shadow-lg:0 20px 50px rgba(0,0,0,.45);
-  --r:14px;
-  --r-sm:9px;
-  --r-full:999px;
-  --mono:ui-monospace,"SF Mono","JetBrains Mono","Fira Code",Menlo,Consolas,"Liberation Mono",monospace;
-  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","Helvetica Neue",Arial,sans-serif;
-  --ar:"SF Arabic","Noto Sans Arabic","Geeza Pro",Tahoma,sans-serif;
-  --grid-line:rgba(88,166,255,.045);
-}
-[data-theme="light"]{
-  --bg:#f4f6f9;
-  --bg-2:#ffffff;
-  --panel:#ffffff;
-  --panel-2:#f6f8fa;
-  --line:#d8dee6;
-  --line-2:#c3ccd8;
-  --t1:#111a24;
-  --t2:#3d4a5a;
-  --t3:#5e6c7c;
-  --t4:#8593a3;
-  --pass:#177f38;
-  --pass-bg:rgba(23,127,56,.10);
-  --fail:#c8232c;
-  --fail-bg:rgba(200,35,44,.09);
-  --warn:#8a6100;
-  --warn-bg:rgba(138,97,0,.10);
-  --info:#0a66c2;
-  --info-bg:rgba(10,102,194,.09);
-  --violet:#8250df;
-  --shadow:0 1px 2px rgba(16,32,60,.05), 0 8px 24px rgba(16,32,60,.06);
-  --shadow-lg:0 18px 40px rgba(16,32,60,.10);
-  --grid-line:rgba(10,102,194,.05);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
-body{
-  font-family:var(--sans);
-  background:var(--bg);
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size:52px 52px;
-  color:var(--t1);
-  line-height:1.62;
-  min-height:100vh;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  transition:background-color .35s ease,color .25s ease;
-}
-:lang(ar),[lang="ar"]{font-family:var(--ar);}
-a{color:inherit;text-decoration:none;}
-ul{list-style:none;}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;}
-[hidden]{display:none !important;}
-::selection{background:var(--info);color:#fff;}
-::-webkit-scrollbar{width:10px;height:10px;}
-::-webkit-scrollbar-track{background:var(--bg-2);}
-::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px;border:2px solid var(--bg-2);}
-:focus-visible{outline:2px solid var(--info);outline-offset:3px;border-radius:4px;}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
-section{padding:96px 0;position:relative;}
-.mono{font-family:var(--mono);}
-
-/* skip link */
-.skip{position:absolute;left:-9999px;top:0;z-index:999;background:var(--info);color:#fff;padding:10px 16px;border-radius:0 0 8px 0;}
-.skip:focus{left:0;}
-
-/* ============================================================
-   NAV — editor tab bar
-   ============================================================ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:300;
-  background:color-mix(in srgb,var(--bg-2) 88%, transparent);
-  backdrop-filter:saturate(160%) blur(12px);
-  -webkit-backdrop-filter:saturate(160%) blur(12px);
-  border-bottom:1px solid var(--line);
-}
-.nav-inner{max-width:1080px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
-.nav-logo{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:-.01em;color:var(--t1);white-space:nowrap;}
-.nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--pass);box-shadow:0 0 0 4px var(--pass-bg);}
-.nav-logo .ext{color:var(--t4);font-weight:400;}
-.nav-links{display:flex;gap:2px;align-items:center;}
-.nav-links a{
-  font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--t3);
-  padding:7px 11px;border-radius:var(--r-sm);border:1px solid transparent;
-  transition:color .2s,background .2s,border-color .2s;
-}
-.nav-links a::before{content:"› ";color:var(--t4);}
-.nav-links a:hover{color:var(--t1);background:var(--panel-2);border-color:var(--line);}
-.nav-links a.active{color:var(--info);background:var(--info-bg);border-color:color-mix(in srgb,var(--info) 30%, transparent);}
-.theme-btn{
-  width:34px;height:34px;border-radius:var(--r-sm);border:1px solid var(--line);
-  background:var(--panel-2);display:grid;place-items:center;color:var(--t2);
-  transition:color .2s,border-color .2s,transform .2s;margin-left:6px;flex:none;
-}
-.theme-btn:hover{color:var(--t1);border-color:var(--line-2);transform:translateY(-1px);}
-.theme-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-[data-theme="light"] .icon-sun{display:none;}
-[data-theme="dark"] .icon-moon{display:none;}
-.nav-toggle{display:none;width:34px;height:34px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--panel-2);color:var(--t2);}
-.nav-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;}
-
-/* ============================================================
-   SHARED ATOMS
-   ============================================================ */
-.chip{
-  display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);
-  font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
-  padding:4px 9px;border-radius:5px;border:1px solid transparent;white-space:nowrap;
-}
-.chip-pass{color:var(--pass);background:var(--pass-bg);border-color:color-mix(in srgb,var(--pass) 32%, transparent);}
-.chip-fail{color:var(--fail);background:var(--fail-bg);border-color:color-mix(in srgb,var(--fail) 32%, transparent);}
-.chip-warn{color:var(--warn);background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 32%, transparent);}
-.chip-info{color:var(--info);background:var(--info-bg);border-color:color-mix(in srgb,var(--info) 32%, transparent);}
-.chip-mute{color:var(--t3);background:var(--panel-2);border-color:var(--line);}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:11px 20px;border-radius:var(--r-sm);font-family:var(--mono);
-  font-size:13px;font-weight:600;border:1px solid var(--line);
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s,background .18s,color .18s;
-  white-space:nowrap;
-}
-.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.btn-p{background:var(--info);border-color:var(--info);color:#fff;}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 20px color-mix(in srgb,var(--info) 35%, transparent);}
-.btn-o{background:var(--panel-2);color:var(--t1);}
-.btn-o:hover{border-color:var(--line-2);transform:translateY(-2px);}
-.btn-g{background:var(--pass-bg);border-color:color-mix(in srgb,var(--pass) 40%, transparent);color:var(--pass);}
-.btn-g:hover{transform:translateY(-2px);box-shadow:0 8px 20px color-mix(in srgb,var(--pass) 22%, transparent);}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
-
-/* section header — describe() block */
-.sec-head{margin-bottom:40px;}
-.sec-file{
-  display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;
-  color:var(--t3);padding:4px 10px;border:1px solid var(--line);border-radius:var(--r-full);
-  background:var(--panel-2);margin-bottom:14px;
-}
-.sec-file::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--info);}
-.sec-h{font-family:var(--mono);font-size:clamp(21px,3.2vw,28px);font-weight:700;letter-spacing:-.02em;color:var(--t1);line-height:1.3;}
-.sec-h .kw{color:var(--violet);}
-.sec-h .str{color:var(--pass);}
-.sec-h .pn{color:var(--t4);font-weight:400;}
-.sec-sub{margin-top:10px;font-size:14.5px;color:var(--t3);max-width:620px;}
-
-/* reveal */
-.fi{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1);}
-.fi.in{opacity:1;transform:none;}
-.d1{transition-delay:.07s;}.d2{transition-delay:.14s;}.d3{transition-delay:.21s;}.d4{transition-delay:.28s;}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto;}
-  .fi{opacity:1;transform:none;transition:none;}
-  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
-}
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 72px;}
-.hero-inner{max-width:1080px;margin:0 auto;padding:0 24px;width:100%;
-  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11.5px;
-  color:var(--pass);background:var(--pass-bg);border:1px solid color-mix(in srgb,var(--pass) 28%, transparent);
-  padding:6px 13px;border-radius:var(--r-full);margin-bottom:22px;letter-spacing:.01em;
-}
-.pulse{width:7px;height:7px;border-radius:50%;background:var(--pass);animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 color-mix(in srgb,var(--pass) 55%, transparent);}50%{opacity:.65;box-shadow:0 0 0 6px transparent;}}
-.hero h1{font-size:clamp(40px,6.4vw,66px);line-height:1.02;font-weight:800;letter-spacing:-.045em;margin-bottom:14px;}
-.hero h1 .gr{
-  background:linear-gradient(115deg,var(--info),var(--pass) 55%,var(--violet));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hero-role{font-family:var(--mono);font-size:14.5px;color:var(--t2);margin-bottom:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;}
-.hero-role .sep{color:var(--t4);}
-.hero-sub{font-size:16px;color:var(--t3);max-width:520px;line-height:1.75;margin-bottom:30px;}
-.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;}
-
-/* terminal window */
-.term{border-radius:var(--r);border:1px solid var(--line);background:var(--bg-2);box-shadow:var(--shadow-lg);overflow:hidden;}
-.term-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--panel-2);border-bottom:1px solid var(--line);}
-.tl{width:11px;height:11px;border-radius:50%;flex:none;}
-.tl-r{background:#ff5f57;}.tl-y{background:#febc2e;}.tl-g{background:#28c840;}
-.term-name{font-family:var(--mono);font-size:11.5px;color:var(--t3);margin-left:6px;}
-.term-body{padding:18px 18px 20px;font-family:var(--mono);font-size:12.6px;line-height:1.85;min-height:296px;}
-.tline{display:flex;gap:9px;opacity:0;animation:tin .34s ease forwards;}
-@keyframes tin{to{opacity:1;}}
-.tline .mk{flex:none;width:14px;text-align:center;}
-.mk-ok{color:var(--pass);}.mk-x{color:var(--fail);}.mk-i{color:var(--info);}.mk-w{color:var(--warn);}
-.tline .tx{color:var(--t2);}
-.tline .dim{color:var(--t4);}
-.term-cmd{color:var(--t1);}
-.term-cmd .pr{color:var(--pass);}
-.term-sum{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line-2);display:flex;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:12px;}
-.term-sum b{font-weight:700;}
-.caret{display:inline-block;width:8px;height:15px;background:var(--pass);vertical-align:-3px;animation:blink 1.05s steps(1) infinite;}
-@keyframes blink{50%{opacity:0;}}
-
-/* stats strip */
-.stats{margin-top:60px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel);}
-.stat{padding:20px 22px;border-right:1px solid var(--line);}
-.stat:last-child{border-right:none;}
-.stat-n{font-family:var(--mono);font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.1;}
-.stat-l{font-size:12px;color:var(--t3);margin-top:5px;font-family:var(--mono);}
-
-/* ============================================================
-   ABOUT
-   ============================================================ */
-.about-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px;align-items:start;}
-.about-p{font-size:15.4px;color:var(--t2);margin-bottom:16px;line-height:1.8;}
-.about-p strong{color:var(--t1);font-weight:600;}
-.about-p code{font-family:var(--mono);font-size:.9em;color:var(--info);background:var(--info-bg);padding:1px 6px;border-radius:5px;}
-.env{padding:0;overflow:hidden;}
-.env-hdr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;background:var(--panel-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--t3);}
-.env-row{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.4px;}
-.env-row:last-child{border-bottom:none;}
-.env-k{color:var(--t4);flex:none;width:78px;}
-.env-v{color:var(--t2);word-break:break-word;min-width:0;}
-.env-v a{color:var(--info);border-bottom:1px solid transparent;transition:border-color .2s;}
-.env-v a:hover{border-color:var(--info);}
-
-/* ============================================================
-   EXPERIENCE — suite results
-   ============================================================ */
-.notice{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:var(--r);
-  border:1px solid color-mix(in srgb,var(--info) 26%, transparent);background:var(--info-bg);margin-bottom:26px;}
-.notice-ico{flex:none;width:20px;height:20px;color:var(--info);}
-.notice-ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.notice-t{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--info);margin-bottom:4px;}
-.notice-d{font-size:14px;color:var(--t2);}
-.notice-d strong{color:var(--t1);font-weight:600;}
-.suites{display:flex;flex-direction:column;gap:16px;}
-.suite{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s;}
-.suite:hover{border-color:var(--line-2);transform:translateY(-2px);box-shadow:var(--shadow);}
-.suite-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 20px;background:var(--panel-2);border-bottom:1px solid var(--line);flex-wrap:wrap;}
-.suite-title{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--t1);letter-spacing:-.01em;}
-.suite-title .arrow{color:var(--pass);margin-right:7px;}
-.suite-co{font-size:13.6px;color:var(--info);margin-top:4px;font-weight:500;}
-.suite-meta{font-family:var(--mono);font-size:11.8px;color:var(--t4);margin-top:6px;}
-.suite-tags{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
-.suite-body{padding:14px 20px 18px;}
-.assert{display:flex;gap:11px;padding:6px 0;font-size:14px;color:var(--t2);line-height:1.6;}
-.assert .mk{flex:none;color:var(--pass);font-family:var(--mono);font-weight:700;}
-.award{display:inline-flex;align-items:center;gap:8px;margin:6px 0 12px;padding:8px 13px;border-radius:var(--r-sm);
-  font-size:13px;font-weight:600;color:var(--warn);background:var(--warn-bg);
-  border:1px solid color-mix(in srgb,var(--warn) 30%, transparent);}
-.stack-line{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11.6px;color:var(--t4);}
-.stack-line b{color:var(--t3);font-weight:600;}
-
-/* ============================================================
-   SKILLS — coverage report
-   ============================================================ */
-.cov{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden;}
-.cov-hdr,.cov-row{display:grid;grid-template-columns:minmax(150px,1.05fr) minmax(0,1.9fr) 150px;gap:18px;align-items:center;padding:14px 20px;}
-.cov-hdr{background:var(--panel-2);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10.8px;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);}
-.cov-row{border-bottom:1px solid var(--line);}
-.cov-row:last-child{border-bottom:none;}
-.cov-row:hover{background:var(--panel-2);}
-.cov-name{font-family:var(--mono);font-size:13.4px;font-weight:600;color:var(--t1);}
-.tags{display:flex;flex-wrap:wrap;gap:6px;}
-.tag{font-family:var(--mono);font-size:11.5px;color:var(--t2);background:var(--panel-2);
-  border:1px solid var(--line);padding:3px 9px;border-radius:var(--r-full);transition:border-color .2s,color .2s;}
-.cov-row:hover .tag{border-color:var(--line-2);}
-.bar{height:6px;border-radius:var(--r-full);background:var(--panel-2);border:1px solid var(--line);overflow:hidden;}
-.bar > i{display:block;height:100%;border-radius:var(--r-full);background:linear-gradient(90deg,var(--pass),color-mix(in srgb,var(--pass) 60%, var(--info)));}
-.bar.mid > i{background:linear-gradient(90deg,var(--info),var(--violet));}
-.bar.low > i{background:linear-gradient(90deg,var(--warn),color-mix(in srgb,var(--warn) 60%, var(--info)));}
-.lvl{font-family:var(--mono);font-size:10.8px;color:var(--t4);margin-top:6px;letter-spacing:.05em;text-transform:uppercase;}
-
-/* ============================================================
-   PROJECTS
-   ============================================================ */
-.pj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;}
-.pj{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);padding:22px;display:flex;flex-direction:column;
-  transition:border-color .25s,transform .25s,box-shadow .25s;}
-.pj:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:var(--shadow-lg);}
-.pj-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
-.pj-ico{width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center;background:var(--info-bg);color:var(--info);border:1px solid color-mix(in srgb,var(--info) 24%, transparent);}
-.pj-ico svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.pj-title{font-size:17px;font-weight:700;letter-spacing:-.02em;margin-bottom:5px;}
-.pj-repo{font-family:var(--mono);font-size:11.4px;color:var(--t4);margin-bottom:11px;}
-.pj-desc{font-size:14px;color:var(--t3);line-height:1.72;margin-bottom:16px;flex:1;}
-.pj-techs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
-.pj-link{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12.4px;font-weight:600;color:var(--info);
-  padding-top:12px;border-top:1px solid var(--line);transition:gap .2s;}
-.pj-link:hover{gap:11px;}
-.pj-link svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.pj-none{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;color:var(--t4);padding-top:12px;border-top:1px solid var(--line);}
-
-/* ============================================================
-   EDUCATION / CONNECT / FOOTER
-   ============================================================ */
-.edu{display:flex;gap:18px;align-items:center;padding:24px;flex-wrap:wrap;}
-.edu-ico{width:46px;height:46px;border-radius:var(--r-sm);display:grid;place-items:center;background:var(--violet);color:#0a0e14;flex:none;}
-.edu-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-.edu-deg{font-size:17px;font-weight:700;letter-spacing:-.02em;}
-.edu-uni{font-size:14px;color:var(--info);margin-top:3px;}
-.edu-per{font-family:var(--mono);font-size:12px;color:var(--t4);margin-top:5px;}
-.co-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;align-items:start;}
-.co-h{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.18;margin-bottom:14px;}
-.co-sub{font-size:15px;color:var(--t3);line-height:1.78;margin-bottom:24px;}
-.co-ctas{display:flex;gap:10px;flex-wrap:wrap;}
-.help{padding:22px;}
-.help h3{font-family:var(--mono);font-size:13.5px;font-weight:700;margin-bottom:16px;color:var(--t1);}
-.help-item{padding:12px 0;border-top:1px solid var(--line);}
-.help-item:first-of-type{border-top:none;padding-top:0;}
-.help-item strong{display:block;font-size:14px;font-weight:600;color:var(--t1);margin-bottom:3px;}
-.help-item span{font-size:13.4px;color:var(--t3);line-height:1.65;}
-footer{border-top:1px solid var(--line);padding:30px 0 40px;background:var(--bg-2);}
-.foot{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
-  font-family:var(--mono);font-size:12px;color:var(--t4);}
-.foot a{color:var(--t3);transition:color .2s;}
-.foot a:hover{color:var(--info);}
-.foot-run{display:flex;align-items:center;gap:8px;}
-
-/* ============================================================
-   GAME — Spot the Bug
-   ============================================================ */
-#game{scroll-margin-top:70px;}
-.game-shell{border:1px solid var(--line);border-radius:var(--r);background:var(--panel);overflow:hidden;box-shadow:var(--shadow);}
-.game-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;
-  background:var(--panel-2);border-bottom:1px solid var(--line);flex-wrap:wrap;}
-.game-bar-l{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.4px;color:var(--t2);}
-.hud{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
-.hud-item{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.6px;color:var(--t3);
-  background:var(--panel);border:1px solid var(--line);padding:5px 10px;border-radius:var(--r-full);}
-.hud-item b{color:var(--t1);font-weight:700;}
-.hud-item.warn{color:var(--fail);border-color:color-mix(in srgb,var(--fail) 40%, transparent);background:var(--fail-bg);}
-.hud-item.warn b{color:var(--fail);}
-.timer-track{width:100%;height:3px;background:var(--panel-2);position:relative;overflow:hidden;}
-.timer-fill{position:absolute;inset:0 auto 0 0;width:100%;background:linear-gradient(90deg,var(--pass),var(--info));transition:width .2s linear,background .3s;}
-.timer-fill.low{background:linear-gradient(90deg,var(--warn),var(--fail));}
-.game-body{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:0;min-height:430px;}
-.stage{padding:24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:16px;min-width:0;}
-.side{padding:20px;background:var(--panel-2);display:flex;flex-direction:column;gap:16px;min-width:0;}
-.side-block h4{font-family:var(--mono);font-size:10.6px;letter-spacing:.11em;text-transform:uppercase;color:var(--t4);margin-bottom:9px;}
-.spec-box{font-family:var(--mono);font-size:12.4px;line-height:1.75;color:var(--t2);background:var(--panel);
-  border:1px solid var(--line);border-left:3px solid var(--info);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:12px 13px;}
-.spec-box .lbl{color:var(--violet);}
-.side-steps{display:flex;flex-direction:column;gap:7px;}
-.step{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:11.8px;color:var(--t4);}
-.step .n{width:19px;height:19px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:10px;flex:none;}
-.step.on{color:var(--t1);}
-.step.on .n{border-color:var(--pass);color:var(--pass);background:var(--pass-bg);}
-.step.done{color:var(--t3);}
-.step.done .n{border-color:var(--pass);background:var(--pass);color:#04120a;}
-.step.miss .n{border-color:var(--fail);background:var(--fail);color:#fff;}
-
-/* browser mock frame */
-.browser{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--bg-2);}
-.browser-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--panel-2);border-bottom:1px solid var(--line);}
-.browser-url{flex:1;font-family:var(--mono);font-size:11px;color:var(--t4);background:var(--panel);
-  border:1px solid var(--line);border-radius:var(--r-full);padding:3px 11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.app{padding:20px;font-size:14px;color:var(--t1);}
-.app h5{font-size:15.5px;font-weight:700;margin-bottom:3px;letter-spacing:-.01em;}
-.app .app-sub{font-size:12.6px;color:var(--t3);margin-bottom:16px;}
-.app-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;font-size:13.6px;}
-.app-row .k{color:var(--t2);}
-.app-row .v{font-family:var(--mono);color:var(--t1);}
-.app-row.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:12px;font-weight:700;font-size:15px;}
-.app-field{margin-bottom:13px;}
-.app-label{display:block;font-size:12px;color:var(--t2);margin-bottom:5px;font-weight:600;}
-.app-input{width:100%;border:1px solid var(--line-2);border-radius:7px;background:var(--panel);
-  padding:9px 11px;font-family:var(--mono);font-size:12.8px;color:var(--t1);}
-.app-input.ph{color:var(--t4);}
-.app-hint{font-size:11.4px;margin-top:5px;color:var(--t4);}
-.app-hint.err{color:var(--fail);}
-.app-btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;border-radius:7px;
-  background:var(--info);color:#fff;font-size:13px;font-weight:600;}
-.app-btn.ghost{background:var(--panel-2);color:var(--t2);border:1px solid var(--line-2);}
-.app-btn.danger{background:var(--fail);color:#fff;}
-.app-btn.off{opacity:.45;}
-.app-table{width:100%;border-collapse:collapse;font-size:13.2px;}
-.app-table th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--t4);
-  padding:7px 10px;border-bottom:1px solid var(--line);font-weight:700;}
-.app-table td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--t2);}
-.app-table td.num{font-family:var(--mono);color:var(--t1);}
-.app-flex{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.app-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-full);
-  border:1px solid var(--line);font-size:12px;color:var(--t2);background:var(--panel-2);}
-.app-badge{display:inline-grid;place-items:center;min-width:19px;height:19px;padding:0 6px;border-radius:var(--r-full);
-  background:var(--fail);color:#fff;font-size:11px;font-weight:700;font-family:var(--mono);}
-.app-pager{display:flex;gap:6px;align-items:center;font-family:var(--mono);font-size:12.4px;}
-.app-pager span{min-width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--line);border-radius:6px;color:var(--t2);}
-.app-pager span.cur{background:var(--info);border-color:var(--info);color:#fff;}
-.app-area{width:100%;min-height:66px;border:1px solid var(--line-2);border-radius:7px;background:var(--panel);
-  padding:10px 11px;font-size:13px;color:var(--t2);line-height:1.55;}
-.app-count{font-family:var(--mono);font-size:11.4px;color:var(--t4);text-align:right;margin-top:5px;}
-.app-note{font-size:12.4px;color:var(--t3);margin-top:10px;}
-
-/* hot regions */
-.hot{
-  display:block;width:100%;text-align:left;border:1.5px dashed transparent;border-radius:8px;
-  padding:4px 6px;margin:-4px -6px;transition:border-color .15s,background .15s,transform .12s;
-}
-.hot:hover{border-color:color-mix(in srgb,var(--info) 55%, transparent);background:var(--info-bg);}
-.hot:active{transform:scale(.995);}
-.hot.inline{display:inline-block;width:auto;}
-.hot.locked{pointer-events:none;}
-.hot.mark-ok{border-color:var(--pass);background:var(--pass-bg);border-style:solid;}
-.hot.mark-no{border-color:var(--fail);background:var(--fail-bg);border-style:solid;animation:shake .35s;}
-@keyframes shake{25%{transform:translateX(-4px);}75%{transform:translateX(4px);}}
-.hint-glow{animation:glow 1.2s ease-in-out infinite;}
-@keyframes glow{0%,100%{box-shadow:0 0 0 0 transparent;}50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--warn) 30%, transparent);}}
-
-/* feedback + start + report */
-.verdict{border-radius:var(--r-sm);border:1px solid var(--line);padding:14px 16px;background:var(--panel-2);}
-.verdict.ok{border-color:color-mix(in srgb,var(--pass) 40%, transparent);background:var(--pass-bg);}
-.verdict.no{border-color:color-mix(in srgb,var(--fail) 40%, transparent);background:var(--fail-bg);}
-.verdict-t{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.6px;font-weight:700;margin-bottom:7px;}
-.verdict.ok .verdict-t{color:var(--pass);}
-.verdict.no .verdict-t{color:var(--fail);}
-.verdict-d{font-size:13.4px;color:var(--t2);line-height:1.68;}
-.verdict-d code{font-family:var(--mono);font-size:.92em;background:var(--panel);border:1px solid var(--line);padding:1px 5px;border-radius:5px;color:var(--t1);}
-.verdict-act{margin-top:12px;display:flex;gap:9px;flex-wrap:wrap;}
-.start{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:40px 24px;min-height:388px;}
-.start-ico{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;background:var(--fail-bg);color:var(--fail);border:1px solid color-mix(in srgb,var(--fail) 30%, transparent);}
-.start-ico svg{width:29px;height:29px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
-.start h3{font-size:24px;font-weight:800;letter-spacing:-.03em;}
-.start p{font-size:14.4px;color:var(--t3);max-width:440px;line-height:1.72;}
-.rules{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
-.report{padding:26px 24px;}
-.report-top{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-bottom:22px;}
-.ring{width:112px;height:112px;flex:none;position:relative;}
-.ring svg{transform:rotate(-90deg);width:112px;height:112px;}
-.ring circle{fill:none;stroke-width:9;stroke-linecap:round;}
-.ring .bgc{stroke:var(--line);}
-.ring .fgc{stroke:var(--pass);transition:stroke-dashoffset 1s cubic-bezier(.2,.8,.3,1);}
-.ring-txt{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--mono);}
-.ring-n{font-size:24px;font-weight:800;color:var(--t1);line-height:1;}
-.ring-l{font-size:9.6px;color:var(--t4);letter-spacing:.09em;text-transform:uppercase;margin-top:3px;}
-.report-title{font-size:22px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px;}
-.report-sub{font-size:14px;color:var(--t3);max-width:420px;line-height:1.65;}
-.report-stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
-.log{border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;margin-bottom:18px;}
-.log-row{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13.2px;color:var(--t2);}
-.log-row:last-child{border-bottom:none;}
-.log-row .mk{font-family:var(--mono);font-weight:700;flex:none;}
-.log-row .mk.ok{color:var(--pass);}
-.log-row .mk.no{color:var(--fail);}
-.log-name{font-family:var(--mono);font-size:12.6px;color:var(--t1);}
-.log-why{font-size:12.6px;color:var(--t3);margin-top:3px;line-height:1.6;}
-.log-time{margin-left:auto;font-family:var(--mono);font-size:11.4px;color:var(--t4);flex:none;}
-.report-cta{display:flex;gap:10px;flex-wrap:wrap;}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width:960px){
-  .hero-inner{grid-template-columns:1fr;gap:36px;}
-  .about-grid,.co-grid{grid-template-columns:1fr;gap:26px;}
-  .game-body{grid-template-columns:1fr;}
-  /* stack order: requirement first, then the screen under test, then progress */
-  .side{display:contents;}
-  .stage{border-right:none;order:2;}
-  .side-block{background:var(--panel-2);padding:16px 18px;}
-  .side-block:nth-of-type(1){order:1;border-bottom:1px solid var(--line);}
-  .side-block:nth-of-type(2){order:3;border-top:1px solid var(--line);}
-  .side-block:nth-of-type(3){order:4;margin-top:0 !important;border-top:1px solid var(--line);}
-  .cov-hdr,.cov-row{grid-template-columns:minmax(120px,1fr) minmax(0,1.5fr);}
-  .cov-hdr span:last-child,.cov-row > div:last-child{grid-column:1 / -1;}
-}
-@media (max-width:760px){
-  section{padding:72px 0;}
-  .nav-links{
-    position:absolute;top:56px;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;
-    background:var(--bg-2);border-bottom:1px solid var(--line);padding:10px 16px 14px;
-    display:none;box-shadow:var(--shadow-lg);
-  }
-  .nav-links.open{display:flex;}
-  .nav-links a{padding:10px 12px;font-size:13.5px;}
-  .nav-links li:nth-last-child(-n+2){display:none;}
-  .nav-right{display:flex;align-items:center;gap:8px;}
-  .nav-toggle{display:grid;place-items:center;}
-  .stats{grid-template-columns:repeat(2,1fr);}
-  .stat{border-bottom:1px solid var(--line);}
-  .stat:nth-child(2){border-right:none;}
-  .stat:nth-child(3),.stat:nth-child(4){border-bottom:none;}
-  .term-body{font-size:11.6px;min-height:250px;}
-  .report-top{gap:18px;}
-}
-@media (max-width:520px){
-  .wrap,.nav-inner,.hero-inner,.foot{padding-left:18px;padding-right:18px;}
-  .hero{padding-top:104px;}
-  .stage,.side,.report{padding:16px;}
-  .btn{padding:10px 15px;font-size:12.4px;}
-  .hud-item{font-size:10.8px;padding:4px 8px;}
-}
-
-/* ============================================================
-   DEPTH LAYER — canvas field, tilt, 3D reveal
-   ============================================================ */
-#fx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.72;}
-[data-theme="light"] #fx{opacity:.5;}
-[data-motion="off"] #fx{display:none;}
-nav,.hero,section,footer{position:relative;z-index:1;}
-
-/* pointer-parallax tilt */
-.tilt{transform-style:preserve-3d;will-change:transform;transition:transform .45s cubic-bezier(.2,.8,.3,1),box-shadow .45s;}
-.tilt.live{transition:transform .08s linear,box-shadow .3s;}
-.tilt > *{transform:translateZ(0.01px);}
-.glare{
-  position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
-  background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%), rgba(255,255,255,.16), transparent 62%);
-  transition:opacity .3s;mix-blend-mode:soft-light;z-index:4;
-}
-.tilt.live .glare{opacity:1;}
-[data-theme="light"] .glare{background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%), rgba(88,166,255,.18), transparent 62%);}
-[data-motion="off"] .tilt{transform:none !important;}
-[data-motion="off"] .glare{display:none;}
-
-.hero-inner{perspective:1400px;}
-.pj-grid{perspective:1600px;}
-.stage-3d{perspective:1500px;}
-.term{position:relative;}
-.pj{position:relative;}
-
-/* 3D scroll reveal */
-.fi{transform:translateY(18px) rotateX(7deg);transform-origin:50% 100%;}
-.fi.in{transform:none;}
-.suites,.pj-grid,.cov,.game-shell{perspective:1400px;}
-
-/* motion toggle */
-.motion-btn{
-  width:34px;height:34px;border-radius:var(--r-sm);border:1px solid var(--line);
-  background:var(--panel-2);display:grid;place-items:center;color:var(--t2);flex:none;
-  transition:color .2s,border-color .2s,transform .2s;margin-left:6px;
-}
-.motion-btn:hover{color:var(--t1);border-color:var(--line-2);transform:translateY(-1px);}
-.motion-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-[data-motion="off"] .motion-btn{color:var(--fail);border-color:color-mix(in srgb,var(--fail) 38%, transparent);}
-[data-motion="off"] .m-on{display:none;}
-[data-motion="on"] .m-off,html:not([data-motion="off"]) .m-off{display:none;}
-[data-motion="off"] .m-off{display:block;}
-
-/* counters */
-.stat-n{font-variant-numeric:tabular-nums;}
-
-/* ============================================================
-   TEST PYRAMID — CSS 3D
-   ============================================================ */
-.pyr-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:34px;align-items:center;}
-.pyr-stage{
-  position:relative;height:430px;perspective:1200px;perspective-origin:50% 46%;
-  display:grid;place-items:center;cursor:grab;touch-action:pan-y;
-  border:1px solid var(--line);border-radius:var(--r);background:
-    radial-gradient(circle at 50% 42%, color-mix(in srgb,var(--info) 9%, transparent), transparent 58%),var(--panel);
-  overflow:hidden;
-}
-.pyr-stage:active{cursor:grabbing;}
-.pyr-stage::after{
-  content:'';position:absolute;inset:auto 0 0 0;height:130px;pointer-events:none;
-  background:linear-gradient(to top, color-mix(in srgb,var(--panel) 96%, transparent), transparent);
-}
-.pyr-hint{position:absolute;left:14px;bottom:12px;z-index:3;font-family:var(--mono);font-size:10.6px;color:var(--t4);letter-spacing:.06em;}
-.pyr{
-  position:relative;width:0;height:0;transform-style:preserve-3d;
-  transform:scale(var(--s,1)) rotateX(var(--rx,60deg)) rotateZ(var(--rz,-28deg));
-  transition:transform .5s cubic-bezier(.2,.8,.3,1);
-}
-.pyr.drag{transition:none;}
-.slab{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;
-  transform:translateZ(var(--z));transition:transform .45s cubic-bezier(.2,.8,.3,1),filter .3s;}
-.slab .face{
-  position:absolute;left:50%;top:50%;
-  border:1px solid color-mix(in srgb,var(--c) 38%, var(--line-2));
-  background:color-mix(in srgb,var(--c) 26%, var(--panel-2));
-  box-shadow:inset 0 0 34px color-mix(in srgb,var(--c) 16%, transparent);
-}
-[data-theme="light"] .slab .face{
-  border-color:color-mix(in srgb,var(--c) 55%, #ffffff);
-  background:color-mix(in srgb,var(--c) 32%, #ffffff);
-  box-shadow:inset 0 0 30px color-mix(in srgb,var(--c) 18%, transparent);
-}
-.f-front{width:var(--w);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d)/2));
-  background:color-mix(in srgb,var(--c) 40%, var(--panel));}
-[data-theme="light"] .f-front{background:color-mix(in srgb,var(--c) 52%, #ffffff);}
-[data-theme="light"] .f-back{background:color-mix(in srgb,var(--c) 20%, #ffffff);}
-.f-back {width:var(--w);height:var(--h);transform:translate(-50%,-50%) translateZ(calc(var(--d)/-2)) rotateY(180deg);}
-.f-right{width:var(--d);height:var(--h);transform:translate(-50%,-50%) translateX(calc(var(--w)/2)) rotateY(90deg);}
-.f-left {width:var(--d);height:var(--h);transform:translate(-50%,-50%) translateX(calc(var(--w)/-2)) rotateY(-90deg);}
-.f-top{width:var(--w);height:var(--d);transform:translate(-50%,-50%) translateY(calc(var(--h)/-2)) rotateX(90deg);}
-.f-bot{width:var(--w);height:var(--d);transform:translate(-50%,-50%) translateY(calc(var(--h)/2)) rotateX(-90deg);}
-.f-back{background:color-mix(in srgb,var(--c) 12%, var(--bg-2));}
-/* billboard label: positioned in 3D, counter-rotated so it always faces the camera */
-.badge{
-  position:absolute;left:50%;top:50%;transform-style:preserve-3d;white-space:nowrap;
-  transform:
-    translate3d(calc(var(--w)/-2 + 10px), calc(var(--h)/-2 - 2px), calc(var(--d)/2 + 44px))
-    rotateZ(calc(-1 * var(--rz, -28deg))) rotateX(calc(-1 * var(--rx, 60deg)))
-    translate(-50%,-50%);
-  font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--c);pointer-events:none;
-  display:flex;align-items:center;gap:7px;
-  padding:4px 10px;border-radius:var(--r-full);
-  background:color-mix(in srgb,var(--panel) 88%, transparent);
-  border:1px solid color-mix(in srgb,var(--c) 34%, var(--line));
-  box-shadow:0 4px 14px color-mix(in srgb,var(--bg) 70%, transparent);
-}
-.badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--c);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%, transparent);}
-.badge b{font-weight:500;font-size:10.4px;letter-spacing:.06em;color:var(--t3);}
-.slab.hl .badge{color:var(--t1);}
-.slab.hl{transform:translateZ(calc(var(--z) + 10px));}
-.slab.hl .face{
-  border-color:var(--c);
-  background:color-mix(in srgb,var(--c) 44%, var(--panel-2));
-  box-shadow:inset 0 0 40px color-mix(in srgb,var(--c) 32%, transparent);
-}
-.slab.hl .f-front{background:color-mix(in srgb,var(--c) 62%, var(--panel));}
-[data-theme="light"] .slab.hl .face{
-  border-color:color-mix(in srgb,var(--c) 80%, #ffffff);
-  background:color-mix(in srgb,var(--c) 48%, #ffffff);
-}
-[data-theme="light"] .slab.hl .f-front{background:color-mix(in srgb,var(--c) 68%, #ffffff);}
-[data-motion="off"] .pyr{animation:none !important;}
-
-.pyr-legend{display:flex;flex-direction:column;gap:10px;}
-.lay{
-  display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border:1px solid var(--line);
-  border-radius:var(--r-sm);background:var(--panel);cursor:default;
-  transition:border-color .25s,transform .25s,background .25s;
-}
-.lay:hover{border-color:var(--c);transform:translateX(4px);background:var(--panel-2);}
-.lay-bar{width:4px;align-self:stretch;border-radius:2px;background:var(--c);flex:none;}
-.lay-name{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--t1);display:flex;align-items:center;gap:9px;}
-.lay-pct{font-family:var(--mono);font-size:11px;color:var(--c);}
-.lay-d{font-size:13.2px;color:var(--t3);line-height:1.62;margin-top:5px;}
-.lay-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;}
-
-@media (max-width:1080px){ .pyr{--s:.86;} }
-@media (max-width:960px){
-  .pyr-grid{grid-template-columns:1fr;gap:22px;}
-  .pyr-stage{height:340px;}
-  .pyr{--s:.8;}
-}
-@media (max-width:620px){
-  .pyr-stage{height:290px;}
-  .pyr{--s:.66;}
-}
-@media (max-width:400px){
-  .pyr-stage{height:250px;}
-  .pyr{--s:.54;}
-}
-
-/* burst overlay lives on the shared canvas — nothing extra needed here */
-@media print{nav,#game,.hero-ctas,.co-ctas{display:none;}body{background:#fff;color:#000;}}
-</style>
-<link rel="stylesheet" href="redesign.css"/>
+<meta property="og:url" content="https://abdelrahmant-9.github.io/My-Portfolio/"/>
+<meta property="og:title" content="Abdelrahman Tarek — QA Engineer"/>
+<meta property="og:description" content="QA first. Mobile and data testing on top. Software QA Engineer at Lumofy — with a Spot the Bug mini-game."/>
+<meta property="og:image" content="https://abdelrahmant-9.github.io/My-Portfolio/assets/og.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23090d17'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' stroke='%2375d7ca' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
+<link rel="preload" as="image" href="assets/hero.webp"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"/>
+<link rel="stylesheet" href="css/style.css"/>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<a class="skip" href="#about">Skip to content</a>
-<canvas id="fx" aria-hidden="true"></canvas>
+<a class="skip" href="#main">Skip to content</a>
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-glow a" aria-hidden="true"></div>
+<div class="bg-glow b" aria-hidden="true"></div>
 
-<!-- ══ NAV ══ -->
-<nav aria-label="Main navigation">
-  <div class="nav-inner">
-    <a class="nav-logo" href="#top"><span class="brand-mark">at<span>✳</span></span><span class="brand-name">Abdelrahman Tarek<span class="ext">QA ENGINEER / BUILDER</span></span></a>
-    <div class="nav-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#projects">Selected work</a></li>
-        <li><a href="#about">About me</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#game">The playground <span class="nav-spark">↗</span></a></li>
-        <li><a href="#connect" class="nav-contact">Let's talk <span>↗</span></a></li>
-        <li>
-          <button class="motion-btn" onclick="toggleMotion()" aria-label="Toggle background motion" title="Toggle motion">
-            <svg class="m-on" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>
-            <svg class="m-off" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="4" y1="4" x2="20" y2="20"/></svg>
-          </button>
-        </li>
-        <li>
-          <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle colour theme">
-            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </button>
-        </li>
-      </ul>
-      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle colour theme" id="themeMobile" style="display:none">
-        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      </button>
-      <button class="motion-btn" onclick="toggleMotion()" aria-label="Toggle background motion" id="motionMobile" style="display:none">
-        <svg class="m-on" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>
-        <svg class="m-off" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><line x1="4" y1="4" x2="20" y2="20"/></svg>
-      </button>
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
-      </button>
-    </div>
+<!-- ============================== NAV ============================== -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Abdelrahman Tarek, back to top">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span>Abdelrahman Tarek<small>QA ENGINEER</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#focus">Focus</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#game">Playground</a></li>
+      <li><a class="btn btn-p nav-cta" href="#contact">Let's talk</a></li>
+    </ul>
   </div>
-</nav>
-
-<!-- ══ HERO ══ -->
-<header class="hero" id="top">
-  <div class="hero-inner">
-    <div class="hero-copy fi in">
-      <div class="hero-badge"><span class="pulse"></span>PLAYER 01 <span class="badge-divider">/</span> QA ENGINEER &amp; BUILDER</div>
-      <h1>Abdelrahman<br/><span class="gr">Tarek<span class="hero-period">.</span></span></h1>
-      <p class="hero-manifesto">Curiosity is the superpower.<br/><span>Quality is the mission.</span></p>
-      <p class="hero-sub">I click twice. I try the weird input.<br class="desktop-break"/> I ask “what if?” — and then I test it.<br class="desktop-break"/> QA Engineer at <strong>Lumofy.</strong> Builder on the side.</p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn btn-p">See what I build <span class="button-arrow">↗</span></a>
-        <a href="#connect" class="hero-contact">Let’s talk <span>↗</span></a>
-      </div>
-      <div class="hero-principles" aria-label="My approach"><span><i>01</i> Stay curious</span><span><i>02</i> Think in edge cases</span><span><i>03</i> Make it better</span></div>
-    </div>
-    <div class="hero-art fi in" id="heroArt">
-      <div class="portrait-orbit" aria-hidden="true"></div>
-      <span class="portrait-coordinate" aria-hidden="true">SUBJECT_01 / THE HUMAN BEHIND THE TESTS</span>
-      <div class="portrait-scene" id="portraitScene">
-        <div class="portrait-backplate" aria-hidden="true"></div>
-        <figure class="portrait-card" id="portraitCard">
-          <div class="portrait-toolbar" aria-hidden="true"><span class="portrait-lights"><i></i><i></i><i></i></span><span>identity.spec.ts</span><span class="portrait-live">● LIVE</span></div>
-          <div class="portrait-image-wrap" id="portraitImageWrap">
-            <img src="assets/abdelrahman-tarek.jpeg" width="400" height="400" fetchpriority="high" decoding="async" alt="Abdelrahman Tarek, Software QA Engineer"/>
-            <div class="portrait-inspect" aria-hidden="true"><span class="inspect-corner top-left"></span><span class="inspect-corner top-right"></span><span class="inspect-corner bottom-left"></span><span class="inspect-corner bottom-right"></span><span class="inspect-label">&lt;engineer /&gt;</span><span class="portrait-scan"></span></div>
-            <div class="inspect-facts" id="inspectFacts" hidden aria-hidden="true"><span>ROLE: SOFTWARE QA ENGINEER</span><span>BASE: CAIRO, EGYPT</span><span>CURIOSITY: ALWAYS ON</span></div>
-            <button class="inspect-profile" id="inspectProfile" aria-pressed="false" aria-controls="inspectFacts">⌕ Inspect me</button>
-            <span class="portrait-crosshair" aria-hidden="true">+</span>
-          </div>
-          <figcaption class="portrait-caption"><span><strong>Curious by default.</strong><small>SOFTWARE QA / AUTOMATION / BUILDER</small></span><span class="portrait-caption-mark" aria-hidden="true">↗</span></figcaption>
-        </figure>
-      </div>
-      <div class="portrait-note note-detail" aria-hidden="true"><span class="note-symbol">⌕</span><div><small>IT’S IN THE DETAILS</small><strong>Look a little closer.</strong></div></div>
-      <div class="portrait-note note-code" aria-hidden="true"><div class="note-code-title"><span class="code-dot"></span> mindset.spec.ts</div><code><span>it</span>(<em>'notices the little things'</em>,<br/>&nbsp;&nbsp;() =&gt; <span>keepExploring</span>());</code></div>
-      <div class="portrait-meta"><span>BASED IN CAIRO ↗</span><span id="inspectCoordinates" aria-hidden="true">X: 200 &nbsp; Y: 200</span></div>
-    </div>
-  </div>
-  <div class="hero-bottom"><a href="#about" class="scroll-cue"><span>↓</span> SCROLL TO INSPECT</a><a href="#game" class="hero-game-link"><span>INTERACTIVE QA CHALLENGE</span> Think you can spot the bug? <b>↗</b></a><span class="hero-index">PERSONAL PORTFOLIO <span>2026</span></span></div>
 </header>
 
-<nav class="journey" id="journey" aria-label="Portfolio inspection trail">
-  <div class="journey-heading">INSPECTION<br/>TRAIL</div>
-  <div class="journey-track"><div class="journey-fill" id="journeyFill"></div><div class="journey-probe" id="journeyProbe" aria-hidden="true"><div class="probe-cube"><span class="probe-face probe-front"><span class="probe-eyes"><i></i><i></i></span></span><span class="probe-face probe-side">+</span><span class="probe-face probe-top">·</span></div></div>
-    <a class="journey-stop" style="--stop:0" href="#top" aria-label="Introduction"></a>
-    <a class="journey-stop" style="--stop:1" href="#about" aria-label="About me"></a>
-    <a class="journey-stop" style="--stop:2" href="#projects" aria-label="Selected work"></a>
-    <a class="journey-stop" style="--stop:3" href="#experience" aria-label="Experience"></a>
-    <a class="journey-stop" style="--stop:4" href="#skills" aria-label="Skills"></a>
-    <a class="journey-stop" style="--stop:5" href="#pyramid" aria-label="Testing approach"></a>
-    <a class="journey-stop" style="--stop:6" href="#game" aria-label="Bug-finding game"></a>
-    <a class="journey-stop" style="--stop:7" href="#education" aria-label="Education"></a>
-    <a class="journey-stop" style="--stop:8" href="#connect" aria-label="Contact"></a>
+<main id="main">
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top">
+  <div class="hero-art" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="status fi"><span class="pulse"></span>QA Engineer @ Lumofy · open to part-time QA</span>
+      <h1 class="fi d1">Abdelrahman<br/>Tarek<span class="dot">.</span></h1>
+      <p class="typing fi d2" aria-live="off"><span class="pfx">$</span><span id="typed">I break things so users don't.</span><span class="caret" aria-hidden="true"></span></p>
+      <p class="hero-sub fi d3">I click twice. I try the weird input. I ask <em>“what if?”</em> — and then I test it. <strong>QA is the core</strong>; mobile and data are where I go deeper.</p>
+      <div class="hero-cta fi d4">
+        <a class="btn btn-p" href="#work">See my work
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-o" href="#game">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>Play Spot the Bug</a>
+      </div>
+      <div class="stats fi d4">
+        <div class="stat"><b><span class="u">#</span><span data-count="1">1</span></b><span>DEPI graduate, of 100+</span></div>
+        <div class="stat"><b><span data-count="20">20</span><span class="u">+</span></b><span>accepted bugs on Test IO</span></div>
+        <div class="stat"><b><span data-count="50">50</span><span class="u">+</span></b><span>test cases designed</span></div>
+        <div class="stat"><b><span data-count="200">200</span><span class="u">+</span></b><span>hours of QA training</span></div>
+      </div>
+    </div>
   </div>
-  <a class="journey-current" id="journeyCurrent" href="#top"><span id="journeyNumber">00 / 08</span><strong id="journeyLabel">INTRODUCTION</strong><span id="journeyPercent">0%</span></a>
-</nav>
+  <a class="scroll-cue" href="#about" aria-label="Scroll to About"><i></i>SCROLL</a>
+</section>
 
-<main id="main-content">
-<!-- ══ STATS ══ -->
-<div class="wrap">
-  <div class="stats fi">
-    <div class="stat"><div class="stat-n" style="color:var(--pass)" data-count="1500" data-suffix="+">0</div><div class="stat-l">test cases written</div></div>
-    <div class="stat"><div class="stat-n" style="color:var(--fail)" data-count="300" data-suffix="+">0</div><div class="stat-l">bugs reported</div></div>
-    <div class="stat"><div class="stat-n" style="color:var(--info)" data-count="200" data-suffix="+">0</div><div class="stat-l">training hours</div></div>
-    <div class="stat"><div class="stat-n" style="color:var(--warn)">#1</div><div class="stat-l">DEPI graduate rank</div></div>
-  </div>
-</div>
-
-<!-- ══ ABOUT ══ -->
+<!-- ============================== ABOUT ============================== -->
 <section id="about">
   <div class="wrap">
-    <div class="sec-head fi">
-      <span class="sec-file">01 / THE PERSON</span>
-      <h2 class="sec-h">Curiosity is my default.</h2>
-    </div>
-    <div class="about-grid">
-      <div class="fi d1">
-        <p class="about-p">I'm a <strong>Software QA Engineer at Lumofy</strong> — hired full-time in April 2026 after starting there as an intern in October 2025. Day to day I test web and mobile products manually and with automation, and I write the bug reports developers don't have to ask questions about.</p>
-        <p class="about-p">I graduated <strong>Top 1 of 100+ participants</strong> in the Digital Egypt Pioneers Initiative (DEPI) after 200+ hours of structured software testing training, where I also led a five-person team through a four-month graduation project.</p>
-        <p class="about-p">On the side I run freelance testing cycles on <strong>Test IO</strong> and build tools for my own workflow — most recently <code>Spectara</code>, a Chrome extension that generates ranked Selenium locators and Page Object classes from any element on a page.</p>
-        <p class="about-p">I also trained in <strong>Flutter</strong> at NTI, which keeps me close to how mobile apps are actually built — useful leverage when testing them.</p>
+    <div class="about">
+      <div class="about-text">
+        <div class="sec-head fi" style="margin-bottom:28px">
+          <span class="sec-kicker"><span class="num">01</span>About</span>
+          <h2 class="sec-h">Curiosity is my <em>default</em>.</h2>
+        </div>
+        <div class="me fi">
+          <img src="assets/abdelrahman-tarek.jpeg" width="76" height="76" alt="Abdelrahman Tarek" loading="lazy"/>
+          <div><b>Abdelrahman Tarek</b><span>Software QA Engineer · Cairo, EG</span></div>
+        </div>
+        <p class="fi">I'm a <strong>Software QA Engineer at Lumofy</strong>, hired full-time in April 2026 after starting there as an intern in October 2025. Day to day I test web and mobile products, manually and with automation, and I write the bug reports developers don't have to ask questions about.</p>
+        <p class="fi">I graduated <strong>Top 1 of 100+</strong> in the Digital Egypt Pioneers Initiative (DEPI) after 200+ hours of software testing training, and led a five-person team through the graduation project. On the side I run freelance cycles on <strong>Test IO</strong> and build tools for my own workflow, like <a href="#work">Spectara</a>.</p>
+        <p class="fi">Two things make me a sharper tester: I've <strong>built mobile apps</strong> in Flutter, so I know where they break, and I've <strong>built data pipelines</strong> with dbt and Snowflake, so I know how to test the data behind the screen.</p>
       </div>
-      <div class="fi d2">
-        <div class="panel env">
-          <div class="env-hdr"><span>AT A GLANCE</span><span class="chip chip-pass">ready</span></div>
-          <div class="env-row"><span class="env-k">role</span><span class="env-v">QA Engineer @ Lumofy</span></div>
-          <div class="env-row"><span class="env-k">location</span><span class="env-v">Cairo, Egypt</span></div>
-          <div class="env-row"><span class="env-k">email</span><span class="env-v"><a href="mailto:abdelrahman.tarek.dev@gmail.com">abdelrahman.tarek.dev@gmail.com</a></span></div>
-          <div class="env-row"><span class="env-k">phone</span><span class="env-v">01005118087</span></div>
-          <div class="env-row"><span class="env-k">linkedin</span><span class="env-v"><a href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener">in/abelrahmantarek</a></span></div>
-          <div class="env-row"><span class="env-k">github</span><span class="env-v"><a href="https://github.com/abdelrahmant-9" target="_blank" rel="noopener">abdelrahmant-9</a></span></div>
-          <div class="env-row"><span class="env-k">cv</span><span class="env-v"><a href="https://drive.google.com/file/d/1cDZ1se7hzIHNFXEptqBsntF_NHGThLjf/view?usp=sharing" target="_blank" rel="noopener">download PDF ↗</a></span></div>
-          <div class="env-row"><span class="env-k">langs</span><span class="env-v">Arabic (native) · English (professional)</span></div>
+
+      <div class="term fi d2" id="term" role="img" aria-label="Test run summary: PASS QA Engineer at Lumofy, PASS Test IO freelance, PASS DEPI top 1, PASS mobile testing, PASS data testing, RUN always learning.">
+        <div class="term-bar"><span class="tl tl-r"></span><span class="tl tl-y"></span><span class="tl tl-g"></span><span class="t">profile.spec.ts</span></div>
+        <div class="term-body" aria-hidden="true">
+          <div class="term-line"><span class="p">$</span><span class="v">qa-run --profile abdelrahman-tarek</span></div>
+          <div class="term-line gap"></div>
+          <div class="term-line"><span class="badge">PASS</span><span class="k">role</span><span class="v">QA Engineer @ Lumofy</span></div>
+          <div class="term-line"><span class="badge">PASS</span><span class="k">freelance</span><span class="v">Test IO · 20+ accepted bugs</span></div>
+          <div class="term-line"><span class="badge">PASS</span><span class="k">training</span><span class="v">DEPI · Top 1 of 100+</span></div>
+          <div class="term-line"><span class="badge">PASS</span><span class="k">mobile</span><span class="v">Android · iOS · RTL · Flutter</span></div>
+          <div class="term-line"><span class="badge">PASS</span><span class="k">data</span><span class="v">SQL · dbt tests · Snowflake</span></div>
+          <div class="term-line"><span class="badge run">RUN</span><span class="k">learning</span><span class="v">always</span></div>
+          <div class="term-line gap"></div>
+          <div class="term-line term-sum">Tests: <span class="ok">5 passed</span>, <span class="run">1 running</span> · 0 failed</div>
+          <div class="term-line gap"></div>
+          <div class="term-line"><span class="k">location</span><span class="v">Cairo, Egypt</span></div>
+          <div class="term-line"><span class="k">email</span><span class="v"><a href="mailto:abdelrahman.tarek.dev@gmail.com">abdelrahman.tarek.dev@gmail.com</a></span></div>
+          <div class="term-line"><span class="k">languages</span><span class="v">Arabic (native) · English (professional)</span></div>
+          <div class="term-line"><span class="p">$</span><span class="cursor"></span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ PROJECTS ══ -->
-<section id="projects">
+<!-- ============================== FOCUS ============================== -->
+<section id="focus">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">02 / SELECTED WORK</span>
-      <h2 class="sec-h">A few things I’ve built.</h2>
+      <span class="sec-kicker"><span class="num">02</span>Focus</span>
+      <h2 class="sec-h">QA first. <em>Mobile and data</em> on top.</h2>
+      <p class="sec-sub">Testing is the job. Mobile and data are the two places I go deeper, because I've built in both and know where they break.</p>
     </div>
-    <div class="pj-grid">
+    <div class="spec-grid">
+      <article class="spec core fi">
+        <svg class="spec-ico ico-target" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="1" y="1" width="62" height="62" rx="16" fill="#111a2c" stroke="#3b5278"/>
+          <circle class="ring1" cx="32" cy="32" r="14" fill="none" stroke="#75d7ca" stroke-width="2"/>
+          <circle cx="32" cy="32" r="14" fill="none" stroke="#75d7ca" stroke-width="2" opacity=".4"/>
+          <circle cx="32" cy="32" r="6" fill="none" stroke="#75d7ca" stroke-width="2.4"/>
+          <path d="M32 12v8M32 44v8M12 32h8M44 32h8" stroke="#75d7ca" stroke-width="2.4" stroke-linecap="round"/>
+          <g class="cur"><path d="M33 33v13l3.6-3.2 2.4 5.6 2.4-1.1-2.4-5.5h4.8z" fill="#f1f5fc" stroke="#090d17"/></g>
+        </svg>
+        <span class="spec-label">The core</span>
+        <h3>Quality Assurance</h3>
+        <p>Web and mobile releases, tested manually and with automation. Every bug ships with a report developers can act on.</p>
+        <ul>
+          <li>Test design, exploratory, regression, smoke</li>
+          <li>Bug reports with steps, severity and evidence (Jira)</li>
+          <li>API testing with Postman, beyond the 200</li>
+          <li>Selenium + TestNG, Page Object Model</li>
+        </ul>
+        <div class="why"><b>daily driver</b> · at Lumofy and on Test IO</div>
+      </article>
 
-      <article class="pj tilt fi" data-tilt="6"><div class="project-visual visual-spectara" aria-hidden="true"><span class="visual-caption">01 / AUTOMATION, REIMAGINED</span><div class="spec-window"><div class="spec-window-bar"><i></i><i></i><i></i><span>SPECTARA</span></div><div class="spec-target"><span>↖</span><div><b>One click.<br/>The right locator.</b><small>LESS GUESSWORK. MORE SHIPPING.</small></div></div><div class="spec-locator"><span>CSS</span><code>[data-testid="quality"]</code><b>98 ↗</b></div></div><span class="visual-watermark">S</span></div><div class="project-content">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v14H3z"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="12" cy="10" r="2.4"/></svg></span>
-          <span class="chip chip-pass">flagship</span>
-        </div>
-        <h3 class="pj-title">Spectara</h3>
-        <div class="pj-repo">abdelrahmant-9/Spectara · Chrome MV3</div>
-        <p class="pj-desc">A Chrome extension that kills the most thankless part of automation. Click any element on any page and get the most stable locator — ranked, not guessed — plus a ready-to-paste Selenium Java snippet and a generated Page Object Model class in about three seconds.</p>
-        <div class="pj-techs"><span class="tag">JavaScript ES6</span><span class="tag">Manifest V3</span><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">POM</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9/Spectara" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-          View source ↗
-        </a>
-      </div></article>
+      <article class="spec mobile fi d1">
+        <svg class="spec-ico ico-phone" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="1" y="1" width="62" height="62" rx="16" fill="#111a2c" stroke="#3b5278"/>
+          <rect x="20" y="9" width="24" height="46" rx="5" fill="#090d17" stroke="#6ba5ff" stroke-width="2"/>
+          <clipPath id="ph"><rect x="22" y="16" width="20" height="34"/></clipPath>
+          <g clip-path="url(#ph)"><g class="rows">
+            <rect x="24" y="18" width="4" height="4" rx="1" fill="#75d7ca"/><rect x="30" y="19" width="10" height="2" rx="1" fill="#3b5278"/>
+            <rect x="24" y="26" width="4" height="4" rx="1" fill="#75d7ca"/><rect x="30" y="27" width="7" height="2" rx="1" fill="#3b5278"/>
+            <rect x="24" y="34" width="4" height="4" rx="1" fill="#ff8d9a"/><rect x="30" y="35" width="10" height="2" rx="1" fill="#3b5278"/>
+            <rect x="24" y="42" width="4" height="4" rx="1" fill="#75d7ca"/><rect x="30" y="43" width="8" height="2" rx="1" fill="#3b5278"/>
+            <rect x="24" y="50" width="4" height="4" rx="1" fill="#75d7ca"/><rect x="30" y="51" width="10" height="2" rx="1" fill="#3b5278"/>
+          </g></g>
+          <circle class="tap" cx="32" cy="38" r="7" fill="none" stroke="#6ba5ff" stroke-width="2"/>
+        </svg>
+        <span class="spec-label">Specialty</span>
+        <h3>Mobile Testing</h3>
+        <p>Android and iOS builds across a device matrix, with extra care for Arabic RTL and localization.</p>
+        <ul>
+          <li>Device matrix, OS versions, screen sizes</li>
+          <li>RTL layouts and AR/EN localization</li>
+          <li>Offline, notifications, permissions, state</li>
+        </ul>
+        <div class="why"><b>edge:</b> I build Flutter apps, so I know where they break</div>
+      </article>
 
-      <article class="pj tilt fi d1" data-tilt="6"><div class="project-visual visual-depi" aria-hidden="true"><span class="visual-caption">02 / A TEAM EFFORT</span><div class="depi-stack"><div>PLAN <span>01</span></div><div>TEST <span>02</span></div><div>SHIP <span>✓</span></div></div><span class="visual-corner">5 PEOPLE. ONE SHARED STANDARD.</span></div><div class="project-content">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
-          <span class="chip chip-warn">team lead</span>
-        </div>
-        <h3 class="pj-title">DEPI Graduation Project</h3>
-        <div class="pj-repo">abdelrahmant-9/SoftwareTesting-FinalProject · Java</div>
-        <p class="pj-desc">Led a five-person QA team through a full web application testing lifecycle. 50+ test cases designed and reviewed, 15+ defects documented, 20+ tasks distributed across four months, closed out with a committee presentation. Repo holds the manual suite, automated cases, and bug documentation.</p>
-        <div class="pj-techs"><span class="tag">Manual Testing</span><span class="tag">Selenium</span><span class="tag">Jira</span><span class="tag">Test Docs</span><span class="tag">Team Lead</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9/SoftwareTesting-FinalProject" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
-          View source ↗
-        </a>
-      </div></article>
-
-      <article class="pj tilt fi d2" data-tilt="6"><div class="project-visual visual-io" aria-hidden="true"><span class="visual-caption">03 / IN THE REAL WORLD</span><div class="io-radar"><i></i><i></i><i></i><span class="radar-dot"></span><span class="radar-dot second"></span><b>20<span>+</span></b></div><span class="visual-corner">ACCEPTED BUGS. BETTER EXPERIENCES.</span></div><div class="project-content">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-          <span class="chip chip-info">freelance</span>
-        </div>
-        <h3 class="pj-title">Test IO Cycles</h3>
-        <div class="pj-repo">crowdtesting · live production apps</div>
-        <p class="pj-desc">10+ professional testing cycles against real shipping products. 20+ accepted bug reports with detailed reproduction steps, screenshots, and severity classification — plus API validation in Postman and pre-release regression passes.</p>
-        <div class="pj-techs"><span class="tag">Exploratory</span><span class="tag">Postman</span><span class="tag">Regression</span><span class="tag">Bug Reports</span></div>
-        <span class="pj-none">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-          NDA — reports not public
-        </span>
-      </div></article>
-
-      <article class="pj tilt fi" data-tilt="6"><div class="project-visual visual-todo" aria-hidden="true"><span class="visual-caption">04 / EVERYDAY UTILITY</span><div class="todo-preview"><span>Make room for focus.</span><div><i>✓</i> Start with a plan</div><div><i>✓</i> Build something useful</div><div><i>○</i> Make it a little better</div></div></div><div class="project-content">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <span class="chip chip-pass">tested</span>
-        </div>
-        <h3 class="pj-title">To-Do App</h3>
-        <div class="pj-repo">abdelrahmant-9/To-Do-App · Dart</div>
-        <p class="pj-desc">Production-shaped Flutter app: Clean Architecture with MVVM, Firebase Auth, Cloud Firestore, Provider and GetIt for DI, AR/EN localization — and unit tests over the domain layer, because I refuse to ship my own code untested.</p>
-        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Clean Architecture</span><span class="tag">Firebase</span><span class="tag">GetIt</span><span class="tag">Unit Tests</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9/To-Do-App" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
-          View source ↗
-        </a>
-      </div></article>
-
-      <article class="pj tilt fi d1" data-tilt="6"><div class="project-visual visual-ajr" aria-hidden="true"><span class="visual-caption">05 / BUILT WITH PURPOSE</span><span class="ajr-orb"></span><div class="ajr-type" lang="ar">أجر<small>SPACE FOR WHAT MATTERS.</small></div></div><div class="project-content">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span>
-          <span class="chip chip-mute">private</span>
-        </div>
-        <h3 class="pj-title">أجر — Islamic Companion App</h3>
-        <div class="pj-repo">Flutter · Arabic-first, RTL</div>
-        <p class="pj-desc">Dhikr and tasbih companion built in Flutter: morning, evening, after-prayer and sleep Azkar, Hive-backed progress and streak tracking, Hijri dates, full RTL Arabic UI, local notifications, and an internal debug dashboard for state inspection.</p>
-        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Hive</span><span class="tag">RTL UI</span><span class="tag">Notifications</span><span class="tag">Localization</span></div>
-        <span class="pj-none">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-          Private repository
-        </span>
-      </div></article>
-
-      <article class="pj tilt fi d2" data-tilt="6"><div class="project-visual visual-flutter" aria-hidden="true"><span class="visual-caption">06 / LEARNING BY BUILDING</span><div class="flutter-symbol"><i></i><i></i><i></i></div><span class="visual-corner">SMALL APPS. BIG LESSONS.</span></div><div class="project-content">
-        <div class="pj-top">
-          <span class="pj-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="10" y1="18" x2="14" y2="18"/></svg></span>
-          <span class="chip chip-mute">practice set</span>
-        </div>
-        <h3 class="pj-title">Flutter Practice Apps</h3>
-        <div class="pj-repo">SmartCalc · Listify · CountUp · QuickText · BMI-App</div>
-        <p class="pj-desc">A run of small, focused builds — each one isolating a single idea. SmartCalc covers layered architecture, precise expression parsing, descriptive error feedback and unit-tested math. The rest drill state management, responsive layout, and local persistence.</p>
-        <div class="pj-techs"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Provider</span><span class="tag">Responsive UI</span><span class="tag">Unit Tests</span></div>
-        <a class="pj-link" href="https://github.com/abdelrahmant-9?tab=repositories" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77"/></svg>
-          Browse all repos ↗
-        </a>
-      </div></article>
-
+      <article class="spec data fi d2">
+        <svg class="spec-ico ico-db" viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="1" y="1" width="62" height="62" rx="16" fill="#111a2c" stroke="#3b5278"/>
+          <rect x="12" y="14" width="40" height="8" rx="4" fill="#152036" stroke="#8a9ab4"/>
+          <rect x="12" y="25" width="40" height="8" rx="4" fill="#152036" stroke="#dfbb8d"/>
+          <rect x="12" y="36" width="40" height="8" rx="4" fill="#152036" stroke="#c1cce0"/>
+          <rect x="12" y="47" width="40" height="8" rx="4" fill="#152036" stroke="#b0a6ef"/>
+          <circle class="drop" cx="42" cy="12" r="2.4" fill="#b0a6ef"/>
+          <circle class="drop" cx="47" cy="12" r="2.4" fill="#6ba5ff"/>
+          <circle class="drop" cx="37" cy="12" r="2.4" fill="#75d7ca"/>
+        </svg>
+        <span class="spec-label">Specialty</span>
+        <h3>Data &amp; Database Testing</h3>
+        <p>The numbers on the screen come from somewhere. I test that path: SQL checks, pipeline tests and data quality.</p>
+        <ul>
+          <li>SQL validation against requirements</li>
+          <li>dbt tests: unique, not null, relationships</li>
+          <li>Warehouse layers: raw → clean → reporting</li>
+        </ul>
+        <div class="why"><b>edge:</b> I've built the pipelines I test</div>
+      </article>
     </div>
   </div>
 </section>
 
-
-<!-- ══ EXPERIENCE ══ -->
-<section id="experience">
+<!-- ============================== WORK ============================== -->
+<section id="work">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">03 / THE JOURNEY</span>
-      <h2 class="sec-h">Real work. Real impact.</h2>
-      <p class="sec-sub">From testing live products to building the tools that make testing better.</p>
+      <span class="sec-kicker"><span class="num">03</span>Selected work</span>
+      <h2 class="sec-h">Things I've <em>tested and built</em>.</h2>
     </div>
 
-    <div class="notice fi d1">
-      <span class="notice-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+    <div class="filters fi" role="group" aria-label="Filter projects">
+      <button class="filter" data-f="all" aria-pressed="true">All<span class="n">7</span></button>
+      <button class="filter" data-f="qa" aria-pressed="false">QA &amp; Automation<span class="n">4</span></button>
+      <button class="filter" data-f="mobile" aria-pressed="false">Mobile<span class="n">2</span></button>
+      <button class="filter" data-f="data" aria-pressed="false">Data<span class="n">1</span></button>
+    </div>
+
+    <div class="work-grid">
+      <!-- Spectara -->
+      <article class="card wide fi" data-cat="qa">
+        <div class="card-vis">
+          <div class="v-spectara" aria-hidden="true">
+            <span class="v-el">&lt;button data-testid="checkout"&gt;</span>
+            <div class="v-out">
+              <div><span>ranked locators</span><span>score</span></div>
+              <div><span class="code">[data-testid="checkout"]</span><b>98</b></div>
+              <div><span class="code">#checkout-btn</span><b>91</b></div>
+              <div><span class="code">//button[text()='Pay']</span><b>64</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-pass">flagship</span><span class="chip chip-mute">Chrome MV3</span></div>
+          <h3>Spectara</h3>
+          <div class="repo">automation, reimagined</div>
+          <p>A Chrome extension that removes the most thankless part of automation. Click any element on any page and get the most stable locator, ranked instead of guessed, plus a ready Selenium Java snippet and a generated Page Object class in about three seconds.</p>
+          <div class="metric"><div><b>~3s</b><span>element → POM</span></div><div><b>ranked</b><span>not guessed</span></div></div>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">Manifest V3</span><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">POM</span></div>
+          <div class="card-links"><span class="muted">private repo · demo on request</span></div>
+        </div>
+      </article>
+
+      <!-- DEPI -->
+      <article class="card fi" data-cat="qa">
+        <div class="card-vis">
+          <div class="v-stack" aria-hidden="true">
+            <div class="v-team"><span>QA</span><span>QA</span><span>QA</span><span>QA</span><span>QA</span></div>
+            <small>5 people · 4 months · 1 standard</small>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-warn">team lead</span><span class="chip chip-mute">Java</span></div>
+          <h3>DEPI Graduation Project</h3>
+          <div class="repo">SoftwareTesting-FinalProject</div>
+          <p>Led a five-person QA team through a full web-app testing lifecycle, closed out with a committee presentation.</p>
+          <div class="metric"><div><b>50+</b><span>test cases</span></div><div><b>15+</b><span>defects</span></div><div><b>20+</b><span>tasks</span></div></div>
+          <div class="tags"><span class="tag">Manual</span><span class="tag">Selenium</span><span class="tag">Jira</span><span class="tag">Test docs</span></div>
+          <div class="card-links"><a href="https://github.com/abdelrahmant-9/SoftwareTesting-FinalProject" target="_blank" rel="noopener">View repo ↗</a></div>
+        </div>
+      </article>
+
+      <!-- Test IO -->
+      <article class="card fi d1" data-cat="qa">
+        <div class="card-vis">
+          <div class="v-stack" aria-hidden="true">
+            <div class="v-bugs">
+              <i class="on"></i><i></i><i class="on" style="animation-delay:.4s"></i><i></i><i></i><i class="on" style="animation-delay:.8s"></i>
+              <i></i><i class="on" style="animation-delay:1.2s"></i><i></i><i class="on" style="animation-delay:1.6s"></i><i></i><i></i>
+              <i class="on" style="animation-delay:2s"></i><i></i><i></i><i class="on" style="animation-delay:2.4s"></i><i></i><i class="on" style="animation-delay:2.8s"></i>
+            </div>
+            <small>live production apps</small>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-info">freelance</span><span class="chip chip-mute">crowdtesting</span></div>
+          <h3>Test IO Cycles</h3>
+          <div class="repo">real products, real users</div>
+          <p>Professional testing cycles against shipping products: accepted bug reports with repro steps, screenshots and severity, plus API checks in Postman and regression passes.</p>
+          <div class="metric"><div><b>10+</b><span>cycles</span></div><div><b>20+</b><span>accepted bugs</span></div></div>
+          <div class="tags"><span class="tag">Exploratory</span><span class="tag">Postman</span><span class="tag">Regression</span></div>
+          <div class="card-links"><span class="muted">reports under NDA</span></div>
+        </div>
+      </article>
+
+      <!-- Data pipelines -->
+      <article class="card wide fi" data-cat="data">
+        <div class="card-vis">
+          <div class="v-layers" aria-hidden="true">
+            <div style="--c:var(--t4)">RAW<span>landing, VARCHAR</span></div>
+            <div style="--c:var(--warn)">BRONZE<span>1:1 views</span></div>
+            <div style="--c:var(--t2)">SILVER<span>typed · deduped · tested</span></div>
+            <div style="--c:var(--violet)">GOLD<span>star schema</span></div>
+            <span class="flow"></span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-violet">data testing</span><span class="chip chip-mute">4 repos</span></div>
+          <h3>Data pipelines, tested at every layer</h3>
+          <div class="repo">dbt · Airflow · Snowflake · DuckDB</div>
+          <p>Warehouses and ELT pipelines I built to learn how data breaks: a Snowflake warehouse from raw to a gold star schema, a daily Airflow DAG gated by dbt tests, and 1.2M sales rows modelled into reporting tables.</p>
+          <div class="metric"><div><b>23</b><span>dbt tests in one DAG</span></div><div><b>1.2M</b><span>rows modelled</span></div><div><b>4</b><span>layers</span></div></div>
+          <div class="tags"><span class="tag">dbt</span><span class="tag">SQL</span><span class="tag">Airflow</span><span class="tag">Snowflake</span><span class="tag">DuckDB</span></div>
+          <div class="card-links">
+            <a href="https://github.com/abdelrahmant-9/agrifresh-dwh" target="_blank" rel="noopener">agrifresh-dwh ↗</a>
+            <a href="https://github.com/abdelrahmant-9/ecommerce-dbt-airflow" target="_blank" rel="noopener">ecommerce-dbt-airflow ↗</a>
+            <a href="https://github.com/abdelrahmant-9/sales-1m-dbt" target="_blank" rel="noopener">sales-1m-dbt ↗</a>
+            <a href="https://github.com/abdelrahmant-9/retail-star-schema-dbt" target="_blank" rel="noopener">retail-star-schema-dbt ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Flutter apps -->
+      <article class="card fi" data-cat="mobile">
+        <div class="card-vis">
+          <div class="v-phones" aria-hidden="true">
+            <div class="v-phone">
+              <div class="row"><i class="done"></i><b></b></div>
+              <div class="row"><i></i><b style="flex:.7"></b></div>
+              <div class="row"><i class="done"></i><b></b></div>
+              <div class="row"><i></i><b style="flex:.5"></b></div>
+              <div class="row"><i class="done"></i><b style="flex:.8"></b></div>
+            </div>
+            <div class="v-phone ajr"><div class="ring"></div><p>أجر</p></div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-info">mobile</span><span class="chip chip-mute">Flutter</span></div>
+          <h3>To-Do &amp; أجر</h3>
+          <div class="repo">code I refuse to ship untested</div>
+          <p>To-Do uses Clean Architecture with MVVM, Firebase Auth, Firestore, GetIt and AR/EN localization, with unit tests on the domain layer. أجر is an Arabic-first Azkar companion with streaks, Hijri dates, RTL UI and notifications.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Hive</span><span class="tag">RTL</span><span class="tag">Unit tests</span></div>
+          <div class="card-links"><a href="https://github.com/abdelrahmant-9/To-Do-App" target="_blank" rel="noopener">To-Do repo ↗</a><span class="muted">أجر is private</span></div>
+        </div>
+      </article>
+
+      <!-- Practice apps -->
+      <article class="card fi d1" data-cat="mobile">
+        <div class="card-vis">
+          <div class="v-reps" aria-hidden="true"><span>SmartCalc</span><span>Listify</span><span>CountUp</span><span>QuickText</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-info">mobile</span><span class="chip chip-mute">practice set</span></div>
+          <h3>Small apps, big lessons</h3>
+          <div class="repo">SmartCalc · Listify · CountUp · QuickText · BMI</div>
+          <p>Small focused builds, each isolating one idea: expression parsing with unit-tested math, state management, responsive layout and local persistence.</p>
+          <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Provider</span></div>
+          <div class="card-links"><a href="https://github.com/abdelrahmant-9/BMI-App" target="_blank" rel="noopener">BMI repo ↗</a><a href="https://github.com/abdelrahmant-9?tab=repositories" target="_blank" rel="noopener">All repos ↗</a></div>
+        </div>
+      </article>
+
+      <!-- QA Reps -->
+      <article class="card wide fi" data-cat="qa">
+        <div class="card-vis">
+          <div class="v-reps" aria-hidden="true"><span>manual</span><span>automation</span><span>API</span><span>performance</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta"><span class="chip chip-pass">for the community</span><span class="chip chip-mute">EN · AR</span></div>
+          <h3>QA Reps</h3>
+          <div class="repo">pull a QA project worth putting on your CV</div>
+          <p>60 project briefs for software testers across manual, automation, API and performance. Each one has build steps, deliverables, practice links and a ready CV line, in English and Arabic.</p>
+          <div class="metric"><div><b>60</b><span>project briefs</span></div><div><b>4</b><span>tracks</span></div><div><b>2</b><span>languages</span></div></div>
+          <div class="card-links"><a href="https://abdelrahmant-9.github.io/Qa-Reps/" target="_blank" rel="noopener">Open it ↗</a><a href="https://github.com/abdelrahmant-9/Qa-Reps" target="_blank" rel="noopener">Repo ↗</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== JOURNEY ============================== -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head fi">
+      <span class="sec-kicker"><span class="num">04</span>Journey</span>
+      <h2 class="sec-h">Real work. <em>Real impact.</em></h2>
+      <p class="sec-sub">From training to testing live products, then building the tools and pipelines that make testing better.</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <span class="progress" aria-hidden="true"></span>
+
+      <article class="job now fi" style="--c:var(--pass)">
+        <div class="job-top">
+          <div><h3>Software QA Engineer</h3><div class="org">Lumofy | لوموفاي</div></div>
+          <div class="when">Oct 2025 — Present<br/>intern → full-time Apr 2026</div>
+        </div>
+        <ul>
+          <li>Manual and automation testing across web and mobile releases</li>
+          <li>Write and maintain test cases, run them as regression before each release</li>
+          <li>Report and track defects in Jira with repro steps, severity and evidence</li>
+          <li>Verify fixes with developers and close the loop on release-blocking issues</li>
+        </ul>
+        <div class="tags"><span class="tag">Jira</span><span class="tag">Postman</span><span class="tag">Selenium</span><span class="tag">mobile</span><span class="tag">regression</span></div>
+      </article>
+
+      <article class="job now fi" style="--c:var(--info)">
+        <div class="job-top">
+          <div><h3>QA Engineer · Freelance</h3><div class="org">Test IO</div></div>
+          <div class="when">Jan 2026 — Present<br/>remote</div>
+        </div>
+        <ul>
+          <li>Manual testing across 10+ crowdtesting cycles on live production products</li>
+          <li>20+ accepted bugs with clear repro steps and severity</li>
+          <li>API testing with Postman against business requirements</li>
+        </ul>
+        <div class="tags"><span class="tag">exploratory</span><span class="tag">Postman</span><span class="tag">cross-browser</span></div>
+      </article>
+
+      <article class="job fi" style="--c:var(--violet)">
+        <div class="job-top">
+          <div><h3>Mobile Developer Trainee</h3><div class="org">National Telecommunication Institute (NTI)</div></div>
+          <div class="when">Jan 2026 — Mar 2026<br/>120 hours</div>
+        </div>
+        <ul>
+          <li>90 hours of Flutter and mobile development, 30 hours of freelancing skills</li>
+          <li>Built a complete mobile app: UI, state management, Dart fundamentals</li>
+          <li>Context that makes me a sharper mobile tester</li>
+        </ul>
+        <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Provider</span></div>
+      </article>
+
+      <article class="job fi" style="--c:var(--warn)">
+        <div class="job-top">
+          <div><h3>Software Tester &amp; Team Leader</h3><div class="org">Digital Egypt Pioneers Initiative (DEPI)</div></div>
+          <div class="when">Jun 2025 — Dec 2025<br/>🏆 Top 1 of 100+</div>
+        </div>
+        <ul>
+          <li>200+ training hours in software testing</li>
+          <li>Led a team of 5 through a 4-month graduation project</li>
+          <li>Designed 50+ test cases, documented 15+ defects, presented to the committee</li>
+        </ul>
+        <div class="tags"><span class="tag">test design</span><span class="tag">Selenium</span><span class="tag">TestNG</span><span class="tag">SQL</span><span class="tag">team lead</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TOOLKIT ============================== -->
+<section id="toolkit">
+  <div class="wrap">
+    <div class="sec-head fi">
+      <span class="sec-kicker"><span class="num">05</span>Toolkit</span>
+      <h2 class="sec-h">Honest levels, <em>not percentages</em>.</h2>
+      <p class="sec-sub">Core is a daily driver. Solid means confident on real work. Growing means actively building.</p>
+    </div>
+    <div class="kit fi" id="kit">
+      <div class="kit-head"><span>module</span><span>stack</span><span>level</span></div>
+      <div class="kit-row"><span class="mod">manual_qa</span><span class="stack"><span class="tag">Test design</span><span class="tag">Exploratory</span><span class="tag">Regression</span><span class="tag">Smoke &amp; sanity</span><span class="tag">Cross-browser</span></span><span class="lvl core"><span class="bar"><i></i></span>core</span></div>
+      <div class="kit-row"><span class="mod">bug_reporting</span><span class="stack"><span class="tag">Jira</span><span class="tag">Severity &amp; priority</span><span class="tag">Repro steps</span><span class="tag">Evidence</span></span><span class="lvl core"><span class="bar"><i></i></span>core</span></div>
+      <div class="kit-row"><span class="mod">mobile_qa</span><span class="stack"><span class="tag">Android</span><span class="tag">iOS</span><span class="tag">Device matrix</span><span class="tag">RTL / localization</span></span><span class="lvl solid"><span class="bar"><i></i></span>solid</span></div>
+      <div class="kit-row"><span class="mod">api_testing</span><span class="stack"><span class="tag">Postman</span><span class="tag">REST</span><span class="tag">Status codes</span><span class="tag">Schema checks</span></span><span class="lvl solid"><span class="bar"><i></i></span>solid</span></div>
+      <div class="kit-row"><span class="mod">automation</span><span class="stack"><span class="tag">Selenium WebDriver</span><span class="tag">TestNG</span><span class="tag">Java</span><span class="tag">POM</span><span class="tag">Locator strategy</span></span><span class="lvl solid"><span class="bar"><i></i></span>solid</span></div>
+      <div class="kit-row"><span class="mod">data_testing</span><span class="stack"><span class="tag">SQL</span><span class="tag">dbt tests</span><span class="tag">Snowflake</span><span class="tag">DuckDB</span><span class="tag">Airflow</span></span><span class="lvl growing"><span class="bar"><i></i></span>growing</span></div>
+      <div class="kit-row"><span class="mod">mobile_dev</span><span class="stack"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Firebase</span><span class="tag">Hive</span><span class="tag">Clean Architecture</span></span><span class="lvl growing"><span class="bar"><i></i></span>growing</span></div>
+      <div class="kit-row"><span class="mod">tooling</span><span class="stack"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Chrome DevTools</span><span class="tag">Charles / proxy</span><span class="tag">JMeter</span></span><span class="lvl solid"><span class="bar"><i></i></span>solid</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== APPROACH ============================== -->
+<section id="approach">
+  <div class="wrap">
+    <div class="approach">
       <div>
-        <div class="notice-t">availability</div>
-        <div class="notice-d">Full-time at <strong>Lumofy</strong>, plus freelance cycles on <strong>Test IO</strong>. Open to <strong>part-time</strong> and <strong>volunteer</strong> QA work that fits around both.</div>
-      </div>
-    </div>
-
-    <div class="suites">
-      <article class="suite fi d1">
-        <div class="suite-hdr">
-          <div>
-            <div class="suite-title"><span class="arrow">▸</span>Software QA Engineer</div>
-            <div class="suite-co">Lumofy | لوموفاي</div>
-            <div class="suite-meta">Oct 2025 — Present · intern → full-time since Apr 2026 · Cairo, EG</div>
-          </div>
-          <div class="suite-tags"><span class="chip chip-pass">● full-time</span><span class="chip chip-mute">current</span></div>
+        <div class="sec-head fi" style="margin-bottom:28px">
+          <span class="sec-kicker"><span class="num">06</span>Approach</span>
+          <h2 class="sec-h">Quality, <em>from the ground up</em>.</h2>
+          <p class="sec-sub">Coverage is not a number you chase, it's a shape. Hover or tap a layer to see where I put the effort and why.</p>
         </div>
-        <div class="suite-body">
-          <div class="assert"><span class="mk">✓</span><span>Manual and automation testing across web and mobile releases</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Write and maintain test cases, then run them as regression before each release</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Report and track defects in Jira with reproduction steps, severity, and evidence</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Verify fixes with developers and close the loop on release-blocking issues</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Promoted from intern to full-time QA Engineer in April 2026</span></div>
-          <div class="stack-line"><b>stack:</b> Jira · Postman · Selenium · manual · mobile · regression</div>
-        </div>
-      </article>
-
-      <article class="suite fi d2">
-        <div class="suite-hdr">
-          <div>
-            <div class="suite-title"><span class="arrow">▸</span>QA Engineer</div>
-            <div class="suite-co">Test IO</div>
-            <div class="suite-meta">Jan 2026 — Present · freelance testing cycles · remote</div>
-          </div>
-          <div class="suite-tags"><span class="chip chip-info">freelance</span><span class="chip chip-mute">active</span></div>
-        </div>
-        <div class="suite-body">
-          <div class="assert"><span class="mk">✓</span><span>Manual testing across 10+ crowdtesting cycles on live production products</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Identified, documented, and tracked 20+ accepted bugs with clear repro steps and severity</span></div>
-          <div class="assert"><span class="mk">✓</span><span>API testing with Postman to validate endpoints against business requirements</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Regression passes before releases to confirm updates did not break existing flows</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Worked with distributed QA teams to verify fixes and sharpen report quality</span></div>
-          <div class="stack-line"><b>stack:</b> exploratory · Postman · regression · cross-browser · bug reporting</div>
-        </div>
-      </article>
-
-      <article class="suite fi d3">
-        <div class="suite-hdr">
-          <div>
-            <div class="suite-title"><span class="arrow">▸</span>Software Tester &amp; Project Team Leader</div>
-            <div class="suite-co">Digital Egypt Pioneers Initiative (DEPI)</div>
-            <div class="suite-meta">Jun 2025 — Dec 2025 · 7 months · Egypt</div>
-          </div>
-          <div class="suite-tags"><span class="chip chip-warn">🏆 top 1</span><span class="chip chip-mute">completed</span></div>
-        </div>
-        <div class="suite-body">
-          <div class="award">🏆 Ranked Top 1 graduate among 100+ participants</div>
-          <div class="assert"><span class="mk">✓</span><span>200+ training hours in software testing — instructor-led, in-person, and self-study</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Led a cross-functional team of 5 through a 4-month graduation project lifecycle</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Distributed and tracked 20+ tasks to keep milestones on schedule</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Designed and reviewed 50+ test cases and test scenarios</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Documented 15+ defects using professional bug reporting practice</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Presented the final project to instructors and the evaluation committee</span></div>
-          <div class="stack-line"><b>stack:</b> test design · Jira · Selenium · TestNG · Java · SQL · team lead</div>
-        </div>
-      </article>
-
-      <article class="suite fi d4">
-        <div class="suite-hdr">
-          <div>
-            <div class="suite-title"><span class="arrow">▸</span>Mobile Developer Trainee</div>
-            <div class="suite-co">National Telecommunication Institute (NTI)</div>
-            <div class="suite-meta">Jan 2026 — Mar 2026 · 3 months · 120 training hours</div>
-          </div>
-          <div class="suite-tags"><span class="chip chip-mute">completed</span></div>
-        </div>
-        <div class="suite-body">
-          <div class="assert"><span class="mk">✓</span><span>120 hours total — 90 hrs Flutter &amp; mobile development, 30 hrs freelancing skills</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Built a complete mobile application applying real-world development patterns</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Covered UI design, state management, and Dart fundamentals</span></div>
-          <div class="assert"><span class="mk">✓</span><span>Shipped cross-platform builds — context that makes me a sharper mobile tester</span></div>
-          <div class="stack-line"><b>stack:</b> Flutter · Dart · Provider · state management · cross-platform</div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SKILLS ══ -->
-<section id="skills">
-  <div class="wrap">
-    <div class="sec-head fi">
-      <span class="sec-file">04 / THE TOOLKIT</span>
-      <h2 class="sec-h">Built for the details.</h2>
-      <p class="sec-sub">Honest levels, not inflated percentages. Core = daily driver, Solid = confident on real work, Growing = actively building.</p>
-    </div>
-    <div class="cov fi d1">
-      <div class="cov-hdr"><span>module</span><span>stack</span><span>level</span></div>
-
-      <div class="cov-row">
-        <div class="cov-name">manual_qa</div>
-        <div class="tags"><span class="tag">Test Case Design</span><span class="tag">Exploratory</span><span class="tag">Regression</span><span class="tag">Smoke &amp; Sanity</span><span class="tag">Cross-browser</span></div>
-        <div><div class="bar"><i style="width:92%"></i></div><div class="lvl">core</div></div>
+        <div class="layer-info fi" id="layerInfo" aria-live="polite"></div>
       </div>
-
-      <div class="cov-row">
-        <div class="cov-name">bug_reporting</div>
-        <div class="tags"><span class="tag">Jira</span><span class="tag">Severity &amp; Priority</span><span class="tag">Repro Steps</span><span class="tag">Evidence Capture</span></div>
-        <div><div class="bar"><i style="width:90%"></i></div><div class="lvl">core</div></div>
-      </div>
-
-      <div class="cov-row">
-        <div class="cov-name">api_testing</div>
-        <div class="tags"><span class="tag">Postman</span><span class="tag">REST</span><span class="tag">Status Codes</span><span class="tag">Schema Checks</span></div>
-        <div><div class="bar mid"><i style="width:76%"></i></div><div class="lvl">solid</div></div>
-      </div>
-
-      <div class="cov-row">
-        <div class="cov-name">automation</div>
-        <div class="tags"><span class="tag">Selenium WebDriver</span><span class="tag">TestNG</span><span class="tag">Java</span><span class="tag">Page Object Model</span><span class="tag">Locator Strategy</span></div>
-        <div><div class="bar mid"><i style="width:70%"></i></div><div class="lvl">solid</div></div>
-      </div>
-
-      <div class="cov-row">
-        <div class="cov-name">mobile_qa</div>
-        <div class="tags"><span class="tag">Android</span><span class="tag">iOS</span><span class="tag">Device Matrix</span><span class="tag">RTL / Localization</span></div>
-        <div><div class="bar mid"><i style="width:68%"></i></div><div class="lvl">solid</div></div>
-      </div>
-
-      <div class="cov-row">
-        <div class="cov-name">tooling</div>
-        <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">SQL</span><span class="tag">Chrome DevTools</span><span class="tag">Charles / Proxy</span></div>
-        <div><div class="bar mid"><i style="width:72%"></i></div><div class="lvl">solid</div></div>
-      </div>
-
-      <div class="cov-row">
-        <div class="cov-name">mobile_dev</div>
-        <div class="tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Provider</span><span class="tag">Hive</span><span class="tag">Firebase</span><span class="tag">Clean Architecture</span></div>
-        <div><div class="bar low"><i style="width:58%"></i></div><div class="lvl">growing</div></div>
-      </div>
-
-      <div class="cov-row">
-        <div class="cov-name">performance_ci</div>
-        <div class="tags"><span class="tag">JMeter</span><span class="tag">CI Pipelines</span><span class="tag">Test Reporting</span></div>
-        <div><div class="bar low"><i style="width:40%"></i></div><div class="lvl">growing</div></div>
+      <div class="fi d1">
+        <div class="pyramid" id="pyramid">
+          <button class="layer top e2e" data-l="e2e">E2E <b>~10%</b></button>
+          <button class="layer api" data-l="api">API &amp; integration <b>~30%</b></button>
+          <button class="layer unit" data-l="unit">Unit <b>~60%</b></button>
+          <button class="explore" data-l="explore">+ exploratory testing, continuous</button>
+        </div>
+        <p class="layer-hint">hover or tap a layer</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ TEST PYRAMID ══ -->
-<section id="pyramid">
-  <div class="wrap">
-    <div class="sec-head fi">
-      <span class="sec-file">05 / THE APPROACH</span>
-      <h2 class="sec-h">Quality, from the ground up.</h2>
-      <p class="sec-sub">Coverage is not a number you chase — it is a shape. Drag the pyramid, or hover a layer to see where I put the effort and why.</p>
-    </div>
-
-    <div class="pyr-grid fi d1">
-      <div class="pyr-stage" id="pyrStage" role="img" aria-label="Three-layer test pyramid: unit tests at the base, integration and API tests in the middle, end-to-end tests at the top">
-        <div class="pyr" id="pyr">
-          <div class="slab" data-layer="unit" style="--w:326px;--h:134px;--d:44px;--z:0px;--c:var(--pass)">
-            <div class="face f-front"></div>
-            <div class="face f-back"></div><div class="face f-right"></div>
-            <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
-            <span class="badge">Unit <b>60%</b></span>
-          </div>
-          <div class="slab" data-layer="api" style="--w:228px;--h:96px;--d:44px;--z:56px;--c:var(--info)">
-            <div class="face f-front"></div>
-            <div class="face f-back"></div><div class="face f-right"></div>
-            <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
-            <span class="badge">API <b>30%</b></span>
-          </div>
-          <div class="slab" data-layer="e2e" style="--w:134px;--h:58px;--d:44px;--z:112px;--c:var(--warn)">
-            <div class="face f-front"></div>
-            <div class="face f-back"></div><div class="face f-right"></div>
-            <div class="face f-left"></div><div class="face f-top"></div><div class="face f-bot"></div>
-            <span class="badge">E2E <b>10%</b></span>
-          </div>
-        </div>
-        <span class="pyr-hint">drag to rotate · hover a layer</span>
-      </div>
-
-      <div class="pyr-legend">
-        <div class="lay" data-layer="e2e" style="--c:var(--warn)">
-          <span class="lay-bar"></span>
-          <div>
-            <div class="lay-name">E2E <span class="lay-pct">~10% of effort</span></div>
-            <div class="lay-d">Few, slow, expensive to maintain — so they only cover journeys that lose money when they break: signup, checkout, core flow. Run before release, never on every commit.</div>
-            <div class="lay-tools"><span class="tag">Selenium</span><span class="tag">TestNG</span><span class="tag">Page Object Model</span></div>
-          </div>
-        </div>
-        <div class="lay" data-layer="api" style="--c:var(--info)">
-          <span class="lay-bar"></span>
-          <div>
-            <div class="lay-name">API &amp; Integration <span class="lay-pct">~30% of effort</span></div>
-            <div class="lay-d">The best value per hour in QA. Endpoints validated against the requirement, not against a 200 — status codes, payload shape, error paths, and auth boundaries.</div>
-            <div class="lay-tools"><span class="tag">Postman</span><span class="tag">REST</span><span class="tag">Schema checks</span></div>
-          </div>
-        </div>
-        <div class="lay" data-layer="unit" style="--c:var(--pass)">
-          <span class="lay-bar"></span>
-          <div>
-            <div class="lay-name">Unit <span class="lay-pct">~60% of effort</span></div>
-            <div class="lay-d">Developer-owned, and I read them. Where unit coverage is thin, the bugs I file get repetitive — so I point at the gap instead of re-catching the same defect by hand every sprint.</div>
-            <div class="lay-tools"><span class="tag">JUnit</span><span class="tag">Flutter Test</span><span class="tag">Coverage review</span></div>
-          </div>
-        </div>
-        <div class="lay" style="--c:var(--violet)">
-          <span class="lay-bar"></span>
-          <div>
-            <div class="lay-name">Exploratory <span class="lay-pct">continuous</span></div>
-            <div class="lay-d">Not a pyramid layer — a habit. No scripted suite finds the defect nobody thought to script. Timeboxed sessions against every release, notes and evidence captured as I go.</div>
-            <div class="lay-tools"><span class="tag">Charters</span><span class="tag">DevTools</span><span class="tag">Session notes</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ GAME ══ -->
+<!-- ============================== GAME ============================== -->
 <section id="game">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">06 / THE PLAYGROUND</span>
-      <h2 class="sec-h">Think you can spot it?</h2>
-      <p class="sec-sub">Six screens. One planted defect in each. Read the requirement, click the thing that violates it — before the timer runs out. A small taste of the job. Up to three minutes to prove your QA instincts.</p>
+      <span class="sec-kicker"><span class="num">07</span>Playground</span>
+      <h2 class="sec-h">Think you can <em>spot the bug</em>?</h2>
+      <p class="sec-sub">Six screens, one planted defect in each. Read the requirement, click the thing that breaks it, before the timer runs out. A small taste of the job.</p>
     </div>
 
-    <div class="game-shell tilt fi d1" data-tilt="3">
+    <div class="game-shell fi d1">
       <div class="game-bar">
         <div class="game-bar-l"><span class="tl tl-r"></span><span class="tl tl-y"></span><span class="tl tl-g"></span><span style="margin-left:6px">spot-the-bug — runner</span></div>
         <div class="hud" id="hud" hidden>
@@ -1195,14 +503,14 @@ nav,.hero,section,footer{position:relative;z-index:1;}
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4l1.5 2.5h5L16 4"/><path d="M12 20a6 6 0 006-6v-2a6 6 0 00-12 0v2a6 6 0 006 6z"/><path d="M12 12v8"/><path d="M6 11H3M21 11h-3M5 6l2 2M19 6l-2 2M5 18l2.2-2M19 18l-2.2-2"/></svg>
         </span>
         <h3>Spot the Bug</h3>
-        <p>Every screen below ships with exactly one defect. You get the requirement, the screen, and thirty seconds. Wrong clicks cost points — same as in real life, where chasing the wrong thing costs time.</p>
+        <p>Every screen ships with exactly one defect. You get the requirement, the screen, and thirty seconds. Wrong clicks cost points, just like chasing the wrong thing costs time in real life.</p>
         <div class="rules">
           <span class="chip chip-mute">6 rounds</span>
           <span class="chip chip-mute">30s each</span>
           <span class="chip chip-mute">−150 per wrong click</span>
           <span class="chip chip-mute">speed bonus</span>
         </div>
-        <button class="btn btn-g" id="btnStart">
+        <button class="btn btn-p" id="btnStart">
           <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           Start test run
         </button>
@@ -1241,736 +549,69 @@ nav,.hero,section,footer{position:relative;z-index:1;}
   </div>
 </section>
 
-<!-- ══ EDUCATION ══ -->
+<!-- ============================== EDUCATION ============================== -->
 <section id="education">
   <div class="wrap">
     <div class="sec-head fi">
-      <span class="sec-file">07 / THE FOUNDATION</span>
-      <h2 class="sec-h">Always a student.</h2>
+      <span class="sec-kicker"><span class="num">08</span>Foundation</span>
+      <h2 class="sec-h">Always a <em>student</em>.</h2>
     </div>
-    <div class="panel edu fi d1">
-      <span class="edu-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
-      <div style="flex:1;min-width:220px">
-        <div class="edu-deg">Bachelor's Degree — Law</div>
-        <div class="edu-uni">Minufiya University</div>
-        <div class="edu-per">Sep 2023 — Sep 2027 (in progress)</div>
-      </div>
-      <p style="font-size:13.4px;color:var(--t3);max-width:340px;line-height:1.65">A law degree trains you to read a specification adversarially, find the gap between what is written and what is meant, and document it precisely. That is most of QA.</p>
+    <div class="edu-grid">
+      <article class="edu fi">
+        <span class="k">Sep 2023 — Sep 2027 · in progress</span>
+        <h3>Bachelor of Law</h3>
+        <div class="org">Minufiya University</div>
+        <p>Law trains you to read a specification adversarially, find the gap between what is written and what is meant, and document it precisely. That's most of QA.</p>
+      </article>
+      <article class="edu fi d1">
+        <span class="k">2025 · 200+ hours</span>
+        <h3>Software Testing Track</h3>
+        <div class="org">DEPI</div>
+        <p>Instructor-led, in-person and self-study testing training. Graduated Top 1 of 100+ participants.</p>
+      </article>
+      <article class="edu fi d2">
+        <span class="k">2026 · 120 hours</span>
+        <h3>Flutter Mobile Development</h3>
+        <div class="org">NTI</div>
+        <p>Flutter, Dart and state management, plus freelancing skills. The reason I know where mobile apps break.</p>
+      </article>
     </div>
-  </div>
-</section>
 
-<!-- ══ CONNECT ══ -->
-<section id="connect">
-  <div class="wrap">
-    <div class="sec-head fi">
-      <span class="sec-file">08 / YOUR NEXT RELEASE</span>
-      <h2 class="sec-h">Let’s make it better.</h2>
-    </div>
-    <div class="co-grid">
-      <div class="fi d1">
-        <h3 class="co-h">Great software starts<br/>with a conversation.</h3>
-        <p class="co-sub">I'm full-time at Lumofy and running freelance cycles on Test IO — but I still take on part-time and volunteer QA work when it's interesting. Send me a build, a staging link, or a problem you can't reproduce.</p>
-        <div class="co-ctas">
-          <a href="mailto:abdelrahman.tarek.dev@gmail.com" class="btn btn-p">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Send an email
-          </a>
-          <a href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener" class="btn btn-o">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://drive.google.com/file/d/1cDZ1se7hzIHNFXEptqBsntF_NHGThLjf/view?usp=sharing" target="_blank" rel="noopener" class="btn btn-o">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            CV
-          </a>
-        </div>
+    <!-- ============================== CONTACT ============================== -->
+    <div class="contact fi" id="contact">
+      <span class="sec-kicker"><span class="num">09</span>Your next release</span>
+      <h2>Let's make it <em style="font-style:normal;color:var(--pass)">better</em>.</h2>
+      <p>I'm full-time at Lumofy and running freelance cycles on Test IO, and I still take on part-time and volunteer QA work when it's interesting. Send me a build, a staging link, or a bug you can't reproduce.</p>
+      <div class="hero-cta">
+        <a class="btn btn-p" href="mailto:abdelrahman.tarek.dev@gmail.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Send an email</a>
+        <a class="btn btn-o" href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn-o" href="https://github.com/abdelrahmant-9" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn btn-o" href="https://drive.google.com/file/d/1cDZ1se7hzIHNFXEptqBsntF_NHGThLjf/view?usp=sharing" target="_blank" rel="noopener">Download CV ↗</a>
       </div>
-      <div class="fi d2">
-        <div class="panel help">
-          <h3>What I bring to the table</h3>
-          <div class="help-item">
-            <strong>Manual &amp; regression testing</strong>
-            <span>Structured scenarios, exploratory passes, reproduction of the bug your team can't pin down, and a release checklist that actually gets run.</span>
-          </div>
-          <div class="help-item">
-            <strong>Bug reporting &amp; documentation</strong>
-            <span>Tickets with steps, expected vs actual, environment, severity, and evidence — the kind developers can act on without a follow-up call.</span>
-          </div>
-          <div class="help-item">
-            <strong>API testing</strong>
-            <span>Postman collections that validate endpoints against requirements, not just against a 200 status code.</span>
-          </div>
-          <div class="help-item">
-            <strong>Automation groundwork</strong>
-            <span>Selenium + TestNG suites with stable locators and Page Object structure, built to survive the next UI change.</span>
-          </div>
-        </div>
+      <div class="offer">
+        <div><b>Manual &amp; regression</b><span>Structured scenarios, exploratory passes, and a release checklist that actually gets run.</span></div>
+        <div><b>Bug reports</b><span>Steps, expected vs actual, environment, severity and evidence. No follow-up call needed.</span></div>
+        <div><b>Mobile testing</b><span>Device matrix, RTL and localization, the states real users end up in.</span></div>
+        <div><b>Data checks</b><span>SQL and dbt tests that prove the numbers on the screen are right.</span></div>
       </div>
     </div>
   </div>
 </section>
-
 </main>
 
-<!-- ══ FOOTER ══ -->
 <footer>
-  <div class="foot">
-    <div class="foot-run"><span style="color:var(--pass)">✓</span><span id="footRun">Made with curiosity. Tested with care.</span></div>
-    <div>
-      <a href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener">LinkedIn</a> ·
-      <a href="https://github.com/abdelrahmant-9" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="mailto:abdelrahman.tarek.dev@gmail.com">Email</a> ·
-      <a href="https://drive.google.com/file/d/1cDZ1se7hzIHNFXEptqBsntF_NHGThLjf/view?usp=sharing" target="_blank" rel="noopener">CV</a>
-    </div>
-    <div>© 2026 Abdelrahman Tarek · Cairo, EG</div>
+  <div class="wrap">
+    <span>✓ Made with curiosity. Tested with care. © 2026 Abdelrahman Tarek · Cairo, EG</span>
+    <span class="links">
+      <a href="https://www.linkedin.com/in/abelrahmantarek/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/abdelrahmant-9" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:abdelrahman.tarek.dev@gmail.com">Email</a>
+    </span>
   </div>
 </footer>
 
-<script>
-/* ============================================================
-   THEME
-   ============================================================ */
-function toggleTheme(){
-  const h=document.documentElement;
-  const next=h.dataset.theme==='light'?'dark':'light';
-  h.dataset.theme=next;
-  try{localStorage.setItem('theme',next);}catch(e){}
-}
-(function(){
-  let saved=null;
-  try{saved=localStorage.getItem('theme');}catch(e){}
-  document.documentElement.dataset.theme=saved||'dark';
-
-  let m=null;
-  try{m=localStorage.getItem('motion');}catch(e){}
-  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.documentElement.dataset.motion = reduce ? 'off' : (m || 'on');
-})();
-function toggleMotion(){
-  const h=document.documentElement;
-  const next=h.dataset.motion==='off'?'on':'off';
-  h.dataset.motion=next;
-  try{localStorage.setItem('motion',next);}catch(e){}
-  window.dispatchEvent(new CustomEvent('motionchange',{detail:next}));
-}
-
-/* ============================================================
-   NAV — mobile menu + scrollspy
-   ============================================================ */
-(function(){
-  const toggle=document.getElementById('navToggle');
-  const links=document.getElementById('navLinks');
-  const themeMobile=document.getElementById('themeMobile');
-  function syncMobile(){
-    const small=matchMedia('(max-width:760px)').matches;
-    themeMobile.style.display=small?'grid':'none';
-    document.getElementById('motionMobile').style.display=small?'grid':'none';
-    if(!small){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
-  }
-  toggle.addEventListener('click',()=>{
-    const open=links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded',String(open));
-  });
-  links.addEventListener('click',e=>{
-    if(e.target.closest('a')){links.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
-  });
-  matchMedia('(max-width:760px)').addEventListener('change',syncMobile);
-  syncMobile();
-
-  const map=new Map();
-  document.querySelectorAll('.nav-links a[href^="#"]').forEach(a=>{
-    const el=document.querySelector(a.getAttribute('href'));
-    if(el) map.set(el,a);
-  });
-  const spy=new IntersectionObserver(entries=>{
-    entries.forEach(en=>{
-      const a=map.get(en.target);
-      if(!a) return;
-      if(en.isIntersecting){
-        document.querySelectorAll('.nav-links a').forEach(x=>x.classList.remove('active'));
-        a.classList.add('active');
-      }
-    });
-  },{rootMargin:'-45% 0px -50% 0px'});
-  map.forEach((a,el)=>spy.observe(el));
-})();
-
-/* ============================================================
-   REVEAL ON SCROLL
-   ============================================================ */
-(function(){
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(x=>{
-      if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}
-    });
-  },{threshold:0.08});
-  document.querySelectorAll('.fi:not(.in)').forEach(el=>io.observe(el));
-})();
-
-/* ============================================================
-   SPOT THE BUG — game engine
-   ============================================================ */
-(function(){
-  const ROUND_MS=30000, PENALTY=150, HINT_COST=200, TOTAL=6;
-
-  const ROUNDS=[
-    {
-      id:'checkout', url:'https://shop.staging.local/cart/checkout',
-      name:'Checkout — order summary',
-      spec:"the order total equals subtotal + shipping",
-      severity:'Critical', bug:'total',
-      hint:'Ignore the labels. Add the money column up yourself.',
-      why:'Subtotal <code>$69.98</code> + shipping <code>$5.00</code> = <code>$74.98</code>, but the total charges <code>$69.98</code>. Shipping is dropped from the sum — the business loses $5 on every order that reaches this screen.',
-      html:`
-        <h5>Order summary</h5><div class="app-sub">Cart · 2 items · standard delivery</div>
-        <button class="hot" data-id="item1" aria-label="Line item wireless mouse"><div class="app-row"><span class="k">Wireless Mouse × 1</span><span class="v">$49.99</span></div></button>
-        <button class="hot" data-id="item2" aria-label="Line item USB-C cable"><div class="app-row"><span class="k">USB-C Cable × 1</span><span class="v">$19.99</span></div></button>
-        <button class="hot" data-id="sub" aria-label="Subtotal row"><div class="app-row"><span class="k">Subtotal</span><span class="v">$69.98</span></div></button>
-        <button class="hot" data-id="ship" aria-label="Shipping row"><div class="app-row"><span class="k">Shipping (standard)</span><span class="v">$5.00</span></div></button>
-        <button class="hot" data-id="total" aria-label="Total row"><div class="app-row tot"><span class="k">Total</span><span class="v">$69.98</span></div></button>
-        <div style="margin-top:16px"><span class="app-btn">Place order</span></div>`
-    },
-    {
-      id:'pager', url:'https://admin.staging.local/users?page=1',
-      name:'User directory — pagination',
-      spec:"every result is reachable through the pager",
-      severity:'Major', bug:'pager',
-      hint:'Divide the result count by the page size, then count the page buttons.',
-      why:'24 users at 10 per page needs <code>3</code> pages. The pager only renders <code>1</code> and <code>2</code>, so users 21–24 are unreachable — a classic off-by-one in <code>Math.ceil</code>.',
-      html:`
-        <h5>Users</h5><div class="app-sub">Admin · directory</div>
-        <button class="hot" data-id="search" aria-label="Search field"><div class="app-input ph">Search users…</div></button>
-        <table class="app-table" style="margin-top:14px">
-          <tr><th>Name</th><th>Role</th><th>Status</th></tr>
-          <tr><td>Mona Adel</td><td>Admin</td><td>Active</td></tr>
-          <tr><td>Youssef Nabil</td><td>Editor</td><td>Active</td></tr>
-          <tr><td>Salma Hassan</td><td>Viewer</td><td>Invited</td></tr>
-        </table>
-        <div class="app-flex" style="margin-top:14px">
-          <button class="hot inline" data-id="count" aria-label="Results count"><span style="font-size:12.6px;color:var(--t3)">Showing 1–10 of 24 users</span></button>
-          <button class="hot inline" data-id="pager" aria-label="Pagination control"><div class="app-pager"><span>‹</span><span class="cur">1</span><span>2</span><span>›</span></div></button>
-        </div>`
-    },
-    {
-      id:'password', url:'https://app.staging.local/signup',
-      name:'Sign-up — credential fields',
-      spec:"credentials are never rendered in plain text",
-      severity:'Critical', bug:'pwd',
-      hint:'Two fields hold the same secret. Only one of them is behaving.',
-      why:'The password field renders its value in plain text — <code>type="password"</code> is missing or overridden. The confirm field masks correctly, which proves the pattern exists and this field skipped it. Exposed on screen shares, screenshots, and over the shoulder.',
-      html:`
-        <h5>Create your account</h5><div class="app-sub">Step 2 of 3 · credentials</div>
-        <button class="hot" data-id="email" aria-label="Email field">
-          <div class="app-field"><span class="app-label">Email</span><div class="app-input">mona.adel@example.com</div></div>
-        </button>
-        <button class="hot" data-id="pwd" aria-label="Password field">
-          <div class="app-field"><span class="app-label">Password</span><div class="app-input">Sup3rSecret!2026</div><div class="app-hint">Minimum 8 characters</div></div>
-        </button>
-        <button class="hot" data-id="confirm" aria-label="Confirm password field">
-          <div class="app-field"><span class="app-label">Confirm password</span><div class="app-input">••••••••••••••••</div></div>
-        </button>
-        <button class="hot inline" data-id="submit" aria-label="Create account button"><span class="app-btn">Create account</span></button>`
-    },
-    {
-      id:'dates', url:'https://booking.staging.local/search',
-      name:'Booking — date range',
-      spec:"check-out must fall after check-in",
-      severity:'Major', bug:'out',
-      hint:'Read the two dates in the order a guest would live them.',
-      why:'Check-out <code>2026-09-03</code> is nine days <em>before</em> check-in <code>2026-09-12</code>, and the form accepts it with no validation error. Downstream this produces a negative night count and, in most booking engines, a negative price.',
-      html:`
-        <h5>Book a stay</h5><div class="app-sub">Cairo · 1 room</div>
-        <button class="hot" data-id="in" aria-label="Check-in date">
-          <div class="app-field"><span class="app-label">Check-in</span><div class="app-input">2026-09-12</div></div>
-        </button>
-        <button class="hot" data-id="out" aria-label="Check-out date">
-          <div class="app-field"><span class="app-label">Check-out</span><div class="app-input">2026-09-03</div></div>
-        </button>
-        <button class="hot" data-id="guests" aria-label="Guests field">
-          <div class="app-field"><span class="app-label">Guests</span><div class="app-input">2 adults</div></div>
-        </button>
-        <button class="hot inline" data-id="search" aria-label="Search button"><span class="app-btn">Search availability</span></button>`
-    },
-    {
-      id:'submit', url:'https://app.staging.local/support/new',
-      name:'Support form — validation state',
-      spec:"submit stays disabled while a required field is invalid",
-      severity:'Major', bug:'submit',
-      hint:'The red error message is correct. Something on this screen is ignoring it.',
-      html:`
-        <h5>Contact support</h5><div class="app-sub">We reply within one business day</div>
-        <button class="hot" data-id="name" aria-label="Full name field">
-          <div class="app-field"><span class="app-label">Full name *</span><div class="app-input ph">&nbsp;</div><div class="app-hint err">Required field</div></div>
-        </button>
-        <button class="hot" data-id="email" aria-label="Email field">
-          <div class="app-field"><span class="app-label">Email *</span><div class="app-input">mona.adel@example.com</div></div>
-        </button>
-        <button class="hot" data-id="msg" aria-label="Message field">
-          <div class="app-field"><span class="app-label">Message *</span><div class="app-area">The export button returns a 500 on large date ranges.</div></div>
-        </button>
-        <button class="hot inline" data-id="submit" aria-label="Submit ticket button"><span class="app-btn">Submit ticket</span></button>`,
-      why:'A required field is empty and already flagged <code>Required field</code>, yet <code>Submit ticket</code> is fully enabled. The form can be posted invalid — validation renders the error but never gates the action.'
-    },
-    {
-      id:'sort', url:'https://shop.staging.local/admin/products?sort=price_asc',
-      name:'Product table — sort indicator',
-      spec:"the active sort matches the order of the rows",
-      severity:'Major', bug:'hprice',
-      hint:'That little arrow is a promise. Check whether the data keeps it.',
-      why:'The Price column claims ascending sort (<code>▲</code>) but the rows read <code>120 → 45 → 300</code>. Either the sort never applied or the indicator is stale — the screen contradicts itself, and any user trusting it gets the wrong product first.',
-      html:`
-        <h5>Products</h5><div class="app-sub">Sorted by price, ascending</div>
-        <table class="app-table" style="margin-top:6px">
-          <tr>
-            <th><button class="hot inline" data-id="hname" aria-label="Name column header" style="padding:2px 5px;margin:0">Name</button></th>
-            <th><button class="hot inline" data-id="hprice" aria-label="Price column header" style="padding:2px 5px;margin:0">Price ▲</button></th>
-            <th><button class="hot inline" data-id="hstock" aria-label="Stock column header" style="padding:2px 5px;margin:0">Stock</button></th>
-          </tr>
-          <tr><td>Mechanical Keyboard</td><td class="num">$120.00</td><td class="num">14</td></tr>
-          <tr><td>Wireless Mouse</td><td class="num">$45.00</td><td class="num">61</td></tr>
-          <tr><td>27&quot; Monitor</td><td class="num">$300.00</td><td class="num">7</td></tr>
-        </table>
-        <div style="margin-top:14px"><button class="hot inline" data-id="export" aria-label="Export button"><span class="app-btn ghost">Export CSV</span></button></div>`
-    },
-    {
-      id:'badge', url:'https://app.staging.local/inbox',
-      name:'Inbox — unread counter',
-      spec:"the unread badge matches the actual unread count",
-      severity:'Minor', bug:'badge',
-      hint:'Two parts of this screen are counting the same thing and disagreeing.',
-      why:'The badge shows <code>1</code> unread while the list and the empty state both report <code>0</code>. The badge is not cleared when messages are read — a stale count that trains users to ignore the badge entirely.',
-      html:`
-        <div class="app-flex" style="margin-bottom:14px">
-          <h5 style="margin:0">Inbox</h5>
-          <button class="hot inline" data-id="badge" aria-label="Unread badge"><span class="app-pill">Unread <span class="app-badge">1</span></span></button>
-        </div>
-        <button class="hot" data-id="empty" aria-label="Empty state message">
-          <div style="text-align:center;padding:26px 10px;border:1px dashed var(--line-2);border-radius:9px">
-            <div style="font-size:22px">📭</div>
-            <div style="font-size:14px;font-weight:600;margin-top:6px">You're all caught up</div>
-            <div style="font-size:12.6px;color:var(--t3);margin-top:3px">0 unread messages</div>
-          </div>
-        </button>
-        <div class="app-flex" style="margin-top:14px">
-          <button class="hot inline" data-id="refresh" aria-label="Refresh button"><span class="app-btn ghost">Refresh</span></button>
-          <button class="hot inline" data-id="settings" aria-label="Settings link"><span style="font-size:12.6px;color:var(--t3)">Inbox settings</span></button>
-        </div>`
-    },
-    {
-      id:'label', url:'https://app.staging.local/settings/profile',
-      name:'Profile settings — field copy',
-      spec:"each field's placeholder describes that field's own input",
-      severity:'Minor', bug:'email',
-      hint:'Read every label together with the grey text underneath it.',
-      why:'The field is labelled <code>Email address</code> but its placeholder shows a phone-number format. Copy was pasted into the wrong field — users type a phone number, validation rejects it, and nobody can tell why.',
-      html:`
-        <h5>Profile settings</h5><div class="app-sub">These details appear on your public profile</div>
-        <button class="hot" data-id="name" aria-label="Full name field">
-          <div class="app-field"><span class="app-label">Full name</span><div class="app-input">Mona Adel</div></div>
-        </button>
-        <button class="hot" data-id="email" aria-label="Email address field">
-          <div class="app-field"><span class="app-label">Email address</span><div class="app-input ph">+20 1XX XXX XXXX</div></div>
-        </button>
-        <button class="hot" data-id="country" aria-label="Country field">
-          <div class="app-field"><span class="app-label">Country</span><div class="app-input">Egypt</div></div>
-        </button>
-        <button class="hot inline" data-id="save" aria-label="Save changes button"><span class="app-btn">Save changes</span></button>`
-    },
-    {
-      id:'promo', url:'https://shop.staging.local/cart/payment',
-      name:'Payment — promo discount',
-      spec:"a percentage promo deducts that percentage of the subtotal",
-      severity:'Major', bug:'disc',
-      hint:'A percentage is not an amount. Convert it before you trust the line.',
-      why:'<code>SAVE20</code> is 20% of <code>$200.00</code> = <code>$40.00</code>, but only <code>$20.00</code> was deducted. The total is internally consistent with the wrong discount, so the summing logic is fine — the discount calculation treats the percentage as a flat amount.',
-      html:`
-        <h5>Payment</h5><div class="app-sub">Promo code applied · SAVE20</div>
-        <button class="hot" data-id="sub" aria-label="Subtotal row"><div class="app-row"><span class="k">Subtotal</span><span class="v">$200.00</span></div></button>
-        <button class="hot" data-id="disc" aria-label="Discount row"><div class="app-row"><span class="k">Promo SAVE20 (−20%)</span><span class="v" style="color:var(--pass)">−$20.00</span></div></button>
-        <button class="hot" data-id="ship" aria-label="Shipping row"><div class="app-row"><span class="k">Shipping</span><span class="v">$0.00</span></div></button>
-        <button class="hot" data-id="total" aria-label="Total row"><div class="app-row tot"><span class="k">Total</span><span class="v">$180.00</span></div></button>
-        <div style="margin-top:16px"><span class="app-btn">Pay $180.00</span></div>`
-    }
-  ];
-
-  /* ---------- refs ---------- */
-  const el={
-    start:document.getElementById('gameStart'),
-    play:document.getElementById('gamePlay'),
-    report:document.getElementById('gameReport'),
-    hud:document.getElementById('hud'),
-    round:document.getElementById('hudRound'),
-    score:document.getElementById('hudScore'),
-    found:document.getElementById('hudFound'),
-    time:document.getElementById('hudTime'),
-    timerItem:document.getElementById('hudTimer'),
-    fill:document.getElementById('timerFill'),
-    app:document.getElementById('mockApp'),
-    url:document.getElementById('mockUrl'),
-    spec:document.getElementById('specText'),
-    steps:document.getElementById('steps'),
-    verdict:document.getElementById('verdict'),
-    hint:document.getElementById('btnHint'),
-    startBtn:document.getElementById('btnStart'),
-    footRun:document.getElementById('footRun')
-  };
-
-  /* ---------- state ---------- */
-  let deck=[], idx=0, score=0, clicks=0, hits=0, results=[], roundStart=0,
-      raf=null, locked=true, hintUsed=false, roundPenalty=0, pausedAt=0;
-
-  const shuffle=a=>{const c=a.slice();for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;};
-  const fmt=ms=>(ms/1000).toFixed(1)+'s';
-
-  /* ---------- lifecycle ---------- */
-  function startGame(){
-    deck=shuffle(ROUNDS).slice(0,TOTAL);
-    idx=0;score=0;clicks=0;hits=0;results=[];
-    el.start.hidden=true;el.report.hidden=true;el.play.hidden=false;el.hud.hidden=false;
-    buildSteps();
-    loadRound();
-    el.play.scrollIntoView({block:'center',behavior:'smooth'});
-  }
-
-  function buildSteps(){
-    el.steps.innerHTML=deck.map((r,i)=>
-      `<div class="step" data-step="${i}"><span class="n">${i+1}</span><span>${r.name.split('—')[0].trim()}</span></div>`
-    ).join('');
-  }
-
-  function loadRound(){
-    const r=deck[idx];
-    hintUsed=false;roundPenalty=0;locked=false;
-    el.hint.disabled=false;el.hint.textContent='Reveal hint (−'+HINT_COST+')';
-    el.url.textContent=r.url;
-    el.spec.innerHTML='&nbsp;&nbsp;'+r.spec;
-    el.app.innerHTML=r.html;
-    el.verdict.innerHTML='';
-    el.round.textContent=(idx+1)+'/'+deck.length;
-    el.score.textContent=score;
-    el.found.textContent=hits;
-    document.querySelectorAll('.step').forEach((s,i)=>{
-      s.classList.toggle('on',i===idx);
-      if(i<idx){
-        s.classList.add('done');
-        if(results[i] && !results[i].pass) s.classList.add('miss');
-      }
-    });
-    el.app.querySelectorAll('.hot').forEach(h=>h.addEventListener('click',onHot));
-    roundStart=performance.now();
-    tick();
-  }
-
-  function tick(){
-    cancelAnimationFrame(raf);
-    const loop=()=>{
-      if(locked) return;
-      const left=Math.max(0,ROUND_MS-(performance.now()-roundStart));
-      const pct=(left/ROUND_MS)*100;
-      el.fill.style.width=pct+'%';
-      el.fill.classList.toggle('low',pct<34);
-      el.time.textContent=Math.ceil(left/1000)+'s';
-      el.timerItem.classList.toggle('warn',pct<34);
-      if(left<=0){ timeUp(); return; }
-      raf=requestAnimationFrame(loop);
-    };
-    raf=requestAnimationFrame(loop);
-  }
-
-  /* ---------- interaction ---------- */
-  function onHot(e){
-    if(locked) return;
-    const btn=e.currentTarget, r=deck[idx];
-    clicks++;
-    if(btn.dataset.id===r.bug){
-      const elapsed=performance.now()-roundStart;
-      const speed=Math.max(0,Math.round(400*(1-elapsed/ROUND_MS)));
-      const gained=Math.max(50,600+speed-roundPenalty-(hintUsed?HINT_COST:0));
-      score+=gained;hits++;
-      btn.classList.add('mark-ok');
-      const box=btn.getBoundingClientRect();
-      if(window.__burst) window.__burst(box.left+box.width/2, box.top+box.height/2, 'pass');
-      finishRound({pass:true,ms:elapsed,gained:gained,reason:'found'});
-    }else{
-      roundPenalty+=PENALTY;
-      score=Math.max(0,score-PENALTY);
-      el.score.textContent=score;
-      btn.classList.add('mark-no');
-      btn.disabled=true;
-      const bx=btn.getBoundingClientRect();
-      if(window.__burst) window.__burst(bx.left+bx.width/2, bx.top+bx.height/2, 'fail');
-      el.verdict.innerHTML=
-        `<div class="verdict no">
-           <div class="verdict-t"><span>✗</span> FAIL — that element satisfies the requirement</div>
-           <div class="verdict-d">−${PENALTY} points. Re-read the requirement on the right and compare it against what each element actually states.</div>
-         </div>`;
-    }
-  }
-
-  function timeUp(){
-    const r=deck[idx];
-    const target=el.app.querySelector('[data-id="'+r.bug+'"]');
-    if(target) target.classList.add('mark-ok');
-    finishRound({pass:false,ms:ROUND_MS,gained:0,reason:'timeout'});
-  }
-
-  function finishRound(res){
-    locked=true;
-    cancelAnimationFrame(raf);
-    el.hint.disabled=true;
-    const r=deck[idx];
-    el.app.querySelectorAll('.hot').forEach(h=>h.classList.add('locked'));
-    results[idx]={pass:res.pass,ms:res.ms,name:r.name,why:r.why,severity:r.severity};
-    el.score.textContent=score;el.found.textContent=hits;
-    const last=idx===deck.length-1;
-    el.verdict.innerHTML=
-      `<div class="verdict ${res.pass?'ok':'no'}">
-         <div class="verdict-t">
-           <span>${res.pass?'✓':'✗'}</span>
-           ${res.pass?'PASS — defect located in '+fmt(res.ms):'FAIL — time expired, defect revealed'}
-           <span class="chip ${res.severity==='Critical'?'chip-fail':res.severity==='Major'?'chip-warn':'chip-info'}" style="margin-left:auto">${r.severity}</span>
-         </div>
-         <div class="verdict-d">${r.why}${res.pass?' <b style="color:var(--pass)">+'+res.gained+' points</b>':''}</div>
-         <div class="verdict-act">
-           <button class="btn ${res.pass?'btn-g':'btn-o'}" id="btnNext">${last?'See test report':'Next round →'}</button>
-         </div>
-       </div>`;
-    document.getElementById('btnNext').addEventListener('click',()=>{
-      if(last){ showReport(); } else { idx++; loadRound(); }
-    });
-    document.getElementById('btnNext').focus({preventScroll:true});
-  }
-
-  el.hint.addEventListener('click',()=>{
-    if(locked||hintUsed) return;
-    hintUsed=true;
-    el.hint.disabled=true;el.hint.textContent='Hint revealed';
-    score=Math.max(0,score-HINT_COST);el.score.textContent=score;
-    el.verdict.innerHTML=
-      `<div class="verdict">
-         <div class="verdict-t" style="color:var(--warn)"><span>!</span> HINT</div>
-         <div class="verdict-d">${deck[idx].hint}</div>
-       </div>`;
-  });
-
-  /* ---------- report ---------- */
-  function showReport(){
-    cancelAnimationFrame(raf);
-    el.play.hidden=true;el.hud.hidden=true;el.report.hidden=false;
-    el.fill.style.width='100%';el.fill.classList.remove('low');
-    const total=results.length;
-    const passed=results.filter(r=>r.pass).length;
-    const failed=total-passed;
-    const pct=Math.round((passed/total)*100);
-    const accuracy=clicks?Math.round((hits/clicks)*100):0;
-    const avg=results.reduce((s,r)=>s+r.ms,0)/total;
-    let best=0;try{best=parseInt(localStorage.getItem('stbBest')||'0',10);}catch(e){}
-    const isBest=score>best;
-    if(isBest){try{localStorage.setItem('stbBest',String(score));}catch(e){}}
-
-    let grade,blurb;
-    if(passed===total && accuracy>=80){grade='SENIOR QA EYE';blurb='Six for six with clean clicks. You read requirements before you read the screen — that is the whole discipline.';}
-    else if(passed>=5){grade='STRONG TESTER';blurb='You caught almost everything. The misses are the ones that hide in copy and state, not in the numbers.';}
-    else if(passed>=3){grade='SOLID INSTINCT';blurb='Half the defects found. The pattern worth practising: check arithmetic, then check whether the UI contradicts itself.';}
-    else{grade='KEEP TRAINING';blurb='Most defects survived. Not a problem — this is exactly what test case design is for. Run it again and work the requirement line by line.';}
-
-    const circ=2*Math.PI*48;
-    el.report.innerHTML=`
-      <div class="report-top">
-        <div class="ring">
-          <svg viewBox="0 0 112 112" aria-hidden="true">
-            <circle class="bgc" cx="56" cy="56" r="48"></circle>
-            <circle class="fgc" cx="56" cy="56" r="48"
-              style="stroke:${pct>=80?'var(--pass)':pct>=50?'var(--warn)':'var(--fail)'};
-                     stroke-dasharray:${circ};stroke-dashoffset:${circ}"></circle>
-          </svg>
-          <div class="ring-txt"><div><div class="ring-n">${pct}%</div><div class="ring-l">detected</div></div></div>
-        </div>
-        <div style="flex:1;min-width:240px">
-          <div class="chip ${passed===total?'chip-pass':'chip-warn'}" style="margin-bottom:8px">${grade}</div>
-          <div class="report-title">${passed} passing · ${failed} failing</div>
-          <p class="report-sub">${blurb}</p>
-          <div class="report-stats">
-            <span class="hud-item">score <b>${score}</b></span>
-            <span class="hud-item">best <b>${Math.max(score,best)}</b>${isBest?' <span style="color:var(--pass)">new</span>':''}</span>
-            <span class="hud-item">click accuracy <b>${accuracy}%</b></span>
-            <span class="hud-item">avg time <b>${fmt(avg)}</b></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="log">
-        ${results.map((r,i)=>`
-          <div class="log-row">
-            <span class="mk ${r.pass?'ok':'no'}">${r.pass?'✓':'✗'}</span>
-            <div style="flex:1;min-width:0">
-              <div class="log-name">${i+1}. ${r.name} <span class="chip ${r.severity==='Critical'?'chip-fail':r.severity==='Major'?'chip-warn':'chip-info'}" style="margin-left:6px">${r.severity}</span></div>
-              <div class="log-why">${r.why}</div>
-            </div>
-            <span class="log-time">${r.pass?fmt(r.ms):'timeout'}</span>
-          </div>`).join('')}
-      </div>
-
-      <div class="report-cta">
-        <button class="btn btn-g" id="btnAgain">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
-          Run the suite again
-        </button>
-        <a class="btn btn-o" href="#connect">Hire this eye →</a>
-        <a class="btn btn-o" href="https://github.com/abdelrahmant-9/Spectara" target="_blank" rel="noopener">See how I automate it ↗</a>
-      </div>`;
-
-    requestAnimationFrame(()=>{
-      const fg=el.report.querySelector('.fgc');
-      if(fg) fg.style.strokeDashoffset=String(circ*(1-passed/total));
-    });
-    document.getElementById('btnAgain').addEventListener('click',startGame);
-    if(el.footRun) el.footRun.textContent='test run finished — '+failed+' failing';
-    el.report.scrollIntoView({block:'center',behavior:'smooth'});
-  }
-
-  /* pause the clock if the tab goes away — nobody should lose to a notification */
-  document.addEventListener('visibilitychange',()=>{
-    if(locked) return;
-    if(document.hidden){ pausedAt=performance.now(); cancelAnimationFrame(raf); }
-    else if(pausedAt){ roundStart+=performance.now()-pausedAt; pausedAt=0; tick(); }
-  });
-
-  el.startBtn.addEventListener('click',startGame);
-})();
-
-/* ============================================================
-   POINTER-PARALLAX TILT — bounded to pointer interaction
-   ============================================================ */
-(function(){
-  const root=document.documentElement;
-  if(!matchMedia('(hover: hover) and (pointer: fine)').matches)return;
-  document.querySelectorAll('[data-tilt]').forEach(card=>{
-    const max=parseFloat(card.dataset.tilt)||6;
-    const glare=document.createElement('span');glare.className='glare';card.appendChild(glare);
-    let bounds=null,frame=0,px=.5,py=.5;
-    const reset=()=>{cancelAnimationFrame(frame);frame=0;bounds=null;card.classList.remove('live');card.style.transform='';};
-    card.addEventListener('pointerenter',()=>{bounds=card.getBoundingClientRect();});
-    card.addEventListener('pointermove',event=>{
-      if(root.dataset.motion==='off')return;
-      const r=bounds || (bounds=card.getBoundingClientRect());
-      px=(event.clientX-r.left)/r.width;py=(event.clientY-r.top)/r.height;
-      if(!frame)frame=requestAnimationFrame(()=>{
-        frame=0;if(root.dataset.motion==='off')return;
-        card.classList.add('live');
-        card.style.transform='perspective(1200px) rotateX('+((.5-py)*max*2).toFixed(2)+'deg) rotateY('+((px-.5)*max*2).toFixed(2)+'deg) translateZ(6px)';
-        glare.style.setProperty('--gx',(px*100).toFixed(1)+'%');glare.style.setProperty('--gy',(py*100).toFixed(1)+'%');
-      });
-    },{passive:true});
-    card.addEventListener('pointerleave',reset);
-    window.addEventListener('motionchange',event=>{if(event.detail==='off')reset();});
-  });
-})();
-
-/* ============================================================
-   STAT COUNTERS
-   ============================================================ */
-(function(){
-  const root=document.documentElement;
-  const els=document.querySelectorAll('[data-count]');
-  if(!els.length) return;
-  const run=el=>{
-    const target=parseInt(el.dataset.count,10);
-    const suffix=el.dataset.suffix||'';
-    if(root.dataset.motion==='off'){el.textContent=target+suffix;return;}
-    const dur=1300, t0=performance.now();
-    const step=now=>{
-      const k=Math.min(1,(now-t0)/dur);
-      const eased=1-Math.pow(1-k,3);
-      el.textContent=Math.round(target*eased)+suffix;
-      if(k<1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(en=>{ if(en.isIntersecting){ run(en.target); io.unobserve(en.target); } });
-  },{threshold:0.4});
-  els.forEach(el=>io.observe(el));
-})();
-
-/* ============================================================
-   TEST PYRAMID — auto-spin, drag, layer sync
-   ============================================================ */
-(function(){
-  const stage=document.getElementById('pyrStage'), pyr=document.getElementById('pyr');
-  if(!stage||!pyr) return;
-  const root=document.documentElement;
-  let rx=60, rz=-28, spinning=true, dragging=false, lx=0, ly=0, raf=null;
-
-  const apply=()=>{pyr.style.setProperty('--rx',rx.toFixed(1)+'deg');pyr.style.setProperty('--rz',rz.toFixed(1)+'deg');};
-  apply();
-
-  let inView=false, lastTime=0;
-  const loop=time=>{
-    raf=null;
-    if(!inView || root.dataset.motion==='off' || document.hidden){lastTime=0;return;}
-    if(spinning && !dragging){rz+=(lastTime?Math.min((time-lastTime)/1000,.05):0)*9.6;apply();}
-    lastTime=time;raf=requestAnimationFrame(loop);
-  };
-  const syncSpin=()=>{
-    if(!inView || root.dataset.motion==='off' || document.hidden){cancelAnimationFrame(raf);raf=null;lastTime=0;}
-    else if(raf===null) raf=requestAnimationFrame(loop);
-  };
-  new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;syncSpin();},{rootMargin:'100px'}).observe(stage);
-  window.addEventListener('motionchange',syncSpin);
-  document.addEventListener('visibilitychange',syncSpin);
-
-  stage.addEventListener('pointerenter',()=>{spinning=false;});
-  stage.addEventListener('pointerleave',()=>{spinning=true;});
-  stage.addEventListener('pointerdown',e=>{
-    dragging=true;lx=e.clientX;ly=e.clientY;
-    pyr.classList.add('drag');
-    stage.setPointerCapture(e.pointerId);
-  });
-  stage.addEventListener('pointermove',e=>{
-    if(!dragging) return;
-    rz+=(e.clientX-lx)*0.42;
-    rx=Math.min(84,Math.max(18,rx-(e.clientY-ly)*0.32));
-    lx=e.clientX;ly=e.clientY;apply();
-  });
-  const end=e=>{
-    if(!dragging) return;
-    dragging=false;pyr.classList.remove('drag');
-    try{stage.releasePointerCapture(e.pointerId);}catch(err){}
-  };
-  stage.addEventListener('pointerup',end);
-  stage.addEventListener('pointercancel',end);
-
-  /* keyboard control */
-  stage.tabIndex=0;
-  stage.addEventListener('keydown',e=>{
-    const k=e.key;
-    if(k==='ArrowLeft'){rz-=6;}
-    else if(k==='ArrowRight'){rz+=6;}
-    else if(k==='ArrowUp'){rx=Math.min(84,rx+5);}
-    else if(k==='ArrowDown'){rx=Math.max(18,rx-5);}
-    else return;
-    e.preventDefault();spinning=false;apply();
-  });
-
-  /* legend ↔ slab highlighting, both directions */
-  const slabs=[...pyr.querySelectorAll('.slab')];
-  const lays=[...document.querySelectorAll('.lay[data-layer]')];
-  const hl=(layer,on)=>{
-    slabs.forEach(sl=>sl.classList.toggle('hl', on && sl.dataset.layer===layer));
-    lays.forEach(l=>l.style.borderColor = (on && l.dataset.layer===layer) ? 'var(--c)' : '');
-  };
-  lays.forEach(l=>{
-    l.addEventListener('pointerenter',()=>hl(l.dataset.layer,true));
-    l.addEventListener('pointerleave',()=>hl(l.dataset.layer,false));
-  });
-  slabs.forEach(sl=>{
-    sl.addEventListener('pointerenter',()=>hl(sl.dataset.layer,true));
-    sl.addEventListener('pointerleave',()=>hl(sl.dataset.layer,false));
-  });
-})();
-</script>
-<script src="scene.js"></script>
+<script src="js/main.js" defer></script>
+<script src="js/game.js" defer></script>
 </body>
 </html>
